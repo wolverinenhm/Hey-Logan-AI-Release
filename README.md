@@ -18,6 +18,11 @@ have them installed. You can talk to it on the PC or from your Android phone.
 Nothing to install first: the Windows build carries its own private Node.js
 runtime, and the APK is signed and ready to sideload.
 
+> **Where to download:** the four prebuilt files are attached to the
+> **[Releases page](../../releases)** of this repository (the binaries are not
+> stored in git). If you downloaded this folder as an archive, they are in
+> `dist\`.
+
 ### Checksums (SHA-256)
 
 | File | Size (bytes) | SHA-256 |
