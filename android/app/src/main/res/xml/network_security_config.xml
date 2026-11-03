@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<network-security-config>
+    <!-- The PC bridge is normally reached over HTTPS with a locally generated
+         self-signed certificate. The app accepts that certificate only for the
+         paired PC after an explicit confirmation (WebViewClient.onReceivedSslError).
+         Plain HTTP is kept available for the PC's typing-only fallback port
+         (http://<pc>:8787); microphone access always uses the HTTPS URL. -->
+    <base-config cleartextTrafficPermitted="true">
+        <trust-anchors>
+            <certificates src="system" />
+            <certificates src="user" />
+        </trust-anchors>
+    </base-config>
+</network-security-config>

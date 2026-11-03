@@ -1,0 +1,7 @@
+// Root build file for the Hey Logan AI Android companion app.
+// The app is framework-only (no AndroidX / no AAR dependencies) so the same
+// sources can be built either by Gradle/Android Studio or by the raw SDK tools
+// (tools/build-apk-manual.ps1) when Gradle is unavailable.
+plugins {
+    id 'com.android.application' version '8.7.3' apply false
+}

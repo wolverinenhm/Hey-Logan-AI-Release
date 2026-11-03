@@ -1,0 +1,6 @@
+
+  Stopping the Hey Logan AI server...
+  Stopped server process 22188
+  Server stopped.
+
+Press any key to continue . . . 

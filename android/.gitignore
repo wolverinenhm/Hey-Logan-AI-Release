@@ -1,0 +1,18 @@
+# Build outputs
+.gradle/
+build/
+_manual-build/
+local.properties
+*.iml
+.idea/
+captures/
+
+# Signing material: never commit real release keys to a public repository.
+# (This local copy is kept on the user's machine only.)
+release-keystore/*.jks
+release-keystore/*.keystore
+release-keystore/keystore.properties
+
+# OS noise
+.DS_Store
+Thumbs.db

@@ -1,0 +1,40 @@
+﻿=== F-1 evidence: portable "Start Hey Logan AI.cmd" + "Stop.cmd" (found and fixed during verification) ===
+
+FOUND in E2E run 1 (pre-fix portable ZIP 18FA9938..., 2026-11-03 21:32-21:35):
+  FAIL A6.13 portable console launcher stopped cleanly  [False]
+  FAIL A8.8 no node processes  [count=1]
+  FAIL A8.9 no listeners on 8787/8443  [count=2]
+  (A8.8/A8.9 were collateral: the QA harness had not yet force-killed the server that Stop.cmd failed to stop.)
+
+Left-over process observed after that run (Get-CimInstance Win32_Process -Filter "Name='node.exe'"):
+  PID=22000  EXE=C:\Temp\hl-qa\e2e\portable\HeyLoganAI\runtime\node.exe
+  CommandLine="runtime\node.exe"  "app\server\index.js"     <-- RELATIVE program path, no install folder in the command line
+  LISTEN 0.0.0.0:8787 PID=22000 / LISTEN 0.0.0.0:8443 PID=22000
+
+Root cause (code inspection of the pre-fix artifacts):
+  windows\installer\portable\Start Hey Logan AI.cmd (pre-fix) launched:
+      "runtime\node.exe" "app\server\index.js"
+  windows\payload\HeyLoganAI\tools\stop.ps1 (lines 5-11) matches a server only when the node.exe CommandLine contains:
+      - the absolute install folder  ( $cmd.IndexOf($root) -ge 0 ), AND
+      - "server\index.js"
+  A relative command line therefore cannot be matched -> Stop.cmd prints
+      "No running Hey Logan AI server was found." and the ports stay bound.
+  Documented promise that failed: windows\installer\portable\README-FIRST.txt:21
+      "4. To stop the app: close the console window, or run \"Stop.cmd\"."
+  (The installed edition is not affected: its Start Console.cmd uses "%~dp0runtime\node.exe", an absolute path;
+   verified PASS in E2E run 3 A3b.1-A3b.3.)
+
+FIX (lead, option A) and re-verification:
+  windows\installer\portable\Start Hey Logan AI.cmd now launches:
+      "%~dp0runtime\node.exe" "%~dp0app\server\index.js"
+  Final frozen portable ZIP: 35,108,868 bytes  SHA256 94BF5051C5369F7F0F797EF3FBF9DB5042BC098AEDB3A7FC58F0A6E2C72FD6B9
+  fix file SHA256: 1D7264EAAB657FFC40AED36424D00CEE72B2A9647EC2FAADEBB60474A3CE6519 (identical inside ZIP and in windows\installer\portable\)
+  Re-verified on the frozen ZIP:
+    E2E run 3: PASS A6.12 "Start Hey Logan AI.cmd brings the server up"
+               PASS A6.13 "portable Stop.cmd stops a console-launched portable server"
+                       output: "Stopped server process 21972" / "Server stopped." (exit 0)
+               PASS A6.14 / A8.8 / A8.9 (no node process, no listener left)
+    portable-final-check.txt: PASS payload identical to windows\payload (569/569 files),
+               PASS Start cmd == source, PASS Stop.cmd stopped the Launch.vbs server,
+               PASS no registry entries / shortcuts.
+

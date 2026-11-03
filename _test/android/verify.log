@@ -1,0 +1,96 @@
+Hey Logan AI Android 1.0.0 - verification evidence
+Generated: 2026-11-03T21:01:20.5263632+10:00
+
+=== APK ===
+
+
+FullName : C:\Users\s2121270\Downloads\Hey-Logan-AI-Release\dist\HeyLoganAI-android-1.0.0.apk
+Length   : 226868
+
+
+
+
+SHA256: 8A4A769223ED16803DC30328B9D10E163D33D6518B6F11194A4BE772E60D8439
+
+=== apksigner verify --verbose --print-certs ===
+Verifies
+Verified using v1 scheme (JAR signing): false
+Verified using v2 scheme (APK Signature Scheme v2): true
+Verified using v3 scheme (APK Signature Scheme v3): true
+Verified using v3.1 scheme (APK Signature Scheme v3.1): false
+Verified using v4 scheme (APK Signature Scheme v4): false
+Verified for SourceStamp: false
+Number of signers: 1
+Signer #1 certificate DN: CN=HeyLoganAI, OU=Local, O=HeyLoganAI, L=Local, ST=Local, C=AU
+Signer #1 certificate SHA-256 digest: 6c82679233c2abdf780cfc2ca89b06684907d0ff545d27a3e126837f9318480c
+Signer #1 certificate SHA-1 digest: 935bc3da0bfe6ccd0fff9f852fceb7758fb27934
+Signer #1 certificate MD5 digest: 335d472caa99174c1e7309b1ea1ce197
+Signer #1 key algorithm: RSA
+Signer #1 key size (bits): 2048
+Signer #1 public key SHA-256 digest: 952060e73a9d1ee0564b8f97d9decd95da66aeaf68f6707a1d8d8c85e9641622
+Signer #1 public key SHA-1 digest: 498c1417520914298a8845b1cc6550980f678950
+Signer #1 public key MD5 digest: 064a9f90161fefb0dc04b36dcce8f15a
+
+=== aapt2 dump badging ===
+package: name='ai.heylogan.app' versionCode='1' versionName='1.0.0' platformBuildVersionName='15' platformBuildVersionCode='35' compileSdkVersion='35' compileSdkVersionCodename='15'
+minSdkVersion:'26'
+targetSdkVersion:'35'
+uses-permission: name='android.permission.INTERNET'
+uses-permission: name='android.permission.ACCESS_NETWORK_STATE'
+uses-permission: name='android.permission.RECORD_AUDIO'
+application-label:'Hey Logan AI'
+application-icon-160:'res/mipmap-anydpi-v26/ic_launcher.xml'
+application-icon-240:'res/mipmap-anydpi-v26/ic_launcher.xml'
+application-icon-320:'res/mipmap-anydpi-v26/ic_launcher.xml'
+application-icon-480:'res/mipmap-anydpi-v26/ic_launcher.xml'
+application-icon-640:'res/mipmap-anydpi-v26/ic_launcher.xml'
+application-icon-65534:'res/mipmap-anydpi-v26/ic_launcher.xml'
+application: label='Hey Logan AI' icon='res/mipmap-anydpi-v26/ic_launcher.xml'
+launchable-activity: name='ai.heylogan.app.MainActivity'  label='' icon=''
+feature-group: label=''
+  uses-feature-not-required: name='android.hardware.microphone'
+  uses-feature: name='android.hardware.faketouch'
+  uses-implied-feature: name='android.hardware.faketouch' reason='default feature for all apps'
+main
+supports-screens: 'small' 'normal' 'large' 'xlarge'
+supports-any-density: 'true'
+locales: '--_--'
+densities: '160' '240' '320' '480' '640' '65534'
+
+=== aapt2 dump xmltree AndroidManifest.xml (activity/sdk/application lines) ===
+      E: uses-sdk (line=0)
+        A: http://schemas.android.com/apk/res/android:minSdkVersion(0x0101020c)=26
+        A: http://schemas.android.com/apk/res/android:targetSdkVersion(0x01010270)=35
+      E: application (line=29)
+        A: http://schemas.android.com/apk/res/android:label(0x01010001)=@0x7f030000
+        A: http://schemas.android.com/apk/res/android:allowBackup(0x01010280)=false
+          E: activity (line=39)
+            A: http://schemas.android.com/apk/res/android:exported(0x01010010)=true
+
+=== APK entries ===
+
+FullName                                         Length
+--------                                         ------
+AndroidManifest.xml                                3544
+res/mipmap-mdpi-v4/ic_launcher.png                 3688
+res/mipmap-mdpi-v4/ic_launcher_foreground.png      7130
+res/mipmap-hdpi-v4/ic_launcher.png                 6537
+res/mipmap-hdpi-v4/ic_launcher_foreground.png     12827
+res/mipmap-xhdpi-v4/ic_launcher.png                9695
+res/mipmap-xhdpi-v4/ic_launcher_foreground.png    19585
+res/mipmap-xxhdpi-v4/ic_launcher.png              17200
+res/mipmap-xxhdpi-v4/ic_launcher_foreground.png   34570
+res/mipmap-xxxhdpi-v4/ic_launcher.png             26165
+res/mipmap-xxxhdpi-v4/ic_launcher_foreground.png  51194
+res/mipmap-anydpi-v26/ic_launcher.xml               448
+res/mipmap-anydpi-v26/ic_launcher_round.xml         448
+res/xml/network_security_config.xml                 560
+resources.arsc                                     2492
+assets/connect.html                                8107
+classes.dex                                       44152
+META-INF/HEYLOGAN.SF                               1961
+META-INF/HEYLOGAN.RSA                              1365
+META-INF/MANIFEST.MF                               1834
+
+
+

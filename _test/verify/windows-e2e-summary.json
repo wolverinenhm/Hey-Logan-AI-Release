@@ -1,0 +1,31 @@
+﻿{
+    "timestamp":  "2026-11-03T21:47:17.9174418+10:00",
+    "host":  "DESKTOP-VKJOJCR",
+    "setup":  {
+                  "path":  "C:\\Users\\s2121270\\Downloads\\Hey-Logan-AI-Release\\dist\\HeyLoganAI-Setup-1.0.0-win-x64.exe",
+                  "sha256":  "8209B35898FF990C460E492E1F4DAE7F7F189E8751E22021FF3A5F9845CED9FC",
+                  "size":  23607380
+              },
+    "portable":  {
+                     "path":  "C:\\Users\\s2121270\\Downloads\\Hey-Logan-AI-Release\\dist\\HeyLoganAI-Portable-1.0.0-win-x64.zip",
+                     "sha256":  "94BF5051C5369F7F0F797EF3FBF9DB5042BC098AEDB3A7FC58F0A6E2C72FD6B9",
+                     "size":  35108868
+                 },
+    "checks":  158,
+    "passed":  158,
+    "failed":  0,
+    "skipped":  1,
+    "failures":  [
+
+                 ],
+    "finalState":  {
+                       "installDir":  false,
+                       "arp":  false,
+                       "run":  false,
+                       "sm":  false,
+                       "desk":  false,
+                       "node":  0,
+                       "listeners":  0
+                   },
+    "logPath":  "C:\\Users\\s2121270\\Downloads\\Hey-Logan-AI-Release\\_test\\verify\\windows-e2e.log"
+}

@@ -1,0 +1,46 @@
+
+  Hey Logan AI - pairing information
+  =================================
+
+  Access token:  QE4C-MT2U-8TEL
+
+  Addresses
+  ---------
+    Phone (same Wi-Fi, recommended) - Wi-Fi       https://192.168.0.104:8443
+    Phone (plain HTTP fallback)                   http://192.168.0.104:8787
+    This PC                                       http://127.0.0.1:8787
+    Other network interface - Meta                https://198.18.0.1:8443
+
+  Pairing links (open on the phone; the token is included)
+  -------------------------------------------------------
+    https://192.168.0.104:8443/?token=QE4C-MT2U-8TEL
+    http://192.168.0.104:8787/?token=QE4C-MT2U-8TEL
+    http://127.0.0.1:8787/?token=QE4C-MT2U-8TEL
+    https://198.18.0.1:8443/?token=QE4C-MT2U-8TEL
+
+  Android app: install the APK, then type the address + token above (or
+  paste the first pairing link). The app has no camera scanner.
+  Phone camera / Chrome: scan the QR code below, accept the certificate
+  warning, then "Add to Home screen".
+
+  Scan this QR code with your phone:
+
+[47m[30m ▄▄▄▄▄▄▄ ▄▄   ▄▄ ▄▄▄▄▄ ▄▄▄▄▄▄▄ [0m
+[47m[30m █ ▄▄▄ █ ▄▄▀▄ █ ▀█  ▄█ █ ▄▄▄ █ [0m
+[47m[30m █ ███ █  ▀▄ ▄█▀█  ██  █ ███ █ [0m
+[47m[30m █▄▄▄▄▄█ █ █▀▄ █ █▀█▀▄ █▄▄▄▄▄█ [0m
+[47m[30m ▄ ▄   ▄▄ █▄█▀▀████▀█▄  ▄  ▄ ▄ [0m
+[47m[30m ▄ ▄█▄▀▄  ▄██▀█▀▄▄█▀▄ █▄ █▄▄▀█ [0m
+[47m[30m  █  ▀█▄█▄▀▄▄▀█ ██▄██▀▀▄  ▀  ▄ [0m
+[47m[30m    ▄  ▄█▀▀ ▄▄ ▄▄▄▀█▄▄ ▀ ▀  ▀█ [0m
+[47m[30m ▀██ █▄▄   ▄▀ ▀▄ ▄█▀▄█ ▀▀█▄  ▄ [0m
+[47m[30m ▄▄  █▄▄██▄▀███▄█ ▀█ ▀ ▄█ ▄▄▀█ [0m
+[47m[30m ▄▄▄▀█ ▄ ▀▄▄▄█▀▄ ▀█ ███▄█▄ ▀▄  [0m
+[47m[30m ▄▄▄▄▄▄▄ █ █ ▄▄█▄▄██ █ ▄ █▀  █ [0m
+[47m[30m █ ▄▄▄ █  ▄▀ ▄▄▄ ▄▄▀▄█▄▄▄██▀▀▄ [0m
+[47m[30m █ ███ █ ▄▄█ ▀▄ ▄▀▀█▄▄▀█▄▄▀ ▄▄ [0m
+[47m[30m █▄▄▄▄▄█ ▄ ▀▄▄  ▀███  ▄█▄█▀▀ ▄ [0m
+[47m[30m[0m[37m▀[47m[30m[0m[37m▀[47m[30m[0m[37m▀[47m[30m[0m[37m▀[47m[30m[0m[37m▀[47m[30m[0m[37m▀[47m[30m[0m[37m▀[47m[30m[0m[37m▀[47m[30m[0m[37m▀[47m[30m[0m[37m▀[47m[30m[0m[37m▀[47m[30m[0m[37m▀[47m[30m[0m[37m▀[47m[30m[0m[37m▀[47m[30m[0m[37m▀[47m[30m[0m[37m▀[47m[30m[0m[37m▀[47m[30m[0m[37m▀[47m[30m[0m[37m▀[47m[30m[0m[37m▀[47m[30m[0m[37m▀[47m[30m[0m[37m▀[47m[30m[0m[37m▀[47m[30m[0m[37m▀[47m[30m[0m[37m▀[47m[30m[0m[37m▀[47m[30m[0m[37m▀[47m[30m[0m[37m▀[47m[30m[0m[37m▀[47m[30m[0m[37m▀[47m[30m[0m[37m▀[47m[30m[0m
+[47m[30m[0m
+
+Press any key to continue . . . 

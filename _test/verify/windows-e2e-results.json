@@ -1,0 +1,797 @@
+﻿[
+    {
+        "Status":  "PASS",
+        "Name":  "A2.0 machine is clean before the test",
+        "Detail":  "no install dir / shortcuts / HKCU / node procs / listeners"
+    },
+    {
+        "Status":  "PASS",
+        "Name":  "A2.1 copied Setup.exe SHA256 == dist SHA256",
+        "Detail":  "8209B35898FF990C460E492E1F4DAE7F7F189E8751E22021FF3A5F9845CED9FC"
+    },
+    {
+        "Status":  "PASS",
+        "Name":  "A2.2 /S installer exit code 0",
+        "Detail":  "exit=0 in 14.8s"
+    },
+    {
+        "Status":  "PASS",
+        "Name":  "A2.3 install dir created",
+        "Detail":  "C:\\Users\\s2121270\\AppData\\Local\\Programs\\HeyLoganAI"
+    },
+    {
+        "Status":  "PASS",
+        "Name":  "A2.4 installed file count == payload + Uninstall.exe",
+        "Detail":  "count=570 (expected 570 = 569 payload files + Uninstall.exe)"
+    },
+    {
+        "Status":  "PASS",
+        "Name":  "A2.5 Uninstall.exe present",
+        "Detail":  "True"
+    },
+    {
+        "Status":  "PASS",
+        "Name":  "A2.6 installed tree contains NO app\\data before first run",
+        "Detail":  "True"
+    },
+    {
+        "Status":  "PASS",
+        "Name":  "A2.7 every payload file installed byte-identically",
+        "Detail":  "missing=0 mismatch=0"
+    },
+    {
+        "Status":  "PASS",
+        "Name":  "A2.8 no unexpected files in install dir",
+        "Detail":  "extra="
+    },
+    {
+        "Status":  "PASS",
+        "Name":  "A2.9 installed item: Launch.vbs",
+        "Detail":  "True"
+    },
+    {
+        "Status":  "PASS",
+        "Name":  "A2.9 installed item: Start Console.cmd",
+        "Detail":  "True"
+    },
+    {
+        "Status":  "PASS",
+        "Name":  "A2.9 installed item: Stop.cmd",
+        "Detail":  "True"
+    },
+    {
+        "Status":  "PASS",
+        "Name":  "A2.9 installed item: Pairing.cmd",
+        "Detail":  "True"
+    },
+    {
+        "Status":  "PASS",
+        "Name":  "A2.9 installed item: Allow through Firewall.cmd",
+        "Detail":  "True"
+    },
+    {
+        "Status":  "PASS",
+        "Name":  "A2.9 installed item: HELP.txt",
+        "Detail":  "True"
+    },
+    {
+        "Status":  "PASS",
+        "Name":  "A2.9 installed item: heylogan.ico",
+        "Detail":  "True"
+    },
+    {
+        "Status":  "PASS",
+        "Name":  "A2.9 installed item: runtime\\node.exe",
+        "Detail":  "True"
+    },
+    {
+        "Status":  "PASS",
+        "Name":  "A2.9 installed item: tools\\pair.js",
+        "Detail":  "True"
+    },
+    {
+        "Status":  "PASS",
+        "Name":  "A2.9 installed item: tools\\stop.ps1",
+        "Detail":  "True"
+    },
+    {
+        "Status":  "PASS",
+        "Name":  "A2.9 installed item: tools\\firewall.ps1",
+        "Detail":  "True"
+    },
+    {
+        "Status":  "PASS",
+        "Name":  "A2.9 installed item: app\\server\\index.js",
+        "Detail":  "True"
+    },
+    {
+        "Status":  "PASS",
+        "Name":  "A2.9 installed item: app\\public\\index.html",
+        "Detail":  "True"
+    },
+    {
+        "Status":  "PASS",
+        "Name":  "A2.9 installed item: app\\public\\native-voice.js",
+        "Detail":  "True"
+    },
+    {
+        "Status":  "PASS",
+        "Name":  "A2.10 Start Menu group created",
+        "Detail":  "C:\\Users\\s2121270\\AppData\\Roaming\\Microsoft\\Windows\\Start Menu\\Programs\\Hey Logan AI"
+    },
+    {
+        "Status":  "PASS",
+        "Name":  "A2.11 Start Menu group has exactly 6 shortcuts",
+        "Detail":  "Allow through Firewall.lnk | Hey Logan AI.lnk | Pairing.lnk | Start Console.lnk | Stop Server.lnk | Uninstall.lnk"
+    },
+    {
+        "Status":  "PASS",
+        "Name":  "A2.12 Start Menu main shortcut present",
+        "Detail":  "True"
+    },
+    {
+        "Status":  "PASS",
+        "Name":  "A2.13 Start Menu has Start Console / Pairing / Stop Server / Allow through Firewall",
+        "Detail":  "True"
+    },
+    {
+        "Status":  "PASS",
+        "Name":  "A2.14 Start Menu uninstall shortcut present",
+        "Detail":  "Uninstall.lnk"
+    },
+    {
+        "Status":  "PASS",
+        "Name":  "A2.15 Desktop shortcut created",
+        "Detail":  "C:\\Users\\s2121270\\Desktop\\Hey Logan AI.lnk"
+    },
+    {
+        "Status":  "PASS",
+        "Name":  "A2.16 main shortcut target is wscript.exe",
+        "Detail":  "C:\\Windows\\System32\\wscript.exe"
+    },
+    {
+        "Status":  "PASS",
+        "Name":  "A2.17 main shortcut arguments point at Launch.vbs",
+        "Detail":  "\"C:\\Users\\s2121270\\AppData\\Local\\Programs\\HeyLoganAI\\Launch.vbs\""
+    },
+    {
+        "Status":  "PASS",
+        "Name":  "A2.18 main shortcut icon is heylogan.ico",
+        "Detail":  "C:\\Users\\s2121270\\AppData\\Local\\Programs\\HeyLoganAI\\heylogan.ico,0"
+    },
+    {
+        "Status":  "PASS",
+        "Name":  "A2.19 Start Console shortcut target",
+        "Detail":  "C:\\Users\\s2121270\\AppData\\Local\\Programs\\HeyLoganAI\\Start Console.cmd"
+    },
+    {
+        "Status":  "PASS",
+        "Name":  "A2.20 Pairing shortcut target",
+        "Detail":  "C:\\Users\\s2121270\\AppData\\Local\\Programs\\HeyLoganAI\\Pairing.cmd"
+    },
+    {
+        "Status":  "PASS",
+        "Name":  "A2.21 Stop Server shortcut target",
+        "Detail":  "C:\\Users\\s2121270\\AppData\\Local\\Programs\\HeyLoganAI\\Stop.cmd"
+    },
+    {
+        "Status":  "PASS",
+        "Name":  "A2.22 Allow through Firewall shortcut target",
+        "Detail":  "C:\\Users\\s2121270\\AppData\\Local\\Programs\\HeyLoganAI\\Allow through Firewall.cmd"
+    },
+    {
+        "Status":  "PASS",
+        "Name":  "A2.23 Desktop shortcut target is wscript.exe + Launch.vbs",
+        "Detail":  "C:\\Windows\\System32\\wscript.exe \"C:\\Users\\s2121270\\AppData\\Local\\Programs\\HeyLoganAI\\Launch.vbs\""
+    },
+    {
+        "Status":  "PASS",
+        "Name":  "A2.24 ARP entry exists",
+        "Detail":  "True"
+    },
+    {
+        "Status":  "PASS",
+        "Name":  "A2.25 ARP DisplayName",
+        "Detail":  "Hey Logan AI"
+    },
+    {
+        "Status":  "PASS",
+        "Name":  "A2.26 ARP DisplayVersion is 1.0.0",
+        "Detail":  "1.0.0"
+    },
+    {
+        "Status":  "PASS",
+        "Name":  "A2.27 ARP Publisher",
+        "Detail":  "Hey Logan AI"
+    },
+    {
+        "Status":  "PASS",
+        "Name":  "A2.28 ARP InstallLocation == install dir",
+        "Detail":  "C:\\Users\\s2121270\\AppData\\Local\\Programs\\HeyLoganAI"
+    },
+    {
+        "Status":  "PASS",
+        "Name":  "A2.29 ARP UninstallString points at Uninstall.exe",
+        "Detail":  "\"C:\\Users\\s2121270\\AppData\\Local\\Programs\\HeyLoganAI\\Uninstall.exe\""
+    },
+    {
+        "Status":  "PASS",
+        "Name":  "A2.30 ARP QuietUninstallString has /S",
+        "Detail":  "\"C:\\Users\\s2121270\\AppData\\Local\\Programs\\HeyLoganAI\\Uninstall.exe\" /S"
+    },
+    {
+        "Status":  "PASS",
+        "Name":  "A2.31 ARP EstimatedSize \u003e 0",
+        "Detail":  "EstimatedSize=91605 KB"
+    },
+    {
+        "Status":  "PASS",
+        "Name":  "A2.32 ARP NoModify/NoRepair = 1",
+        "Detail":  "True"
+    },
+    {
+        "Status":  "PASS",
+        "Name":  "A2.33 ARP DisplayIcon is heylogan.ico",
+        "Detail":  "C:\\Users\\s2121270\\AppData\\Local\\Programs\\HeyLoganAI\\heylogan.ico"
+    },
+    {
+        "Status":  "PASS",
+        "Name":  "A2.34 HKCU\\Software\\HeyLoganAI InstallDir",
+        "Detail":  "C:\\Users\\s2121270\\AppData\\Local\\Programs\\HeyLoganAI"
+    },
+    {
+        "Status":  "PASS",
+        "Name":  "A2.35 start-at-login Run value exists (default component)",
+        "Detail":  "\"C:\\WINDOWS\\system32\\wscript.exe\" \"C:\\Users\\s2121270\\AppData\\Local\\Programs\\HeyLoganAI\\Launch.vbs\""
+    },
+    {
+        "Status":  "PASS",
+        "Name":  "A2.36 Run value = wscript.exe + Launch.vbs",
+        "Detail":  "\"C:\\WINDOWS\\system32\\wscript.exe\" \"C:\\Users\\s2121270\\AppData\\Local\\Programs\\HeyLoganAI\\Launch.vbs\""
+    },
+    {
+        "Status":  "PASS",
+        "Name":  "A2.37 no HKLM Add/Remove Programs entry added",
+        "Detail":  "True"
+    },
+    {
+        "Status":  "PASS",
+        "Name":  "A2.38 nothing installed under Program Files",
+        "Detail":  "C:\\Program Files\\HeyLoganAI"
+    },
+    {
+        "Status":  "PASS",
+        "Name":  "A2.39 only HeyLoganAI added under %LOCALAPPDATA%\\Programs",
+        "Detail":  "added=HeyLoganAI"
+    },
+    {
+        "Status":  "PASS",
+        "Name":  "A3.1 /api/health after shortcut launch (\u003c=75 s)",
+        "Detail":  "True"
+    },
+    {
+        "Status":  "PASS",
+        "Name":  "A3.2 health ok:true",
+        "Detail":  "True"
+    },
+    {
+        "Status":  "PASS",
+        "Name":  "A3.3 health app == Hey Logan AI",
+        "Detail":  "Hey Logan AI"
+    },
+    {
+        "Status":  "PASS",
+        "Name":  "A3.4 health version == 1.0.0",
+        "Detail":  "1.0.0"
+    },
+    {
+        "Status":  "PASS",
+        "Name":  "A3.5 first run created app\\data\\config.json",
+        "Detail":  "C:\\Users\\s2121270\\AppData\\Local\\Programs\\HeyLoganAI\\app\\data\\config.json"
+    },
+    {
+        "Status":  "PASS",
+        "Name":  "A3.6 first run created app\\data\\certs\\cert.pem + key.pem",
+        "Detail":  "True"
+    },
+    {
+        "Status":  "PASS",
+        "Name":  "A3.7 config token is a 14-char XXXX-XXXX-XXXX token",
+        "Detail":  "QE4C-MT2U-8TEL"
+    },
+    {
+        "Status":  "PASS",
+        "Name":  "A3.8 config http port is 8787",
+        "Detail":  "True"
+    },
+    {
+        "Status":  "PASS",
+        "Name":  "A3.9 config https port is 8443",
+        "Detail":  "True"
+    },
+    {
+        "Status":  "PASS",
+        "Name":  "A3.10 /api/session-info with token ok",
+        "Detail":  "True"
+    },
+    {
+        "Status":  "PASS",
+        "Name":  "A3.11 session-info app name / version",
+        "Detail":  "Hey Logan AI 1.0.0"
+    },
+    {
+        "Status":  "PASS",
+        "Name":  "A3.12 session-info reports agents",
+        "Detail":  "agents=6"
+    },
+    {
+        "Status":  "PASS",
+        "Name":  "A3.13 session-info lists LAN https URL",
+        "Detail":  "{\"local\":[\"https://localhost:8443\",\"http://localhost:8787\"],\"lan\":[\"https://192.168.0.104:8443\",\"https://198.18.0.1:8443\",\"http://192.168.0.104:8787\",\"http://198.18.0.1:8787\"]}"
+    },
+    {
+        "Status":  "PASS",
+        "Name":  "A3.14 POST /api/command returned ok",
+        "Detail":  "ok=True"
+    },
+    {
+        "Status":  "PASS",
+        "Name":  "A3.15 command produced a spoken answer",
+        "Detail":  "Downloads has 15 items. Showing the first 15."
+    },
+    {
+        "Status":  "PASS",
+        "Name":  "A3.16 headless-Edge screenshot of the running UI captured",
+        "Detail":  "84261 bytes"
+    },
+    {
+        "Status":  "PASS",
+        "Name":  "A3.17 Pairing.cmd exits 0",
+        "Detail":  "exit=0"
+    },
+    {
+        "Status":  "PASS",
+        "Name":  "A3.18 Pairing output shows the access token",
+        "Detail":  "True"
+    },
+    {
+        "Status":  "PASS",
+        "Name":  "A3.19 Pairing output shows a 192.168.* LAN address",
+        "Detail":  "    Phone (same Wi-Fi, recommended) - Wi-Fi       https://192.168.0.104:8443 /     Phone (plain HTTP fallback)                   http://192.168.0.104:8787"
+    },
+    {
+        "Status":  "PASS",
+        "Name":  "A3.20 Pairing output shows a QR code block",
+        "Detail":  "lines=47"
+    },
+    {
+        "Status":  "PASS",
+        "Name":  "A3.21 Stop.cmd exits 0",
+        "Detail":  "exit=0"
+    },
+    {
+        "Status":  "PASS",
+        "Name":  "A3.22 Stop.cmd stopped the server (health down)",
+        "Detail":  "True"
+    },
+    {
+        "Status":  "PASS",
+        "Name":  "A3.23 no node process left for the install dir",
+        "Detail":  "before=1 after=0"
+    },
+    {
+        "Status":  "PASS",
+        "Name":  "A3.24 no listener left on 8787/8443",
+        "Detail":  "True"
+    },
+    {
+        "Status":  "PASS",
+        "Name":  "A3.25 second launch works (/api/health again)",
+        "Detail":  "True"
+    },
+    {
+        "Status":  "PASS",
+        "Name":  "A3.26 second stop works",
+        "Detail":  "exit=0"
+    },
+    {
+        "Status":  "PASS",
+        "Name":  "A3b.1 installed Start Console.cmd brings the server up",
+        "Detail":  "True"
+    },
+    {
+        "Status":  "PASS",
+        "Name":  "A3b.2 installed console-mode server is stopped by Stop.cmd",
+        "Detail":  "exit=0 procsAfter=0"
+    },
+    {
+        "Status":  "PASS",
+        "Name":  "A3b.3 installed console mode left no node process",
+        "Detail":  "True"
+    },
+    {
+        "Status":  "PASS",
+        "Name":  "A4.0 app running before the upgrade",
+        "Detail":  "True"
+    },
+    {
+        "Status":  "PASS",
+        "Name":  "A4.1 upgrade installer exit code 0",
+        "Detail":  "exit=0"
+    },
+    {
+        "Status":  "PASS",
+        "Name":  "A4.2 access token unchanged after upgrade",
+        "Detail":  "QE4C-MT2U-8TEL"
+    },
+    {
+        "Status":  "PASS",
+        "Name":  "A4.3 config settings unchanged after upgrade",
+        "Detail":  "True"
+    },
+    {
+        "Status":  "PASS",
+        "Name":  "A4.4 upgrade did not duplicate Start Menu shortcuts",
+        "Detail":  "count=6"
+    },
+    {
+        "Status":  "PASS",
+        "Name":  "A4.5 desktop shortcut still single",
+        "Detail":  "True"
+    },
+    {
+        "Status":  "PASS",
+        "Name":  "A4.6 ARP entry still single after upgrade",
+        "Detail":  "True"
+    },
+    {
+        "Status":  "PASS",
+        "Name":  "A4.7 upgrade kept app\\data (config.json still present)",
+        "Detail":  "True"
+    },
+    {
+        "Status":  "PASS",
+        "Name":  "A4.8 upgrade stopped the running server",
+        "Detail":  "True"
+    },
+    {
+        "Status":  "PASS",
+        "Name":  "A4.9 upgrade left no node process behind",
+        "Detail":  "True"
+    },
+    {
+        "Status":  "PASS",
+        "Name":  "A4b.1 locked-data silent upgrade aborts with exit code 1",
+        "Detail":  "exit=1"
+    },
+    {
+        "Status":  "PASS",
+        "Name":  "A4b.2 access token intact after the aborted upgrade",
+        "Detail":  "True"
+    },
+    {
+        "Status":  "PASS",
+        "Name":  "A4b.3 certificate files intact after the aborted upgrade",
+        "Detail":  "True"
+    },
+    {
+        "Status":  "PASS",
+        "Name":  "A4b.4 no stashed .hl-data-keep left behind",
+        "Detail":  "True"
+    },
+    {
+        "Status":  "PASS",
+        "Name":  "A4b.5 Launch.vbs untouched after abort",
+        "Detail":  "True"
+    },
+    {
+        "Status":  "PASS",
+        "Name":  "A4b.6 runtime\\node.exe untouched after abort",
+        "Detail":  "True"
+    },
+    {
+        "Status":  "PASS",
+        "Name":  "A4b.7 Uninstall.exe untouched after abort",
+        "Detail":  "True"
+    },
+    {
+        "Status":  "PASS",
+        "Name":  "A4b.8 ARP entry intact after abort (install still registered)",
+        "Detail":  "True"
+    },
+    {
+        "Status":  "PASS",
+        "Name":  "A4b.9 normal silent upgrade after the lock is released (exit 0)",
+        "Detail":  "exit=0"
+    },
+    {
+        "Status":  "PASS",
+        "Name":  "A4b.10 token still unchanged after the successful upgrade",
+        "Detail":  "True"
+    },
+    {
+        "Status":  "PASS",
+        "Name":  "A5.1 Uninstall.exe exists before uninstall",
+        "Detail":  "True"
+    },
+    {
+        "Status":  "PASS",
+        "Name":  "A5.2 Uninstall.exe /S exit code 0",
+        "Detail":  "exit=0"
+    },
+    {
+        "Status":  "PASS",
+        "Name":  "A5.3 shortcuts removed (Start Menu group)",
+        "Detail":  "True"
+    },
+    {
+        "Status":  "PASS",
+        "Name":  "A5.4 Desktop shortcut removed",
+        "Detail":  "True"
+    },
+    {
+        "Status":  "PASS",
+        "Name":  "A5.5 ARP entry removed",
+        "Detail":  "True"
+    },
+    {
+        "Status":  "PASS",
+        "Name":  "A5.6 HKCU app key removed",
+        "Detail":  "True"
+    },
+    {
+        "Status":  "PASS",
+        "Name":  "A5.7 Run value removed",
+        "Detail":  "True"
+    },
+    {
+        "Status":  "PASS",
+        "Name":  "A5.8 app\\data kept as documented",
+        "Detail":  "C:\\Users\\s2121270\\AppData\\Local\\Programs\\HeyLoganAI\\app\\data\\config.json"
+    },
+    {
+        "Status":  "PASS",
+        "Name":  "A5.9 runtime\\node.exe removed",
+        "Detail":  "True"
+    },
+    {
+        "Status":  "PASS",
+        "Name":  "A5.10 Launch.vbs / Uninstall.exe removed",
+        "Detail":  "True"
+    },
+    {
+        "Status":  "PASS",
+        "Name":  "A5.11 no node process/listener after uninstall",
+        "Detail":  "True"
+    },
+    {
+        "Status":  "PASS",
+        "Name":  "A5.12 leftover install folder removed by QA",
+        "Detail":  "True"
+    },
+    {
+        "Status":  "PASS",
+        "Name":  "A7.1 /S /D= custom-dir installer exit code 0",
+        "Detail":  "exit=0"
+    },
+    {
+        "Status":  "PASS",
+        "Name":  "A7.2 custom dir created with Launch.vbs",
+        "Detail":  "C:\\Temp\\hl-qa\\e2e\\custom-install"
+    },
+    {
+        "Status":  "PASS",
+        "Name":  "A7.3 custom dir has runtime\\node.exe",
+        "Detail":  "True"
+    },
+    {
+        "Status":  "PASS",
+        "Name":  "A7.4 ARP InstallLocation is the custom dir",
+        "Detail":  "C:\\Temp\\hl-qa\\e2e\\custom-install"
+    },
+    {
+        "Status":  "PASS",
+        "Name":  "A7.5 main shortcut points at the custom dir Launch.vbs",
+        "Detail":  "\"C:\\Temp\\hl-qa\\e2e\\custom-install\\Launch.vbs\""
+    },
+    {
+        "Status":  "PASS",
+        "Name":  "A7.6 ARP UninstallString points at custom Uninstall.exe",
+        "Detail":  "\"C:\\Temp\\hl-qa\\e2e\\custom-install\\Uninstall.exe\""
+    },
+    {
+        "Status":  "PASS",
+        "Name":  "A7.7 ARP UninstallString /S exit code 0",
+        "Detail":  "exit=0"
+    },
+    {
+        "Status":  "PASS",
+        "Name":  "A7.8 custom install dir removed",
+        "Detail":  "True"
+    },
+    {
+        "Status":  "PASS",
+        "Name":  "A7.9 ARP entry removed after custom uninstall",
+        "Detail":  "True"
+    },
+    {
+        "Status":  "PASS",
+        "Name":  "A7.10 shortcuts removed after custom uninstall",
+        "Detail":  "True"
+    },
+    {
+        "Status":  "PASS",
+        "Name":  "A5b.1 silent install with /NOAUTOSTART exit code 0",
+        "Detail":  "exit=0"
+    },
+    {
+        "Status":  "PASS",
+        "Name":  "A5b.2 /NOAUTOSTART wrote NO start-at-login Run value",
+        "Detail":  "True"
+    },
+    {
+        "Status":  "PASS",
+        "Name":  "A5b.3 /NOAUTOSTART still installed the app (Launch.vbs present)",
+        "Detail":  "True"
+    },
+    {
+        "Status":  "PASS",
+        "Name":  "A5b.4 /NOAUTOSTART still created the shortcuts",
+        "Detail":  "True"
+    },
+    {
+        "Status":  "PASS",
+        "Name":  "A5b.5 Uninstall.exe /S /PURGEDATA exit code 0",
+        "Detail":  "exit=0"
+    },
+    {
+        "Status":  "PASS",
+        "Name":  "A5b.6 install folder fully removed (no app\\data left)",
+        "Detail":  "True"
+    },
+    {
+        "Status":  "PASS",
+        "Name":  "A5b.7 registry fully removed after purge",
+        "Detail":  "True"
+    },
+    {
+        "Status":  "SKIP",
+        "Name":  "A5b.8 interactive uninstall keep/delete message box",
+        "Detail":  "no interactive clicks possible in this agent session (documented limitation)"
+    },
+    {
+        "Status":  "PASS",
+        "Name":  "A6.1 portable ZIP extracted (exit 0)",
+        "Detail":  "C:\\Temp\\hl-qa\\e2e\\portable\\HeyLoganAI"
+    },
+    {
+        "Status":  "PASS",
+        "Name":  "A6.2 portable README-FIRST.txt + Start Hey Logan AI.cmd present",
+        "Detail":  "True"
+    },
+    {
+        "Status":  "PASS",
+        "Name":  "A6.3 portable payload has no app\\data before first run",
+        "Detail":  "True"
+    },
+    {
+        "Status":  "PASS",
+        "Name":  "A6.4 portable Launch.vbs brings the server up",
+        "Detail":  "True"
+    },
+    {
+        "Status":  "PASS",
+        "Name":  "A6.5 portable run created its own app\\data",
+        "Detail":  "True"
+    },
+    {
+        "Status":  "PASS",
+        "Name":  "A6.6 portable run created no ARP entry",
+        "Detail":  "True"
+    },
+    {
+        "Status":  "PASS",
+        "Name":  "A6.7 portable run created no Run value",
+        "Detail":  "True"
+    },
+    {
+        "Status":  "PASS",
+        "Name":  "A6.8 portable run created no Start Menu group / desktop shortcut",
+        "Detail":  "True"
+    },
+    {
+        "Status":  "PASS",
+        "Name":  "A6.9 portable tools\\stop.ps1 stops the server",
+        "Detail":  "exit=0"
+    },
+    {
+        "Status":  "PASS",
+        "Name":  "A6.10 no node process left for the portable folder",
+        "Detail":  "True"
+    },
+    {
+        "Status":  "PASS",
+        "Name":  "A6.11 no listener left after portable stop",
+        "Detail":  "True"
+    },
+    {
+        "Status":  "PASS",
+        "Name":  "A6.12 portable Start Hey Logan AI.cmd brings the server up",
+        "Detail":  "True"
+    },
+    {
+        "Status":  "PASS",
+        "Name":  "A6.13 portable Stop.cmd stops a console-launched portable server",
+        "Detail":  "Stop.cmd exit=0 / server still running: (none)"
+    },
+    {
+        "Status":  "PASS",
+        "Name":  "A6.14 QA cleanup of the console-launched portable server",
+        "Detail":  "True"
+    },
+    {
+        "Status":  "PASS",
+        "Name":  "A8.1 no install dir",
+        "Detail":  "True"
+    },
+    {
+        "Status":  "PASS",
+        "Name":  "A8.2 no custom install dir",
+        "Detail":  "True"
+    },
+    {
+        "Status":  "PASS",
+        "Name":  "A8.3 no ARP entry",
+        "Detail":  "True"
+    },
+    {
+        "Status":  "PASS",
+        "Name":  "A8.4 no HKCU app key",
+        "Detail":  "True"
+    },
+    {
+        "Status":  "PASS",
+        "Name":  "A8.5 no Run value",
+        "Detail":  "True"
+    },
+    {
+        "Status":  "PASS",
+        "Name":  "A8.6 no Start Menu group",
+        "Detail":  "True"
+    },
+    {
+        "Status":  "PASS",
+        "Name":  "A8.7 no desktop shortcut",
+        "Detail":  "True"
+    },
+    {
+        "Status":  "PASS",
+        "Name":  "A8.8 no node processes",
+        "Detail":  "count=0"
+    },
+    {
+        "Status":  "PASS",
+        "Name":  "A8.9 no listeners on 8787/8443",
+        "Detail":  "count=0"
+    },
+    {
+        "Status":  "PASS",
+        "Name":  "A8.10 no firewall rule added",
+        "Detail":  "True"
+    },
+    {
+        "Status":  "PASS",
+        "Name":  "A8.11 no leftover entries in Start Menu Programs",
+        "Detail":  "True"
+    },
+    {
+        "Status":  "PASS",
+        "Name":  "A8.12 no leftover files on the Desktop",
+        "Detail":  "True"
+    },
+    {
+        "Status":  "PASS",
+        "Name":  "A8.13 no HKLM Add/Remove Programs changes",
+        "Detail":  "True"
+    }
+]

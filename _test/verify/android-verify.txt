@@ -1,0 +1,208 @@
+﻿=== Android FINAL verification evidence, qa-reviewer, 2026-11-03T21:31:18.3807325+10:00 ===
+
+--- frozen artifact hashes ---
+HeyLoganAI-android-1.0.0.apk  226868 bytes  SHA256 4C571B7C43D677A0CE92F691F92D8CDC3D3D85D131791939DA48EB1278448D80
+HeyLoganAI-Android-Project-1.0.0.zip  232691 bytes  SHA256 F8C42754E413AFC415356A6AE703680EE9388A7F82A61A7451D0F932B1EF6FD6
+copy SHA256 matches dist: True
+
+--- command: apksigner.bat verify --verbose --print-certs <apk> ---
+Verifies
+Verified using v1 scheme (JAR signing): false
+Verified using v2 scheme (APK Signature Scheme v2): true
+Verified using v3 scheme (APK Signature Scheme v3): true
+Verified using v3.1 scheme (APK Signature Scheme v3.1): false
+Verified using v4 scheme (APK Signature Scheme v4): false
+Verified for SourceStamp: false
+Number of signers: 1
+Signer #1 certificate DN: CN=HeyLoganAI, OU=Local, O=HeyLoganAI, L=Local, ST=Local, C=AU
+Signer #1 certificate SHA-256 digest: 6c82679233c2abdf780cfc2ca89b06684907d0ff545d27a3e126837f9318480c
+Signer #1 certificate SHA-1 digest: 935bc3da0bfe6ccd0fff9f852fceb7758fb27934
+Signer #1 certificate MD5 digest: 335d472caa99174c1e7309b1ea1ce197
+Signer #1 key algorithm: RSA
+Signer #1 key size (bits): 2048
+Signer #1 public key SHA-256 digest: 952060e73a9d1ee0564b8f97d9decd95da66aeaf68f6707a1d8d8c85e9641622
+Signer #1 public key SHA-1 digest: 498c1417520914298a8845b1cc6550980f678950
+Signer #1 public key MD5 digest: 064a9f90161fefb0dc04b36dcce8f15a
+
+--- command: apksigner.bat verify --min-sdk-version 21 --verbose <apk> ---
+Verifies
+Verified using v1 scheme (JAR signing): true
+Verified using v2 scheme (APK Signature Scheme v2): true
+Verified using v3 scheme (APK Signature Scheme v3): true
+Verified using v3.1 scheme (APK Signature Scheme v3.1): false
+Verified using v4 scheme (APK Signature Scheme v4): false
+Verified for SourceStamp: false
+Number of signers: 1
+
+--- command: aapt2.exe dump badging <apk> ---
+package: name='ai.heylogan.app' versionCode='1' versionName='1.0.0' platformBuildVersionName='15' platformBuildVersionCode='35' compileSdkVersion='35' compileSdkVersionCodename='15'
+minSdkVersion:'26'
+targetSdkVersion:'35'
+uses-permission: name='android.permission.INTERNET'
+uses-permission: name='android.permission.ACCESS_NETWORK_STATE'
+uses-permission: name='android.permission.RECORD_AUDIO'
+application-label:'Hey Logan AI'
+application-icon-160:'res/mipmap-anydpi-v26/ic_launcher.xml'
+application-icon-240:'res/mipmap-anydpi-v26/ic_launcher.xml'
+application-icon-320:'res/mipmap-anydpi-v26/ic_launcher.xml'
+application-icon-480:'res/mipmap-anydpi-v26/ic_launcher.xml'
+application-icon-640:'res/mipmap-anydpi-v26/ic_launcher.xml'
+application-icon-65534:'res/mipmap-anydpi-v26/ic_launcher.xml'
+application: label='Hey Logan AI' icon='res/mipmap-anydpi-v26/ic_launcher.xml'
+launchable-activity: name='ai.heylogan.app.MainActivity'  label='' icon=''
+feature-group: label=''
+  uses-feature-not-required: name='android.hardware.microphone'
+  uses-feature: name='android.hardware.faketouch'
+  uses-implied-feature: name='android.hardware.faketouch' reason='default feature for all apps'
+main
+supports-screens: 'small' 'normal' 'large' 'xlarge'
+supports-any-density: 'true'
+locales: '--_--'
+densities: '160' '240' '320' '480' '640' '65534'
+
+--- command: zipalign.exe -c -v 4 <apk> (tail) ---
+  218614 META-INF/HEYLOGAN.RSA (OK - compressed)
+  219745 META-INF/MANIFEST.MF (OK - compressed)
+Verification succesful
+
+--- APK entries (20 expected) ---
+AndroidManifest.xml
+res/mipmap-mdpi-v4/ic_launcher.png
+res/mipmap-mdpi-v4/ic_launcher_foreground.png
+res/mipmap-hdpi-v4/ic_launcher.png
+res/mipmap-hdpi-v4/ic_launcher_foreground.png
+res/mipmap-xhdpi-v4/ic_launcher.png
+res/mipmap-xhdpi-v4/ic_launcher_foreground.png
+res/mipmap-xxhdpi-v4/ic_launcher.png
+res/mipmap-xxhdpi-v4/ic_launcher_foreground.png
+res/mipmap-xxxhdpi-v4/ic_launcher.png
+res/mipmap-xxxhdpi-v4/ic_launcher_foreground.png
+res/mipmap-anydpi-v26/ic_launcher.xml
+res/mipmap-anydpi-v26/ic_launcher_round.xml
+res/xml/network_security_config.xml
+resources.arsc
+assets/connect.html
+classes.dex
+META-INF/HEYLOGAN.SF
+META-INF/HEYLOGAN.RSA
+META-INF/MANIFEST.MF
+
+--- classes.dex vs android\_manual-build\dex\classes.dex ---
+apk dex   : 5F074B3A3BB553ECB71AE44B2F73D1DC520CA197FFBE301B625821077B8CCCC3
+build dex : 5F074B3A3BB553ECB71AE44B2F73D1DC520CA197FFBE301B625821077B8CCCC3
+identical: True
+
+--- dex: expected class descriptors ---
+classes: 38
+Lai/heylogan/app/MainActivity;             FOUND
+Lai/heylogan/app/VoiceBridge;              FOUND
+Lai/heylogan/app/MainActivity$PairBridge;  FOUND
+Lai/heylogan/app/R;                        FOUND
+
+--- dex strings: @JavascriptInterface surface + native event protocol ---
+sttAvailable             FOUND
+startListening           FOUND
+stopListening            FOUND
+ttsAvailable             FOUND
+speak                    FOUND
+stopSpeaking             FOUND
+destroy                  FOUND
+_onNative                FOUND
+start                    FOUND
+partial                  FOUND
+final                    FOUND
+end                      FOUND
+tts-start                FOUND
+tts-end                  FOUND
+not-allowed              FOUND
+audio-capture            FOUND
+service-not-allowed      FOUND
+network                  FOUND
+HeyNativeVoice           FOUND
+HeyPairBridge            FOUND
+addJavascriptInterface   FOUND
+evaluateJavascript       FOUND
+JavaScriptEnabled        FOUND
+
+--- assets/connect.html in APK vs android source ---
+apk : E54EA5A0E9655B99E9EBF6FF1CA47DB71A4B6D13AA581416A4587F91384225FC
+src : E54EA5A0E9655B99E9EBF6FF1CA47DB71A4B6D13AA581416A4587F91384225FC
+identical: True
+
+--- keystore certificate vs APK signer certificate ---
+Alias name: heylogan
+Owner: CN=HeyLoganAI, OU=Local, O=HeyLoganAI, L=Local, ST=Local, C=AU
+Valid from: Tue Nov 03 20:59:07 AEST 2026 until: Sat Mar 21 20:59:07 AEST 2054
+SHA256: 6C:82:67:92:33:C2:AB:DF:78:0C:FC:2C:A8:9B:06:68:49:07:D0:FF:54:5D:27:A3:E1:26:83:7F:93:18:48:0C
+Signature algorithm name: SHA256withRSA
+Subject Public Key Algorithm: 2048-bit RSA key
+
+--- project ZIP: entries (29 expected) ---
+entry count: 29
+.gitignore
+BUILD-NOTES.md
+build.gradle
+gradle.properties
+README.md
+settings.gradle
+.github/workflows/android-build.yml
+app/build.gradle
+app/proguard-rules.pro
+app/src/main/AndroidManifest.xml
+app/src/main/assets/connect.html
+app/src/main/java/ai/heylogan/app/MainActivity.java
+app/src/main/java/ai/heylogan/app/VoiceBridge.java
+app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml
+app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml
+app/src/main/res/mipmap-hdpi/ic_launcher.png
+app/src/main/res/mipmap-hdpi/ic_launcher_foreground.png
+app/src/main/res/mipmap-mdpi/ic_launcher.png
+app/src/main/res/mipmap-mdpi/ic_launcher_foreground.png
+app/src/main/res/mipmap-xhdpi/ic_launcher.png
+app/src/main/res/mipmap-xhdpi/ic_launcher_foreground.png
+app/src/main/res/mipmap-xxhdpi/ic_launcher.png
+app/src/main/res/mipmap-xxhdpi/ic_launcher_foreground.png
+app/src/main/res/mipmap-xxxhdpi/ic_launcher.png
+app/src/main/res/mipmap-xxxhdpi/ic_launcher_foreground.png
+app/src/main/res/values/colors.xml
+app/src/main/res/values/strings.xml
+app/src/main/res/xml/network_security_config.xml
+tools/build-apk-manual.ps1
+
+--- project ZIP: forbidden entries (expect empty) ---
+matches: 0
+
+
+--- project ZIP: keystore password literal occurrences (expect 0) ---
+password literal hits: 0
+
+
+--- project ZIP files vs android\ source tree (SHA256) ---
+zip files: 29   mismatches/missing: 0
+
+source files not in zip: 0
+
+
+--- project ZIP: key docs snippets ---
+workflow builds: run: gradle :app:assembleDebug --no-daemon --stacktrace
+README CI sentence: Gradle sync. (The CI workflow does this with `sed`.) | A GitHub Actions workflow that runs the Gradle debug build (and uploads the | debug APK as an artifact) is in `.github/workflows/android-build.yml`. | .github/workflows/android-build.yml
+README password pointer: -File "$rel\android\tools\build-apk-manual.ps1" -StorePass '<read from release-keystore/keystore-info.txt>' | the password in `release-keystore/keystore-info.txt`, then reference it from | | Store / key password | see `release-keystore/keystore-info.txt` (not shipped in this zip) | | Details are in `release-keystore/keystore-info.txt`. Keep the keystore and that | --ks-pass pass:<password> --key-pass pass:<password> `
+
+--- manifest xmltree summary ---
+E: uses-sdk (line=0)
+A: http://schemas.android.com/apk/res/android:minSdkVersion(0x0101020c)=26
+A: http://schemas.android.com/apk/res/android:targetSdkVersion(0x01010270)=35
+E: uses-permission (line=10)
+E: uses-permission (line=11)
+E: uses-permission (line=12)
+A: http://schemas.android.com/apk/res/android:name(0x01010003)="android.speech.RecognitionService" (Raw: "android.speech.RecognitionService")
+A: http://schemas.android.com/apk/res/android:name(0x01010003)="android.intent.action.TTS_SERVICE" (Raw: "android.intent.action.TTS_SERVICE")
+E: application (line=29)
+A: http://schemas.android.com/apk/res/android:theme(0x01010000)=@0x0103022e
+A: http://schemas.android.com/apk/res/android:usesCleartextTraffic(0x010104ec)=true
+A: http://schemas.android.com/apk/res/android:networkSecurityConfig(0x01010527)=@0x7f040000
+E: activity (line=39)
+A: http://schemas.android.com/apk/res/android:name(0x01010003)=".MainActivity" (Raw: ".MainActivity")
+A: http://schemas.android.com/apk/res/android:exported(0x01010010)=true
+A: http://schemas.android.com/apk/res/android:name(0x01010003)="android.intent.action.MAIN" (Raw: "android.intent.action.MAIN")
+A: http://schemas.android.com/apk/res/android:name(0x01010003)="android.intent.category.LAUNCHER" (Raw: "android.intent.category.LAUNCHER")

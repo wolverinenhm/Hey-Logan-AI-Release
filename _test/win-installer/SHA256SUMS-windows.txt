@@ -1,0 +1,2 @@
+8209b35898ff990c460e492e1f4dae7f7f189e8751e22021ff3a5f9845ced9fc  HeyLoganAI-Setup-1.0.0-win-x64.exe
+18fa9938946f2b14d58c5f8425bf3a3a7e97172c4c6cb1cafdc0c5db30cb5cf6  HeyLoganAI-Portable-1.0.0-win-x64.zip

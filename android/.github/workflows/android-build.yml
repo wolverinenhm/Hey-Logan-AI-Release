@@ -1,0 +1,56 @@
+name: Android build
+
+# Builds the Hey Logan AI Android companion app with Gradle and uploads an APK.
+#
+# Push THIS project folder (the one containing settings.gradle) as the root of a
+# repository and the workflow runs. It needs no secrets: it produces a debug
+# APK that installs fine on a phone (debug-signed). Use your own keystore for a
+# distributable release build.
+#
+# The repository's AndroidManifest.xml carries package="ai.heylogan.app" because
+# the local raw-SDK-tools build (tools/build-apk-manual.ps1) needs it. AGP 8 uses
+# the namespace in app/build.gradle instead and rejects that attribute, so the
+# first step strips it.
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+
+      - name: Set up Android SDK
+        uses: android-actions/setup-android@v3
+
+      - name: Set up Gradle 8.9
+        uses: gradle/actions/setup-gradle@v4
+        with:
+          gradle-version: '8.9'
+
+      - name: Prepare manifest for AGP (namespace replaces package attribute)
+        run: sed -i 's/^    package="ai.heylogan.app">$/    >/' app/src/main/AndroidManifest.xml
+
+      - name: Build debug APK (installable, debug-signed)
+        run: gradle :app:assembleDebug --no-daemon --stacktrace
+
+      - name: Show outputs
+        run: ls -l app/build/outputs/apk/debug/
+
+      - name: Upload APK artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: heylogan-ai-debug-apk
+          path: app/build/outputs/apk/debug/*.apk
+          if-no-files-found: error

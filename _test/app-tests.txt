@@ -1,0 +1,461 @@
+[config] Could not parse C:\Users\s2121270\AppData\Local\Temp\heyai-cfg-SmdPhR\config.json (Expected property name or '}' in JSON at position 1 (line 1 column 2)). Using defaults for missing values.
+TAP version 13
+# Subtest: normalizeText lowercases, strips punctuation and collapses spaces
+ok 1 - normalizeText lowercases, strips punctuation and collapses spaces
+  ---
+  duration_ms: 6.9036
+  type: 'test'
+  ...
+# Subtest: hasPhrase respects word boundaries
+ok 2 - hasPhrase respects word boundaries
+  ---
+  duration_ms: 0.9875
+  type: 'test'
+  ...
+# Subtest: findExecutable finds node and reports missing tools
+ok 3 - findExecutable finds node and reports missing tools
+  ---
+  duration_ms: 34.1923
+  type: 'test'
+  ...
+# Subtest: resolveStatic serves index.html and blocks traversal
+ok 4 - resolveStatic serves index.html and blocks traversal
+  ---
+  duration_ms: 1.4308
+  type: 'test'
+  ...
+# Subtest: humanBytes and formatDuration are readable
+ok 5 - humanBytes and formatDuration are readable
+  ---
+  duration_ms: 0.823
+  type: 'test'
+  ...
+# Subtest: stripMarkdown and firstSentences produce speech-friendly text
+ok 6 - stripMarkdown and firstSentences produce speech-friendly text
+  ---
+  duration_ms: 1.7478
+  type: 'test'
+  ...
+# Subtest: randomToken looks like a pairing token and is unique
+ok 7 - randomToken looks like a pairing token and is unique
+  ---
+  duration_ms: 1.1708
+  type: 'test'
+  ...
+# Subtest: deepMerge merges nested objects but replaces arrays
+ok 8 - deepMerge merges nested objects but replaces arrays
+  ---
+  duration_ms: 2.3178
+  type: 'test'
+  ...
+# Subtest: getLanAddresses returns only IPv4 non-loopback addresses
+ok 9 - getLanAddresses returns only IPv4 non-loopback addresses
+  ---
+  duration_ms: 15.9584
+  type: 'test'
+  ...
+# Subtest: lineSplitter emits complete lines and flushes the remainder
+ok 10 - lineSplitter emits complete lines and flushes the remainder
+  ---
+  duration_ms: 1.0591
+  type: 'test'
+  ...
+# Subtest: loadConfig creates defaults, writes config.json and persists a token
+ok 11 - loadConfig creates defaults, writes config.json and persists a token
+  ---
+  duration_ms: 27.3246
+  type: 'test'
+  ...
+# Subtest: user config overrides defaults without losing other keys
+ok 12 - user config overrides defaults without losing other keys
+  ---
+  duration_ms: 9.2627
+  type: 'test'
+  ...
+# Subtest: explicit token option wins over stored config
+ok 13 - explicit token option wins over stored config
+  ---
+  duration_ms: 4.8633
+  type: 'test'
+  ...
+# Subtest: deep overrides merge into the config
+ok 14 - deep overrides merge into the config
+  ---
+  duration_ms: 4.8458
+  type: 'test'
+  ...
+# Subtest: environment overrides are applied
+ok 15 - environment overrides are applied
+  ---
+  duration_ms: 3.9232
+  type: 'test'
+  ...
+# Subtest: placeholder tokens from copied example configs are replaced
+ok 16 - placeholder tokens from copied example configs are replaced
+  ---
+  duration_ms: 24.6702
+  type: 'test'
+  ...
+# Subtest: too-short tokens are replaced with a real token
+ok 17 - too-short tokens are replaced with a real token
+  ---
+  duration_ms: 6.8071
+  type: 'test'
+  ...
+# Subtest: corrupt config files fall back to defaults instead of crashing
+ok 18 - corrupt config files fall back to defaults instead of crashing
+  ---
+  duration_ms: 12.7746
+  type: 'test'
+  ...
+# Subtest: timingSafeEqualStr compares safely
+ok 19 - timingSafeEqualStr compares safely
+  ---
+  duration_ms: 0.8389
+  type: 'test'
+  ...
+# Subtest: tokenFromRequest reads header, bearer and query
+ok 20 - tokenFromRequest reads header, bearer and query
+  ---
+  duration_ms: 1.0065
+  type: 'test'
+  ...
+# Subtest: isAuthorized requires an exact token
+ok 21 - isAuthorized requires an exact token
+  ---
+  duration_ms: 0.8967
+  type: 'test'
+  ...
+# Subtest: query tokens are accepted for GET but rejected for POST
+ok 22 - query tokens are accepted for GET but rejected for POST
+  ---
+  duration_ms: 0.9039
+  type: 'test'
+  ...
+# Subtest: clientIp ignores spoofed X-Forwarded-For from non-loopback peers
+ok 23 - clientIp ignores spoofed X-Forwarded-For from non-loopback peers
+  ---
+  duration_ms: 0.676
+  type: 'test'
+  ...
+# Subtest: rate limiter bans after repeated failures and resets on success
+ok 24 - rate limiter bans after repeated failures and resets on success
+  ---
+  duration_ms: 1.6024
+  type: 'test'
+  ...
+# Subtest: the example command routes to Claude Code and strips the new-session wording
+ok 25 - the example command routes to Claude Code and strips the new-session wording
+  ---
+  duration_ms: 9.4166
+  type: 'test'
+  ...
+# Subtest: weak agent name at the start is accepted without "hey"
+ok 26 - weak agent name at the start is accepted without "hey"
+  ---
+  duration_ms: 1.4429
+  type: 'test'
+  ...
+# Subtest: a bare mention inside a sentence does not wake an agent
+ok 27 - a bare mention inside a sentence does not wake an agent
+  ---
+  duration_ms: 1.0234
+  type: 'test'
+  ...
+# Subtest: wake phrase in the middle of a sentence still routes
+ok 28 - wake phrase in the middle of a sentence still routes
+  ---
+  duration_ms: 1.2605
+  type: 'test'
+  ...
+# Subtest: the longest matching wake phrase wins
+ok 29 - the longest matching wake phrase wins
+  ---
+  duration_ms: 1.2712
+  type: 'test'
+  ...
+# Subtest: generic wake asks which agent
+ok 30 - generic wake asks which agent
+  ---
+  duration_ms: 1.0459
+  type: 'test'
+  ...
+# Subtest: no wake word falls through to the default agent
+ok 31 - no wake word falls through to the default agent
+  ---
+  duration_ms: 0.7311
+  type: 'test'
+  ...
+# Subtest: only a wake phrase produces needsTask
+ok 32 - only a wake phrase produces needsTask
+  ---
+  duration_ms: 2.3872
+  type: 'test'
+  ...
+# Subtest: computer wake phrase and lock command
+ok 33 - computer wake phrase and lock command
+  ---
+  duration_ms: 1.7467
+  type: 'test'
+  ...
+# Subtest: new session wording is recognized in several forms
+ok 34 - new session wording is recognized in several forms
+  ---
+  duration_ms: 1.9272
+  type: 'test'
+  ...
+# Subtest: fillers are stripped from the task
+ok 35 - fillers are stripped from the task
+  ---
+  duration_ms: 1.3843
+  type: 'test'
+  ...
+# Subtest: empty input yields a needsTask result on the fallback agent
+ok 36 - empty input yields a needsTask result on the fallback agent
+  ---
+  duration_ms: 0.5478
+  type: 'test'
+  ...
+# Subtest: parseIntent understands the example command
+ok 37 - parseIntent understands the example command
+  ---
+  duration_ms: 4.7459
+  type: 'test'
+  ...
+# Subtest: parseIntent detects type-only searches, lock, launch and screenshot
+ok 38 - parseIntent detects type-only searches, lock, launch and screenshot
+  ---
+  duration_ms: 16.164
+  type: 'test'
+  ...
+# Subtest: parseIntent extracts quoted-style names and open-after
+ok 39 - parseIntent extracts quoted-style names and open-after
+  ---
+  duration_ms: 0.4237
+  type: 'test'
+  ...
+# Subtest: searchFiles finds matches, skips node_modules and filters by type
+ok 40 - searchFiles finds matches, skips node_modules and filters by type
+  ---
+  duration_ms: 81.5956
+  type: 'test'
+  ...
+# Subtest: resolveFolder honours folderMap overrides
+ok 41 - resolveFolder honours folderMap overrides
+  ---
+  duration_ms: 1.5451
+  type: 'test'
+  ...
+# Subtest: findKnownApp maps common applications
+ok 42 - findKnownApp maps common applications
+  ---
+  duration_ms: 0.4129
+  type: 'test'
+  ...
+# Subtest: find command returns ranked results and a spoken summary
+ok 43 - find command returns ranked results and a spoken summary
+  ---
+  duration_ms: 67.6249
+  type: 'test'
+  ...
+# Subtest: list command lists folder contents
+ok 44 - list command lists folder contents
+  ---
+  duration_ms: 6.146
+  type: 'test'
+  ...
+# Subtest: find with no match explains where it searched
+ok 45 - find with no match explains where it searched
+  ---
+  duration_ms: 3.1656
+  type: 'test'
+  ...
+# Subtest: help lists capabilities
+ok 46 - help lists capabilities
+  ---
+  duration_ms: 0.5047
+  type: 'test'
+  ...
+# Subtest: a query of generic words still searches by name (regression)
+ok 47 - a query of generic words still searches by name (regression)
+  ---
+  duration_ms: 3.3646
+  type: 'test'
+  ...
+# Subtest: find without a file name lists the folder instead of the newest file (regression)
+ok 48 - find without a file name lists the folder instead of the newest file (regression)
+  ---
+  duration_ms: 2.7993
+  type: 'test'
+  ...
+# Subtest: ambiguous find without context asks for a file name
+ok 49 - ambiguous find without context asks for a file name
+  ---
+  duration_ms: 0.4845
+  type: 'test'
+  ...
+# Subtest: unknown task falls back to a file search
+ok 50 - unknown task falls back to a file search
+  ---
+  duration_ms: 59.1499
+  type: 'test'
+  ...
+# Subtest: ensureCertificate creates a CA-capable cert covering this machine and reuses it
+ok 51 - ensureCertificate creates a CA-capable cert covering this machine and reuses it
+  ---
+  duration_ms: 471.5816
+  type: 'test'
+  ...
+# Subtest: certificateCovers rejects certificates that miss a required name
+ok 52 - certificateCovers rejects certificates that miss a required name
+  ---
+  duration_ms: 243.2555
+  type: 'test'
+  ...
+# Subtest: wake + command in one breath keeps the command as the remainder (regression)
+ok 53 - wake + command in one breath keeps the command as the remainder (regression)
+  ---
+  duration_ms: 2.2376
+  type: 'test'
+  ...
+# Subtest: a bare wake phrase yields no remainder (two-step flow still works)
+ok 54 - a bare wake phrase yields no remainder (two-step flow still works)
+  ---
+  duration_ms: 0.5173
+  type: 'test'
+  ...
+# Subtest: punctuated one-breath commands are cleaned up
+ok 55 - punctuated one-breath commands are cleaned up
+  ---
+  duration_ms: 0.8899
+  type: 'test'
+  ...
+# Subtest: generic wake has no agent and no remainder
+ok 56 - generic wake has no agent and no remainder
+  ---
+  duration_ms: 0.6503
+  type: 'test'
+  ...
+# Subtest: transcripts without a wake word return null
+ok 57 - transcripts without a wake word return null
+  ---
+  duration_ms: 0.2298
+  type: 'test'
+  ...
+# Subtest: removeWakePhrase removes only the wake words
+ok 58 - removeWakePhrase removes only the wake words
+  ---
+  duration_ms: 0.2218
+  type: 'test'
+  ...
+# Subtest: push-to-talk is not hard-disabled in the HTML
+ok 59 - push-to-talk is not hard-disabled in the HTML
+  ---
+  duration_ms: 0.3435
+  type: 'test'
+  ...
+# Subtest: index.html has no inline scripts (CSP-safe)
+ok 60 - index.html has no inline scripts (CSP-safe)
+  ---
+  duration_ms: 0.294
+  type: 'test'
+  ...
+# Subtest: every element id referenced by app.js exists in index.html
+ok 61 - every element id referenced by app.js exists in index.html
+  ---
+  duration_ms: 1.2076
+  type: 'test'
+  ...
+# Subtest: manifest icons exist on disk
+ok 62 - manifest icons exist on disk
+  ---
+  duration_ms: 2.1657
+  type: 'test'
+  ...
+# Subtest: one-breath wake path exists in app.js
+ok 63 - one-breath wake path exists in app.js
+  ---
+  duration_ms: 0.5634
+  type: 'test'
+  ...
+# Subtest: health endpoint is public
+ok 64 - health endpoint is public
+  ---
+  duration_ms: 140.4289
+  type: 'test'
+  ...
+# Subtest: protected endpoints reject missing or wrong tokens
+ok 65 - protected endpoints reject missing or wrong tokens
+  ---
+  duration_ms: 17.743
+  type: 'test'
+  ...
+# Subtest: session-info lists all six agents and server urls
+ok 66 - session-info lists all six agents and server urls
+  ---
+  duration_ms: 113.9102
+  type: 'test'
+  ...
+# Subtest: serves the PWA shell and blocks path traversal
+ok 67 - serves the PWA shell and blocks path traversal
+  ---
+  duration_ms: 37.4966
+  type: 'test'
+  ...
+# Subtest: pairing endpoint returns a QR code and tokenized URLs
+ok 68 - pairing endpoint returns a QR code and tokenized URLs
+  ---
+  duration_ms: 67.949
+  type: 'test'
+  ...
+# Subtest: command executes the Computer agent synchronously
+ok 69 - command executes the Computer agent synchronously
+  ---
+  duration_ms: 30.5872
+  type: 'test'
+  ...
+# Subtest: generic wake asks which agent
+ok 70 - generic wake asks which agent
+  ---
+  duration_ms: 11.9489
+  type: 'test'
+  ...
+# Subtest: text-only wake phrase asks for a task
+ok 71 - text-only wake phrase asks for a task
+  ---
+  duration_ms: 6.7273
+  type: 'test'
+  ...
+# Subtest: missing CLI agents report a helpful install message
+ok 72 - missing CLI agents report a helpful install message
+  ---
+  duration_ms: 125.5059
+  type: 'test'
+  ...
+# Subtest: settings endpoint validates and persists allowed values
+ok 73 - settings endpoint validates and persists allowed values
+  ---
+  duration_ms: 31.9394
+  type: 'test'
+  ...
+# Subtest: sessions are listed and readable after a command
+ok 74 - sessions are listed and readable after a command
+  ---
+  duration_ms: 8.2656
+  type: 'test'
+  ...
+# Subtest: SSE delivers routing and result events for async commands
+ok 75 - SSE delivers routing and result events for async commands
+  ---
+  duration_ms: 132.6855
+  type: 'test'
+  ...
+1..75
+# tests 75
+# suites 0
+# pass 75
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 2408.236

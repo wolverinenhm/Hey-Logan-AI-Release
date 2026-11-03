@@ -1,0 +1,47 @@
+
+  ╔══════════════════════════════════════════════════════════════╗
+  ║                    H E Y   A I   B R I D G E                 ║
+  ╚══════════════════════════════════════════════════════════════╝
+  Hey Logan AI v1.0.0
+
+  Desktop (this PC):
+    https://localhost:8443
+    http://localhost:8787
+
+  Phone (same Wi-Fi):
+    https://192.168.0.104:8443
+    https://198.18.0.1:8443
+
+  Access token:  ZMEF-H97R-NYKE
+  Pairing link:  https://192.168.0.104:8443?token=ZMEF-H97R-NYKE
+
+  Agents:
+  [ok] Computer           ready
+  [--] Claude Code        not found  ->  npm install -g @anthropic-ai/claude-code
+  [--] Codex              not found  ->  npm install -g @openai/codex
+  [ok] DeepSeek Harness   ready
+  [--] Workbuddy          not found  ->  Set agents.workbuddy.command in data/config.json to your Workbuddy executable
+  [--] Gemini             not found  ->  npm install -g @google/gemini-cli
+
+  Config:        C:\Users\s2121270\Downloads\Hey-Logan-AI-Release\windows\payload\HeyLoganAI\app\data\config.json
+  Data folder:   C:\Users\s2121270\Downloads\Hey-Logan-AI-Release\windows\payload\HeyLoganAI\app\data
+
+  Scan to open on your phone:
+
+[47m[30m ▄▄▄▄▄▄▄  ▄     ▄ ▄ ▄▄ ▄▄▄▄▄▄▄ [0m
+[47m[30m █ ▄▄▄ █ ▀ █ █ ▄█ █ ▀▄ █ ▄▄▄ █ [0m
+[47m[30m █ ███ █ ▄ ██▀ ▀▀ ▄▀█▄ █ ███ █ [0m
+[47m[30m █▄▄▄▄▄█ ▄ ▄ ▄▀█ ▄ ▄ █ █▄▄▄▄▄█ [0m
+[47m[30m ▄ ▄ ▄ ▄  ██  ▀ █▄▄█▀▄   ▄  ▄  [0m
+[47m[30m ▄▀ ▄▄ ▄ █▀ ▄▄█▄▄▀█▄▀  ▄██▀▄▄█ [0m
+[47m[30m  █▄█▄▀▄▀▀▀█▄▄  ▀██▀ ▀▄▄█ ▄ █▄ [0m
+[47m[30m █▀ █▄▀▄▄  █▄ █▀█▄▄█▀▄█▀█▀█ ▄█ [0m
+[47m[30m █  ▀▀█▄▄  ▀ ▀██▄▄▀▀▀██▀▄█▀ █▄ [0m
+[47m[30m ▄ ▄▀  ▄ ▀▀▄▄ ▀ ▄▀▄██▀█▄  ▀▄▄█ [0m
+[47m[30m ▄▀▀▀█▀▄█▀█▀ ▀▀▄▀ ██ █▄▄▄▄▀▀▀  [0m
+[47m[30m ▄▄▄▄▄▄▄ ▀ █▀ ▄ ▄ ▄▄██ ▄ █▄▀██ [0m
+[47m[30m █ ▄▄▄ █ ▄▄█ ▀   ▄█▀▀█▄▄▄█ ▀▄▄ [0m
+[47m[30m █ ███ █ ▄█▄ ▀ ▄▀ ▀█▀▄▄█▀▄▄ ▀▄ [0m
+[47m[30m █▄▄▄▄▄█ ▄ ▀▀▄▀██▄▄▀█ ▀█▀█▄▀█▄ [0m
+[47m[30m[0m[37m▀[47m[30m[0m[37m▀[47m[30m[0m[37m▀[47m[30m[0m[37m▀[47m[30m[0m[37m▀[47m[30m[0m[37m▀[47m[30m[0m[37m▀[47m[30m[0m[37m▀[47m[30m[0m[37m▀[47m[30m[0m[37m▀[47m[30m[0m[37m▀[47m[30m[0m[37m▀[47m[30m[0m[37m▀[47m[30m[0m[37m▀[47m[30m[0m[37m▀[47m[30m[0m[37m▀[47m[30m[0m[37m▀[47m[30m[0m[37m▀[47m[30m[0m[37m▀[47m[30m[0m[37m▀[47m[30m[0m[37m▀[47m[30m[0m[37m▀[47m[30m[0m[37m▀[47m[30m[0m[37m▀[47m[30m[0m[37m▀[47m[30m[0m[37m▀[47m[30m[0m[37m▀[47m[30m[0m[37m▀[47m[30m[0m[37m▀[47m[30m[0m[37m▀[47m[30m[0m[37m▀[47m[30m[0m
+[47m[30m[0m

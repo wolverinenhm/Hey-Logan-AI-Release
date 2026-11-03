@@ -1,0 +1,69 @@
+HEY LOGAN AI - Windows quick guide
+==================================
+
+Hey Logan AI turns your PC into a voice command center. Talk to it from this
+PC or from your Android phone and it runs the task on your computer: it finds
+files, opens folders and apps, takes screenshots, reports PC stats, and hands
+longer tasks to AI command-line agents (Claude Code, Codex, DeepSeek, Gemini,
+Workbuddy) if they are installed.
+
+WHAT IS IN THIS FOLDER
+----------------------
+  Launch.vbs              Start the app (no console window). This is the
+                          thing you normally double-click.
+  Start Console.cmd       Start the server in a visible console window - use
+                          this if you want to see the log, the URLs and the
+                          QR code, or if something goes wrong.
+  Stop.cmd                Stop the background server.
+  Pairing.cmd             Show your access token, the phone URLs and a QR
+                          code (scan it with the phone camera to open the
+                          web app, or paste the pairing link into the Android
+                          app).
+  Allow through Firewall.cmd
+                          Let Windows Firewall allow your phone to connect
+                          (asks for administrator approval).
+  app\                    The application itself.
+  runtime\node.exe        Private copy of the Node.js runtime.
+  data info: app\data\    Created on first start: your settings, access
+                          token and the local HTTPS certificate.
+
+FIRST START
+-----------
+1. Double-click "Launch.vbs". A window opens with the app.
+2. If Windows Firewall asks for permission for Node.js, click "Allow access"
+   and tick "Private networks". If you missed it, run
+   "Allow through Firewall.cmd" once.
+3. On this PC the app is already connected. Say or type:
+       Hey Computer, find my budget PDF in Downloads.
+   or
+       Hey Claude Code, open a new session and look for the tax return in Downloads.
+
+USING YOUR ANDROID PHONE
+------------------------
+1. Install HeyLoganAI-android-1.0.0.apk on the phone, or open the pairing link
+   in Chrome and use "Add to Home screen".
+2. On the PC run "Pairing.cmd", then either paste the printed pairing link into
+   the Hey Logan AI Android app (the app has no camera scanner), or scan the QR
+   code with the phone camera to open the web app in Chrome.
+3. The PC and the phone must be on the same Wi-Fi network, and the PC must be
+   running Hey Logan AI.
+
+IF SOMETHING DOES NOT WORK
+--------------------------
+- Nothing happens when you double-click Launch.vbs:
+  run "Start Console.cmd" instead and read the error.
+- Ports 8787 or 8443 already in use: another program (or another copy of this
+  app) is using them. Run "Stop.cmd", then try again.
+- The phone cannot connect: same Wi-Fi? "Private" network in Windows? Firewall
+  rule added? Run "Pairing.cmd" again for the current address - the address
+  changes when the PC gets a new IP from the router.
+- Voice input needs a secure page: on the phone use the https:// pairing link
+  and accept the certificate warning.
+
+UNINSTALLING
+------------
+Windows Settings -> Apps -> "Hey Logan AI" -> Uninstall.
+
+Hey Logan AI runs entirely on your own machine. No cloud account, no
+subscription, and your files never leave your PC except through the AI agents
+you explicitly ask for. See app\README.md for the full documentation.

@@ -1,0 +1,51 @@
+plugins {
+    id 'com.android.application'
+}
+
+android {
+    namespace 'ai.heylogan.app'
+    compileSdk 35
+
+    defaultConfig {
+        applicationId 'ai.heylogan.app'
+        minSdk 26
+        targetSdk 35
+        versionCode 1
+        versionName '1.0.0'
+    }
+
+    // The sources use Java 17 (strings, lambdas, try-with-resources) and only
+    // framework APIs, so no desugaring/library configuration is needed.
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            shrinkResources false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+        debug {
+            applicationIdSuffix ''
+            versionNameSuffix ''
+        }
+    }
+
+    packagingOptions {
+        resources {
+            excludes += ['META-INF/*.kotlin_module']
+        }
+    }
+
+    lint {
+        abortOnError false
+        checkReleaseBuilds false
+    }
+}
+
+// Intentionally empty: the app is framework-only (no AndroidX, no AARs) so the
+// APK can also be built when Gradle is unavailable.
+dependencies {
+}

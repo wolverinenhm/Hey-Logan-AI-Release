@@ -1,0 +1,4 @@
+﻿=== Shipped app test suite from the FINAL frozen portable payload, qa-reviewer, 2026-11-03T21:53:24.5560921+10:00 === portable ZIP SHA256: 94BF5051C5369F7F0F797EF3FBF9DB5042BC098AEDB3A7FC58F0A6E2C72FD6B9  command: runtime\node.exe test\run.js  (cwd = <extracted>\HeyLoganAI\app) exit code: 0  # tests 75
+# pass 75
+# fail 0
+# skipped 0

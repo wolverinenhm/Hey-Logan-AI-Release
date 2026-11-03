@@ -1,0 +1,31 @@
+# Build toolchains and outputs are NOT part of the repository
+_toolchain/
+_tooling/
+_git-upload/
+
+# Android build output / signing material (the keystore stays private)
+android/_manual-build/
+android/build/
+android/app/build/
+android/.gradle/
+android/local.properties
+android/release-keystore/
+
+# Installer build staging
+windows/installer/.build/
+*.cab
+*.ddf
+
+# Node.js runtime (83 MB) - fetch it with windows/installer/fetch-node.ps1
+windows/payload/HeyLoganAI/runtime/node.exe
+
+# Release binaries live in GitHub Releases, not in git
+dist/*.exe
+dist/*.zip
+dist/*.apk
+dist/*.idsig
+
+# OS / editor noise
+Thumbs.db
+desktop.ini
+.DS_Store
