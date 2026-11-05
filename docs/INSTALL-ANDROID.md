@@ -5,15 +5,19 @@ your Windows PC, and the phone is your microphone, screen and speaker for it.
 Both devices must be on the same Wi-Fi network, and **the PC app must be
 running** while you use the phone.
 
+**What is new in 1.1.0 — hands-free:** the app starts listening by itself. Call
+**“Hey Logan”**, hear the answer, then give your command. No “Start listening”
+button after the one-time microphone permission.
+
 ## Requirements
 
 - Android 8.0 (API 26) or newer, with a browser/WebView (any modern phone).
 - The PC running Hey Logan AI, reachable on your local network.
-- Microphone permission (for voice) — the app asks on first use.
+- Microphone permission (for voice) — the app asks once, on first start.
 
 ## 1. Install the APK
 
-Copy **`HeyLoganAI-android-1.0.0.apk`** to the phone (USB cable, a cloud drive,
+Copy **`HeyLoganAI-android-1.1.0.apk`** to the phone (USB cable, a cloud drive,
 or email it to yourself) and tap it in the phone's Files app.
 
 Android will ask to allow installing from that app the first time:
@@ -22,11 +26,11 @@ Android will ask to allow installing from that app the first time:
 With USB debugging enabled you can also install it from the PC:
 
 ```
-adb install -r HeyLoganAI-android-1.0.0.apk
+adb install -r HeyLoganAI-android-1.1.0.apk
 ```
 
-The APK is signed with a release key, so it installs and updates normally; it
-is not distributed through Google Play.
+The APK is signed with the same release key as 1.0.0, so it installs straight
+over the older version (your pairing is kept). It is not on Google Play.
 
 ## 2. Pair the app with your PC
 
@@ -51,14 +55,23 @@ The app remembers the PC, so next time it opens straight into the assistant.
 > certificates are rejected. It is safe to continue: the traffic never leaves
 > your network.
 
-## 3. Use it
+## 3. Use it — hands-free
 
-1. Tap the orb / **Start listening**.
-2. Say a wake phrase:
-   - **"Hey Computer, find my budget PDF in Downloads."**
-   - **"Hey Computer, open Downloads."**
-   - **"Hey Claude Code, summarise the repo in Documents."** (needs Claude Code installed on the PC)
-3. The result is shown **and spoken back** through the phone's speaker.
+1. Open the app. It asks for the microphone **once** — allow it. After that the
+   app starts listening every time it opens.
+2. Say: **“Hey Logan.”**
+3. It answers out loud: **“Logan here.”**
+4. Then say your command:
+   - **“Find my budget PDF in Downloads.”**
+   - **“Open Downloads.”**
+   - **“Ask Claude Code to summarise the repo in Documents.”** (needs Claude Code on the PC)
+5. The result is shown **and spoken back** through the phone's speaker.
+
+The wake word and routing are handled by the PC app (the same page), so the
+phone gets “Hey Logan” as soon as the PC is updated to 1.1.0 — after updating
+the PC, close and reopen the phone app once (its offline cache is refreshed on
+that first reload). You can also still say an agent wake word directly
+(“Hey Computer, …”).
 
 Voice works inside the app because it ships a native speech bridge
 (Android speech recognition for listening, Android text-to-speech for replies) —
@@ -70,7 +83,9 @@ Android's WebView has no built-in Web Speech API. Voice needs:
 - microphone permission for Hey Logan AI.
 
 If a phone has no speech-recognition service, the app still works for typed
-commands and shows the app's own message.
+commands and shows the app's own message. If you denied the microphone, allow it
+in *Settings → Apps → Hey Logan AI → Permissions → Microphone* and reopen the
+app.
 
 ## Menu
 
@@ -87,6 +102,8 @@ when your router gives the PC a new address (run **Pairing** on the PC again).
 | App shows "no speech recognition service" | Install/enable Google speech services, or use typed commands. |
 | Pairing link stopped working after a reboot | The PC's IP changed: run **Pairing** on the PC, then **Change PC** in the app. |
 | Phone connects but commands do nothing | The PC app must show agents as ready; CLI agents (Claude Code, Codex, …) must be installed on the PC. |
+| It does not react to "Hey Logan" | The PC app must be 1.1.0+ (the wake word lives in the PC page). Allow the microphone (Settings → Apps → Hey Logan AI → Permissions). If you tapped **Stop listening**, tap **Start listening** again or reopen the app. |
+| Spoken replies are silent | Check the phone media volume and the Android TTS engine (Settings → Accessibility → Text-to-speech output). The app still shows every reply on screen. |
 
 ## Prefer not to install an APK?
 
@@ -96,7 +113,7 @@ you the same UI as an installable web app with full voice support.
 
 ## Rebuilding the APK
 
-The source is in `HeyLoganAI-Android-Project-1.0.0.zip` (package
+The source is in `HeyLoganAI-Android-Project-1.1.0.zip` (package
 `ai.heylogan.app`, Java, no third-party libraries).
 
 - **Android Studio:** open the folder (the one containing `settings.gradle`),

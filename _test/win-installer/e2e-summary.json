@@ -1,19 +1,19 @@
 ﻿{
-    "timestamp":  "2026-11-03T21:27:33.6372504+10:00",
+    "timestamp":  "2026-11-05T18:10:45.7259235+10:00",
     "host":  "DESKTOP-VKJOJCR",
-    "version":  "1.0.0",
+    "version":  "1.1.0",
     "setup":  {
-                  "path":  "C:\\Users\\s2121270\\Downloads\\Hey-Logan-AI-Release\\dist\\HeyLoganAI-Setup-1.0.0-win-x64.exe",
-                  "size":  23607380,
-                  "sha256":  "8209b35898ff990c460e492e1f4dae7f7f189e8751e22021ff3a5f9845ced9fc"
+                  "path":  "C:\\Users\\s2121270\\Downloads\\Hey-Logan-AI-Release\\dist\\HeyLoganAI-Setup-1.1.0-win-x64.exe",
+                  "size":  23607146,
+                  "sha256":  "1a9131cb90dea921772542a0dee329855460c8079f789cab05acf904640eb586"
               },
     "portable":  {
-                     "path":  "C:\\Users\\s2121270\\Downloads\\Hey-Logan-AI-Release\\dist\\HeyLoganAI-Portable-1.0.0-win-x64.zip",
-                     "size":  35108753,
-                     "sha256":  "18fa9938946f2b14d58c5f8425bf3a3a7e97172c4c6cb1cafdc0c5db30cb5cf6"
+                     "path":  "C:\\Users\\s2121270\\Downloads\\Hey-Logan-AI-Release\\dist\\HeyLoganAI-Portable-1.1.0-win-x64.zip",
+                     "size":  35114765,
+                     "sha256":  "25caa3921530039d5aac1695fe7a6e01cc82db49343f3a18f856cbb49ed9bb8b"
                  },
-    "checks":  181,
-    "passed":  181,
+    "checks":  208,
+    "passed":  208,
     "failed":  0,
     "failures":  [
 

@@ -14,11 +14,20 @@ QUICK START
    the app.
    Prefer no console window? Double-click "Launch.vbs" instead - it starts the
    server hidden and opens the app in a chromeless Edge/Chrome window.
-3. To use your phone: run "Pairing.cmd" (or scan the QR code shown in the
+   The app window uses its own private browser profile (the browser-profile
+   folder created next to it), so the microphone permission is remembered and
+   the app starts listening for "Hey Logan" by itself - just say it.
+
+3. Optional: to start Hey Logan AI automatically when you sign in to Windows,
+   run "Start at Login On.cmd" (undo with "Start at Login Off.cmd"). This
+   writes a single HKCU Run entry that points at this folder; nothing else is
+   installed.
+
+4. To use your phone: run "Pairing.cmd" (or scan the QR code shown in the
    console). The phone must be on the same Wi-Fi network. If the firewall
    asks for permission, click "Allow access"; otherwise run
    "Allow through Firewall.cmd" once (it asks for administrator approval).
-4. To stop the app: close the console window, or run "Stop.cmd".
+5. To stop the app: close the console window, or run "Stop.cmd".
 
 YOUR DATA
 ---------

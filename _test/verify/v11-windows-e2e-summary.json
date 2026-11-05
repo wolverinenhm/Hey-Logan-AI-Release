@@ -1,0 +1,33 @@
+﻿{
+    "timestamp":  "2026-11-05T18:24:07.1030456+10:00",
+    "host":  "DESKTOP-VKJOJCR",
+    "setup":  {
+                  "path":  "C:\\Users\\s2121270\\Downloads\\Hey-Logan-AI-Release\\dist\\HeyLoganAI-Setup-1.1.0-win-x64.exe",
+                  "sha256":  "1A9131CB90DEA921772542A0DEE329855460C8079F789CAB05ACF904640EB586",
+                  "size":  23607146
+              },
+    "portable":  {
+                     "path":  "C:\\Users\\s2121270\\Downloads\\Hey-Logan-AI-Release\\dist\\HeyLoganAI-Portable-1.1.0-win-x64.zip",
+                     "sha256":  "25CAA3921530039D5AAC1695FE7A6E01CC82DB49343F3A18F856CBB49ED9BB8B",
+                     "size":  35114765
+                 },
+    "apk":  {
+                "sha256":  "CCB8FB6E2FF57D856621A0E1ACD41E90A1AF4323A364B19CBDFD31047DBE0173",
+                "path":  "C:\\Users\\s2121270\\Downloads\\Hey-Logan-AI-Release\\dist\\HeyLoganAI-android-1.1.0.apk"
+            },
+    "projectZip":  {
+                       "sha256":  "D3B945956F6041F1D3920E6F30E7AF01FE937150508C3B7D3CF4CFD1EFCE9ED9",
+                       "path":  "C:\\Users\\s2121270\\Downloads\\Hey-Logan-AI-Release\\dist\\HeyLoganAI-Android-Project-1.1.0.zip"
+                   },
+    "checks":  167,
+    "passed":  167,
+    "failed":  0,
+    "skipped":  0,
+    "failures":  [
+
+                 ],
+    "userStateRestored":  true,
+    "userServerListeners":  2,
+    "logPath":  "C:\\Users\\s2121270\\Downloads\\Hey-Logan-AI-Release\\_test\\verify\\v11-windows-e2e.log",
+    "probePath":  "C:\\Temp\\hl-qa-11\\e2e\\ui-probe.json"
+}

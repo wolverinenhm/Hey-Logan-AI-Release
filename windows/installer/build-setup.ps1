@@ -5,7 +5,7 @@
 #   powershell -NoProfile -ExecutionPolicy Bypass -File windows\installer\build-setup.ps1 -Version 1.0.0
 #
 # Optional parameters:
-#   -Version <x.y.z>       Product version baked into the installer (default 1.0.0)
+#   -Version <x.y.z>       Product version baked into the installer (default 1.1.0)
 #   -PayloadDir <path>     Payload to package (default windows\payload\HeyLoganAI)
 #   -OutDir <path>         Output folder (default <release root>\dist)
 #   -Makensis <path>      makensis.exe to use (default: bundled _toolchain\nsis, then PATH)
@@ -14,7 +14,7 @@
 
 [CmdletBinding()]
 param(
-    [string]$Version = '1.0.0',
+    [string]$Version = '1.1.0',
     [string]$PayloadDir = '',
     [string]$OutDir = '',
     [string]$Makensis = '',

@@ -4,16 +4,22 @@ This folder builds the two Windows release artifacts:
 
 | Artifact | What it is |
 | --- | --- |
-| `dist\HeyLoganAI-Setup-1.0.0-win-x64.exe` | NSIS / Modern UI 2 Setup wizard. Per-user install (no UAC), real uninstaller, Start Menu + Desktop shortcuts, Add/Remove Programs entry, optional start-at-login. |
-| `dist\HeyLoganAI-Portable-1.0.0-win-x64.zip` | Portable edition. Extract and run; no installer, no registry writes, no shortcuts. Includes `README-FIRST.txt` and a visible-console `Start Hey Logan AI.cmd`. |
+| `dist\HeyLoganAI-Setup-1.1.0-win-x64.exe` | NSIS / Modern UI 2 Setup wizard. Per-user install (no UAC), real uninstaller, Start Menu + Desktop shortcuts, Add/Remove Programs entry, optional start-at-login. |
+| `dist\HeyLoganAI-Portable-1.1.0-win-x64.zip` | Portable edition. Extract and run; no installer, no registry writes, no shortcuts. Includes `README-FIRST.txt` and a visible-console `Start Hey Logan AI.cmd`. |
 | `_test\win-installer\SHA256SUMS-windows.txt` | SHA-256 of both Windows artifacts (written by `build-all.ps1`; kept out of `dist\` so the release folder contains only the Lead's deliverables + the two Windows artifacts). |
 
 Both artifacts are produced from the **same payload tree**:
 `windows\payload\HeyLoganAI\` - the app (with `node_modules`), a private
 `runtime\node.exe` (Node.js v22.23.3, x64), the launcher scripts
 (`Launch.vbs`, `Start Console.cmd`, `Stop.cmd`, `Pairing.cmd`,
-`Allow through Firewall.cmd`, `HELP.txt`, `tools\pair.js`, `tools\stop.ps1`,
+`Allow through Firewall.cmd`, `Start at Login On.cmd`,
+`Start at Login Off.cmd`, `HELP.txt`, `tools\pair.js`, `tools\stop.ps1`,
 `tools\firewall.ps1`) and `heylogan.ico`.
+
+On first launch `Launch.vbs` creates a `browser-profile\` folder next to the
+app (a dedicated Chromium profile seeded with a microphone permission for the
+local app). It holds no user data, is not shipped in either artifact and is
+deleted by the uninstaller.
 
 The build scripts stage a **clean copy** of that payload and hard-exclude
 `app\data` (the user's settings, pairing token and HTTPS certificate). User
@@ -47,17 +53,17 @@ windows\installer\build.cmd
 or, explicitly:
 
 ```powershell
-powershell -NoProfile -ExecutionPolicy Bypass -File windows\installer\build-all.ps1 [-Version 1.0.0] [-Makensis <path-to-makensis.exe>]
+powershell -NoProfile -ExecutionPolicy Bypass -File windows\installer\build-all.ps1 [-Version 1.1.0] [-Makensis <path-to-makensis.exe>]
 ```
 
 Individual steps:
 
 ```powershell
 # Setup.exe only
-powershell -NoProfile -ExecutionPolicy Bypass -File windows\installer\build-setup.ps1 [-Version 1.0.0] [-Makensis <path>] [-KeepStage]
+powershell -NoProfile -ExecutionPolicy Bypass -File windows\installer\build-setup.ps1 [-Version 1.1.0] [-Makensis <path>] [-KeepStage]
 
 # Portable ZIP only
-powershell -NoProfile -ExecutionPolicy Bypass -File windows\installer\build-portable.ps1 [-Version 1.0.0] [-KeepStage]
+powershell -NoProfile -ExecutionPolicy Bypass -File windows\installer\build-portable.ps1 [-Version 1.1.0] [-KeepStage]
 ```
 
 Notes:
@@ -113,6 +119,8 @@ windows\installer\
   - `Pairing` - `Pairing.cmd`
   - `Stop Server` - `Stop.cmd`
   - `Allow through Firewall` - `Allow through Firewall.cmd`
+  - `Start at Login On` - `Start at Login On.cmd` (writes the HKCU Run value for this install)
+  - `Start at Login Off` - `Start at Login Off.cmd` (removes it)
   - `Uninstall` - `Uninstall.exe`
   - plus the same main shortcut on the Desktop.
 - **HKCU Add/Remove Programs entry** (`DisplayName`, `DisplayVersion`,
@@ -128,6 +136,11 @@ windows\installer\
   points into that folder), replaces the program files and **keeps
   `<install>\app\data`** (settings, pairing token, HTTPS certificate), so a
   phone does not need to be re-paired. A stale run value is rewritten.
+  When no `/D=` is given, `.onInit` reuses
+  `HKCU\...\Uninstall\HeyLoganAI\InstallLocation` as the target folder, so
+  running a newer Setup.exe replaces an earlier custom-folder installation
+  (for example `D:\HeyLoganAI`) instead of creating a second copy under
+  `%LOCALAPPDATA%`. An explicit `/D=` still wins.
   If the existing `app\data` cannot be moved aside safely (e.g. a file is
   locked by another program or an antivirus scan), Setup **aborts with exit
   code 1 before deleting anything**: the old installation, registry entries and
@@ -141,12 +154,37 @@ windows\installer\
   folder aside safely, it stops with exit code 1 **before deleting any program
   file or `app\data`** - run `Uninstall.exe` again once whatever locks the
   folder is closed.
-- **Version metadata:** `VIProductVersion`/`VIFileVersion` 1.0.0.0 and
+- **Version metadata:** `VIProductVersion`/`VIFileVersion` 1.1.0.0 and
   `VIAddVersionKey` strings (ProductName `Hey Logan AI`, FileDescription
   `Hey Logan AI Setup`, CompanyName `Hey Logan AI`, LegalCopyright,
-  FileVersion/ProductVersion `1.0.0`) so the exe looks legitimate in Explorer.
+  FileVersion/ProductVersion `1.1.0`) so the exe looks legitimate in Explorer.
   All installer strings are ASCII.
 
+### Hands-free launcher (v1.1.0)
+
+`Launch.vbs` opens the app in a dedicated Chromium app window
+(`<install>\browser-profile`, created next to the app) with these flags:
+
+```
+--app="http://127.0.0.1:8787/?token=..."
+--window-size=1180,840
+--user-data-dir="<install>\browser-profile"
+--no-first-run
+--no-default-browser-check
+--autoplay-policy=no-user-gesture-required
+```
+
+It also seeds `<profile>\Default\Preferences` (only when it does not exist
+yet) with a microphone permission exception scoped to the local app origins
+(`http://127.0.0.1:8787`, `https://127.0.0.1:8443`, `https://localhost:8443`).
+That grant, plus the autoplay flag, is what lets the wake word "Hey Logan" and
+the spoken reply work at logon without a permission click or a "Start
+listening" click. The user's normal browser profile is not touched and
+`--use-fake-ui-for-media-stream` is deliberately not used (it triggers an
+"unsupported command-line flag" warning bar).
+
+If no Chromium browser is found, the launcher falls back to the default
+browser and to the existing message boxes.
 ### Registry keys written (HKCU only)
 
 ```
@@ -173,14 +211,19 @@ Upgrades never touch it. Uninstall keeps it unless purged.
 
 | Command | Effect |
 | --- | --- |
-| `HeyLoganAI-Setup-1.0.0-win-x64.exe` | Interactive wizard. |
-| `HeyLoganAI-Setup-1.0.0-win-x64.exe /S` | Silent install into the default folder, all default components (start-at-login **on**), no "Run" launch. Exits 0 on success. |
-| `HeyLoganAI-Setup-1.0.0-win-x64.exe /S /NOAUTOSTART` | Silent install **without** the start-at-login component: no `HKCU\...\Run` value is written. Works together with `/D=`. |
-| `HeyLoganAI-Setup-1.0.0-win-x64.exe /S /D=C:\Apps\HeyLoganAI` | Silent install into a custom folder. |
+| `HeyLoganAI-Setup-1.1.0-win-x64.exe` | Interactive wizard. |
+| `HeyLoganAI-Setup-1.1.0-win-x64.exe /S` | Silent install into the default folder, all default components (start-at-login **on**), no "Run" launch. Exits 0 on success. |
+| `HeyLoganAI-Setup-1.1.0-win-x64.exe /S /NOAUTOSTART` | Silent install **without** the start-at-login component: no `HKCU\...\Run` value is written. Works together with `/D=`. |
+| `HeyLoganAI-Setup-1.1.0-win-x64.exe /S /D=C:\Apps\HeyLoganAI` | Silent install into a custom folder. |
+| `HeyLoganAI-Setup-1.1.0-win-x64.exe /S /NOAUTOSTART /D=C:\Apps\HeyLoganAI` | Both switches together: custom folder, no start-at-login Run value. |
 | `Uninstall.exe /S` | Silent uninstall, **keep** `app\data`. |
 | `Uninstall.exe /S /KEEPDATA` | Same as above, explicit. |
 | `Uninstall.exe /S /PURGEDATA` | Silent uninstall, **delete** `app\data` as well. |
 | `Uninstall.exe` | Interactive uninstall - asks whether to keep `app\data`. |
+
+The two uninstall data switches are mutually exclusive - use exactly one of
+`/S /KEEPDATA` (keep token/certificates, the default for `/S`) or
+`/S /PURGEDATA` (delete them) for unattended uninstalls.
 
 `/D=` details: this is the standard NSIS rule - it must be the **last**
 parameter and the path must **not** be wrapped in quotes, even if it contains
@@ -205,7 +248,7 @@ does exactly that (`Wait-SilentUninstallComplete`).
 
 ## Portable ZIP
 
-Extract `dist\HeyLoganAI-Portable-1.0.0-win-x64.zip`; it contains one top-level
+Extract `dist\HeyLoganAI-Portable-1.1.0-win-x64.zip`; it contains one top-level
 folder `HeyLoganAI\` with the same payload plus:
 
 - `README-FIRST.txt` - quick start for the portable edition
@@ -281,6 +324,10 @@ See `_test\win-installer\TEST-RESULTS.md` for the latest recorded run
   an upgrade or a keep-data uninstall (locked file / antivirus scan), Setup or
   Uninstall exits with code 1 instead of continuing - the token and
   certificates are never deleted. Close the locking program and run it again.
+- **If you previously installed the web app as an Edge PWA**, Edge may have its
+  own "run on OS login" entry for `http://127.0.0.1:8787/`. Together with the
+  installer Run value that can open two app windows at logon. Remove the PWA
+  (or its OS-login setting) if you only want the Hey Logan AI launcher.
 - **Start-at-login is on by default and can be automated off** with
   `/NOAUTOSTART` (see the silent switches table). Interactive users just clear
   the "Start Hey Logan AI when I sign in" checkbox.

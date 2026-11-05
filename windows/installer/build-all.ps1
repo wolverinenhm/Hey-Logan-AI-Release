@@ -5,11 +5,11 @@
 #
 # Usage:
 #   pwsh -File windows\installer\build-all.ps1
-#   pwsh -File windows\installer\build-all.ps1 -Version 1.0.0 [-Makensis <path>]
+#   pwsh -File windows\installer\build-all.ps1 -Version 1.1.0 [-Makensis <path>]
 
 [CmdletBinding()]
 param(
-    [string]$Version = '1.0.0',
+    [string]$Version = '1.1.0',
     [string]$Makensis = ''
 )
 

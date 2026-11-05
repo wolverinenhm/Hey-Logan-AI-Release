@@ -1,0 +1,180 @@
+﻿=== Android v1.1.0 verification evidence, qa-reviewer, 2026-11-05T18:01:05.0406449+10:00 ===
+
+--- artifact hashes (Lead-supplied expected: APK 226868 B / CCB8FB6E2FF57D856621A0E1ACD41E90A1AF4323A364B19CBDFD31047DBE0173, ZIP 236017 B / D3B945956F6041F1D3920E6F30E7AF01FE937150508C3B7D3CF4CFD1EFCE9ED9) ---
+HeyLoganAI-android-1.1.0.apk  226868 bytes  SHA256 CCB8FB6E2FF57D856621A0E1ACD41E90A1AF4323A364B19CBDFD31047DBE0173
+HeyLoganAI-Android-Project-1.1.0.zip  236017 bytes  SHA256 D3B945956F6041F1D3920E6F30E7AF01FE937150508C3B7D3CF4CFD1EFCE9ED9
+copy SHA256 matches dist: True
+
+--- apksigner verify --verbose --print-certs ---
+Verifies
+Verified using v1 scheme (JAR signing): false
+Verified using v2 scheme (APK Signature Scheme v2): true
+Verified using v3 scheme (APK Signature Scheme v3): true
+Verified using v3.1 scheme (APK Signature Scheme v3.1): false
+Verified using v4 scheme (APK Signature Scheme v4): false
+Verified for SourceStamp: false
+Number of signers: 1
+Signer #1 certificate DN: CN=HeyLoganAI, OU=Local, O=HeyLoganAI, L=Local, ST=Local, C=AU
+Signer #1 certificate SHA-256 digest: 6c82679233c2abdf780cfc2ca89b06684907d0ff545d27a3e126837f9318480c
+Signer #1 certificate SHA-1 digest: 935bc3da0bfe6ccd0fff9f852fceb7758fb27934
+Signer #1 certificate MD5 digest: 335d472caa99174c1e7309b1ea1ce197
+Signer #1 key algorithm: RSA
+Signer #1 key size (bits): 2048
+Signer #1 public key SHA-256 digest: 952060e73a9d1ee0564b8f97d9decd95da66aeaf68f6707a1d8d8c85e9641622
+Signer #1 public key SHA-1 digest: 498c1417520914298a8845b1cc6550980f678950
+Signer #1 public key MD5 digest: 064a9f90161fefb0dc04b36dcce8f15a
+
+--- apksigner verify --min-sdk-version 21 --verbose (v1 JAR signature) ---
+Verifies
+Verified using v1 scheme (JAR signing): true
+Verified using v2 scheme (APK Signature Scheme v2): true
+Verified using v3 scheme (APK Signature Scheme v3): true
+Verified using v3.1 scheme (APK Signature Scheme v3.1): false
+Verified using v4 scheme (APK Signature Scheme v4): false
+Verified for SourceStamp: false
+Number of signers: 1
+
+--- aapt2 dump badging ---
+package: name='ai.heylogan.app' versionCode='2' versionName='1.1.0' platformBuildVersionName='15' platformBuildVersionCode='35' compileSdkVersion='35' compileSdkVersionCodename='15'
+minSdkVersion:'26'
+targetSdkVersion:'35'
+uses-permission: name='android.permission.INTERNET'
+uses-permission: name='android.permission.ACCESS_NETWORK_STATE'
+uses-permission: name='android.permission.RECORD_AUDIO'
+application-label:'Hey Logan AI'
+application-icon-160:'res/mipmap-anydpi-v26/ic_launcher.xml'
+application-icon-240:'res/mipmap-anydpi-v26/ic_launcher.xml'
+application-icon-320:'res/mipmap-anydpi-v26/ic_launcher.xml'
+application-icon-480:'res/mipmap-anydpi-v26/ic_launcher.xml'
+application-icon-640:'res/mipmap-anydpi-v26/ic_launcher.xml'
+application-icon-65534:'res/mipmap-anydpi-v26/ic_launcher.xml'
+application: label='Hey Logan AI' icon='res/mipmap-anydpi-v26/ic_launcher.xml'
+launchable-activity: name='ai.heylogan.app.MainActivity'  label='' icon=''
+feature-group: label=''
+  uses-feature-not-required: name='android.hardware.microphone'
+  uses-feature: name='android.hardware.faketouch'
+  uses-implied-feature: name='android.hardware.faketouch' reason='default feature for all apps'
+main
+supports-screens: 'small' 'normal' 'large' 'xlarge'
+supports-any-density: 'true'
+locales: '--_--'
+densities: '160' '240' '320' '480' '640' '65534'
+
+--- zipalign -c -v 4 (tail) ---
+  219031 META-INF/HEYLOGAN.RSA (OK - compressed)
+  220159 META-INF/MANIFEST.MF (OK - compressed)
+Verification succesful
+
+--- APK entries ---
+AndroidManifest.xml
+res/mipmap-mdpi-v4/ic_launcher.png
+res/mipmap-mdpi-v4/ic_launcher_foreground.png
+res/mipmap-hdpi-v4/ic_launcher.png
+res/mipmap-hdpi-v4/ic_launcher_foreground.png
+res/mipmap-xhdpi-v4/ic_launcher.png
+res/mipmap-xhdpi-v4/ic_launcher_foreground.png
+res/mipmap-xxhdpi-v4/ic_launcher.png
+res/mipmap-xxhdpi-v4/ic_launcher_foreground.png
+res/mipmap-xxxhdpi-v4/ic_launcher.png
+res/mipmap-xxxhdpi-v4/ic_launcher_foreground.png
+res/mipmap-anydpi-v26/ic_launcher.xml
+res/mipmap-anydpi-v26/ic_launcher_round.xml
+res/xml/network_security_config.xml
+resources.arsc
+assets/connect.html
+classes.dex
+META-INF/HEYLOGAN.SF
+META-INF/HEYLOGAN.RSA
+META-INF/MANIFEST.MF
+
+--- classes.dex vs android\_manual-build\dex\classes.dex ---
+apk dex   : 8B2A5C8BF0B9C3C3D422FDA555333B6E5006DEC3C868F40709FD969A56B16F8C
+build dex : 8B2A5C8BF0B9C3C3D422FDA555333B6E5006DEC3C868F40709FD969A56B16F8C
+identical: True
+
+--- dex classes + new permission-flow strings ---
+class count: 38
+Lai/heylogan/app/MainActivity;             FOUND
+Lai/heylogan/app/VoiceBridge;              FOUND
+Lai/heylogan/app/MainActivity$PairBridge;  FOUND
+RECORD_AUDIO                       FOUND
+requestPermissions                 FOUND
+onRequestPermissionsResult         FOUND
+reload                             FOUND
+onResume                           missing
+hasMicrophonePermission            FOUND
+setMediaPlaybackRequiresUserGesture FOUND
+addJavascriptInterface             FOUND
+HeyNativeVoice                     FOUND
+sttAvailable                       FOUND
+startListening                     FOUND
+ttsAvailable                       FOUND
+stopSpeaking                       FOUND
+_onNative                          FOUND
+
+--- keystore certificate identity ---
+Alias name: heylogan
+Owner: CN=HeyLoganAI, OU=Local, O=HeyLoganAI, L=Local, ST=Local, C=AU
+Valid from: Tue Nov 03 20:59:07 AEST 2026 until: Sat Mar 21 20:59:07 AEST 2054
+SHA256: 6C:82:67:92:33:C2:AB:DF:78:0C:FC:2C:A8:9B:06:68:49:07:D0:FF:54:5D:27:A3:E1:26:83:7F:93:18:48:0C
+Signature algorithm name: SHA256withRSA
+
+--- project ZIP entries ---
+entry count: 29
+.github/workflows/android-build.yml
+.gitignore
+app/build.gradle
+app/proguard-rules.pro
+app/src/main/AndroidManifest.xml
+app/src/main/assets/connect.html
+app/src/main/java/ai/heylogan/app/MainActivity.java
+app/src/main/java/ai/heylogan/app/VoiceBridge.java
+app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml
+app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml
+app/src/main/res/mipmap-hdpi/ic_launcher.png
+app/src/main/res/mipmap-hdpi/ic_launcher_foreground.png
+app/src/main/res/mipmap-mdpi/ic_launcher.png
+app/src/main/res/mipmap-mdpi/ic_launcher_foreground.png
+app/src/main/res/mipmap-xhdpi/ic_launcher.png
+app/src/main/res/mipmap-xhdpi/ic_launcher_foreground.png
+app/src/main/res/mipmap-xxhdpi/ic_launcher.png
+app/src/main/res/mipmap-xxhdpi/ic_launcher_foreground.png
+app/src/main/res/mipmap-xxxhdpi/ic_launcher.png
+app/src/main/res/mipmap-xxxhdpi/ic_launcher_foreground.png
+app/src/main/res/values/colors.xml
+app/src/main/res/values/strings.xml
+app/src/main/res/xml/network_security_config.xml
+build.gradle
+BUILD-NOTES.md
+gradle.properties
+README.md
+settings.gradle
+tools/build-apk-manual.ps1
+
+--- project ZIP forbidden entries (expect empty) ---
+
+
+--- project ZIP: keystore password literal hits (expect 0) ---
+hits: 0
+
+
+--- project ZIP files vs android\ source (SHA256) ---
+zip files: 29 mismatches/missing: 0
+
+
+--- manifest xmltree (permissions/activity/cleartext) ---
+E: uses-sdk (line=0)
+A: http://schemas.android.com/apk/res/android:minSdkVersion(0x0101020c)=26
+A: http://schemas.android.com/apk/res/android:targetSdkVersion(0x01010270)=35
+E: uses-permission (line=10)
+E: uses-permission (line=11)
+E: uses-permission (line=12)
+A: http://schemas.android.com/apk/res/android:name(0x01010003)="android.speech.RecognitionService" (Raw: "android.speech.RecognitionService")
+A: http://schemas.android.com/apk/res/android:name(0x01010003)="android.intent.action.TTS_SERVICE" (Raw: "android.intent.action.TTS_SERVICE")
+A: http://schemas.android.com/apk/res/android:usesCleartextTraffic(0x010104ec)=true
+A: http://schemas.android.com/apk/res/android:networkSecurityConfig(0x01010527)=@0x7f040000
+E: activity (line=39)
+A: http://schemas.android.com/apk/res/android:name(0x01010003)=".MainActivity" (Raw: ".MainActivity")
+A: http://schemas.android.com/apk/res/android:exported(0x01010010)=true
+A: http://schemas.android.com/apk/res/android:name(0x01010003)="android.intent.action.MAIN" (Raw: "android.intent.action.MAIN")
+A: http://schemas.android.com/apk/res/android:name(0x01010003)="android.intent.category.LAUNCHER" (Raw: "android.intent.category.LAUNCHER")

@@ -23,7 +23,7 @@ Unicode true
 
 ;--- Build-time defines (provided by build-setup.ps1) ------------------------
 !ifndef PRODUCT_VERSION
-  !define PRODUCT_VERSION "1.0.0"
+  !define PRODUCT_VERSION "1.1.0"
 !endif
 !ifndef PAYLOAD_DIR
   !error "PAYLOAD_DIR is not defined. Run build-setup.ps1 to build the installer."
@@ -239,6 +239,12 @@ Section "Hey Logan AI (required)" SEC_MAIN
   CreateShortCut "$SMPROGRAMS\${SM_GROUP}\Allow through Firewall.lnk" \
                  "$INSTDIR\Allow through Firewall.cmd" "" \
                  "$INSTDIR\heylogan.ico" 0 SW_SHOWNORMAL "" "Allow your phone to reach ${PRODUCT_NAME} through Windows Firewall"
+  CreateShortCut "$SMPROGRAMS\${SM_GROUP}\Start at Login On.lnk" \
+                 "$INSTDIR\Start at Login On.cmd" "" \
+                 "$INSTDIR\heylogan.ico" 0 SW_SHOWNORMAL "" "Start ${PRODUCT_NAME} automatically when you sign in to Windows"
+  CreateShortCut "$SMPROGRAMS\${SM_GROUP}\Start at Login Off.lnk" \
+                 "$INSTDIR\Start at Login Off.cmd" "" \
+                 "$INSTDIR\heylogan.ico" 0 SW_SHOWNORMAL "" "Stop ${PRODUCT_NAME} from starting automatically"
   CreateShortCut "$SMPROGRAMS\${SM_GROUP}\Uninstall.lnk" \
                  "$INSTDIR\Uninstall.exe" "" \
                  "$INSTDIR\heylogan.ico" 0 SW_SHOWNORMAL "" "Uninstall ${PRODUCT_NAME}"
@@ -284,6 +290,23 @@ Function .onInit
 
   ; Everything is per-user: shortcuts, registry and the install folder.
   SetShellVarContext current
+
+  ; --- upgrade in place ----------------------------------------------------
+  ; A previous version may be installed in a custom folder (the user machine
+  ; has it in D:\HeyLoganAI). Reuse the registered install location as the
+  ; default folder so this version replaces that copy instead of creating a
+  ; second one. An explicit /D= on this command line still wins: then
+  ; $INSTDIR no longer matches the built-in default or the app-key value.
+  ReadRegStr $R0 HKCU "${ARP_REG_KEY}" "InstallLocation"
+  ReadRegStr $R1 HKCU "${APP_REG_KEY}" "InstallDir"
+  ${If} $R0 != ""
+    ${If} ${FileExists} "$R0\*.*"
+      ${If} $INSTDIR == "$LOCALAPPDATA\Programs\HeyLoganAI"
+      ${OrIf} $INSTDIR == $R1
+        StrCpy $INSTDIR $R0
+      ${EndIf}
+    ${EndIf}
+  ${EndIf}
 
   ; /NOAUTOSTART: skip the start-at-login component (HKCU Run value).
   ; Works together with /S and /D=; the interactive wizard simply shows the
@@ -365,6 +388,8 @@ Section "Uninstall"
   Delete "$SMPROGRAMS\${SM_GROUP}\Pairing.lnk"
   Delete "$SMPROGRAMS\${SM_GROUP}\Stop Server.lnk"
   Delete "$SMPROGRAMS\${SM_GROUP}\Allow through Firewall.lnk"
+  Delete "$SMPROGRAMS\${SM_GROUP}\Start at Login On.lnk"
+  Delete "$SMPROGRAMS\${SM_GROUP}\Start at Login Off.lnk"
   Delete "$SMPROGRAMS\${SM_GROUP}\Uninstall.lnk"
   RMDir "$SMPROGRAMS\${SM_GROUP}"
 
@@ -414,6 +439,9 @@ Section "Uninstall"
   Delete "$INSTDIR\*.txt"
   Delete "$INSTDIR\*.ico"
   Delete "$INSTDIR\Uninstall.exe"
+  ; The private browser profile is only the launcher's mic-permission profile;
+  ; it is not user data and must not be left behind on uninstall.
+  RMDir /r "$INSTDIR\browser-profile"
 
   ${If} $UnPurgeData != "1"
     CreateDirectory "$INSTDIR\app"

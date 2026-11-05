@@ -1,0 +1,26 @@
+﻿{
+  "debugPort": 9224,
+  "expectedPort": "8794",
+  "targetUrl": "http://127.0.0.1:8794/",
+  "targetTitle": "Hey Logan AI",
+  "readyState": "complete",
+  "title": "Hey Logan AI",
+  "secureContext": true,
+  "statusText": "Listening for wake words…",
+  "connLabel": "Hey Logan AI · 2/6 agents ready",
+  "orbState": "listening",
+  "listenButton": "Stop listening",
+  "versionLabel": "v1.1.0",
+  "autoListenToggle": true,
+  "srSupported": true,
+  "synthSupported": true,
+  "microphonePermission": "granted",
+  "appJsHasAutoStartListening": true,
+  "voiceJsHasDefaultWake": true,
+  "servedSwHasV110Cache": true,
+  "servedIndexVersionLabel": "v1.1.0",
+  "ttsProbe": "started",
+  "clickedStopListening": true,
+  "sttProbe": "STARTED"
+}
+

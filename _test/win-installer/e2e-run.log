@@ -1,234 +1,268 @@
-﻿Hey Logan AI E2E test - 2026-11-03 21:25:07
-[21:25:07] 
-[21:25:08] === PHASE 0 - release artifacts ===
-[21:25:08] host     : Microsoft Windows 11 Enterprise 10.0.26200
-[21:25:08] user     : STUDENT\s2121270
-[21:25:08] powershell: 5.1.26100.9711
-[21:25:08] repo     : C:\Users\s2121270\Downloads\Hey-Logan-AI-Release
-[21:25:08] work     : C:\Temp\hl-e2e
-[21:25:08] PASS 01  dist Setup.exe exists  [C:\Users\s2121270\Downloads\Hey-Logan-AI-Release\dist\HeyLoganAI-Setup-1.0.0-win-x64.exe]
-[21:25:08] PASS 02  dist Portable.zip exists  [C:\Users\s2121270\Downloads\Hey-Logan-AI-Release\dist\HeyLoganAI-Portable-1.0.0-win-x64.zip]
-[21:25:09] setup    : 23607380 bytes  sha256 8209b35898ff990c460e492e1f4dae7f7f189e8751e22021ff3a5f9845ced9fc
-[21:25:09] portable : 35108753 bytes  sha256 18fa9938946f2b14d58c5f8425bf3a3a7e97172c4c6cb1cafdc0c5db30cb5cf6
-[21:25:09] PASS 03  Setup.exe size > 20 MB  [23607380 bytes]
-[21:25:09] PASS 04  Portable ZIP size > 25 MB  [35108753 bytes]
-[21:25:11] PASS 05  Setup.exe copied to C:\Temp with identical SHA256  [C:\Temp\hl-e2e\setup\HeyLoganAI-Setup.exe]
-[21:25:11] PASS 06  Setup.exe ProductName is "Hey Logan AI"  [Hey Logan AI]
-[21:25:11] PASS 07  Setup.exe FileDescription mentions Hey Logan AI  [Hey Logan AI Setup]
-[21:25:11] PASS 08  Setup.exe CompanyName is "Hey Logan AI"  [Hey Logan AI]
-[21:25:11] PASS 09  Setup.exe FileVersion is 1.0.0.x  [1.0.0]
-[21:25:11] PASS 10  Setup.exe ProductVersion is 1.0.0.x  [1.0.0]
-[21:25:11] PASS 11  Setup.exe LegalCopyright present  [Copyright (c) 2026 Hey Logan AI]
-[21:25:11] PASS 12  Portable ZIP has > 500 entries  [654 entries]
-[21:25:11] PASS 13  Portable ZIP contains README-FIRST.txt
-[21:25:11] PASS 14  Portable ZIP contains "Start Hey Logan AI.cmd"
-[21:25:11] PASS 15  Portable ZIP contains runtime/node.exe
-[21:25:11] PASS 16  Portable ZIP contains app/server/index.js
-[21:25:11] PASS 17  Portable ZIP ships no app/data
-[21:25:11]   Authenticode status: NotSigned (expected: not signed - the release is unsigned)
-[21:25:12] PASS 18  Setup manifest requests asInvoker (no UAC prompt)
-[21:25:12] PASS 19  Setup manifest does not request administrator rights
-[21:25:12] PASS 20  build checksum manifest exists (_test\win-installer\SHA256SUMS-windows.txt)  [C:\Users\s2121270\Downloads\Hey-Logan-AI-Release\_test\win-installer\SHA256SUMS-windows.txt]
-[21:25:12] PASS 21  Checksum manifest matches both artifact hashes
-[21:25:12] 
-[21:25:12] === PHASE 1 - clean machine baseline ===
-[21:25:12] PASS 22  No pre-existing install dir  [C:\Users\s2121270\AppData\Local\Programs\HeyLoganAI]
-[21:25:12] PASS 23  No pre-existing ARP entry
-[21:25:12] PASS 24  No pre-existing Run value
-[21:25:12] PASS 25  No pre-existing Start Menu group
-[21:25:12] PASS 26  No pre-existing Desktop shortcut
-[21:25:14] PASS 27  Ports 8787/8443 are free
-[21:25:14] PASS 28  No Hey Logan AI node processes
-[21:25:14] 
-[21:25:14] === PHASE 2a - interactive wizard starts ===
-[21:25:16] PASS 29  Interactive Setup.exe opens the Modern UI 2 wizard window  [window title='Hey Logan AI Setup']
-[21:25:17] PASS 30  Cancelled wizard left no partial install
-[21:25:17] 
-[21:25:17] === PHASE 2 - silent install /S (default location) ===
-[21:25:29] PASS 31  Silent install exits 0  [exit=0 seconds=12.1]
-[21:25:29] PASS 32  Silent install finished in < 180 s  [12.1s]
-[21:25:29] PASS 33  Install dir created (LOCALAPPDATA\Programs\HeyLoganAI)  [C:\Users\s2121270\AppData\Local\Programs\HeyLoganAI]
-[21:25:29] PASS 34  All expected launcher/app/runtime files installed  [all present]
-[21:25:29] PASS 35  Bundled runtime\node.exe is the 83 MB Node build  [86973768 bytes]
-[21:25:29] PASS 36  No app\data shipped or pre-created by installer
-[21:25:29] PASS 37  index.html loads native-voice.js (updated payload)
-[21:25:29] PASS 38  Installed HELP.txt carries updated pairing wording (phone camera)
-[21:25:29] PASS 39  Installed tools\pair.js carries updated QR footer (no camera scanner)
-[21:25:29] PASS 40  Silent install does not start the server  [no node process]
-[21:25:29] 
-[21:25:29] === PHASE 3 - Add/Remove Programs entry (HKCU) ===
-[21:25:29] PASS 41  ARP key exists
-[21:25:29] PASS 42  ARP DisplayName  [Hey Logan AI]
-[21:25:30] PASS 43  ARP DisplayVersion  [1.0.0]
-[21:25:30] PASS 44  ARP Publisher  [Hey Logan AI]
-[21:25:30] PASS 45  ARP DisplayIcon points at installed .ico  [C:\Users\s2121270\AppData\Local\Programs\HeyLoganAI\heylogan.ico]
-[21:25:30] PASS 46  ARP InstallLocation  [C:\Users\s2121270\AppData\Local\Programs\HeyLoganAI]
-[21:25:30] PASS 47  ARP UninstallString points at Uninstall.exe  ["C:\Users\s2121270\AppData\Local\Programs\HeyLoganAI\Uninstall.exe"]
-[21:25:30] PASS 48  ARP QuietUninstallString has /S  ["C:\Users\s2121270\AppData\Local\Programs\HeyLoganAI\Uninstall.exe" /S]
-[21:25:30] PASS 49  ARP EstimatedSize >= 80000 KB  [91605]
-[21:25:30] PASS 50  ARP NoModify = 1
-[21:25:30] PASS 51  ARP NoRepair = 1
-[21:25:30] PASS 52  ARP VersionMajor/Minor = 1.0
-[21:25:30] PASS 53  ARP is not hidden (SystemComponent absent)
-[21:25:30] PASS 54  HKCU\Software\HeyLoganAI InstallDir  [C:\Users\s2121270\AppData\Local\Programs\HeyLoganAI]
-[21:25:30] PASS 55  HKCU\Software\HeyLoganAI Version  [1.0.0]
-[21:25:30] 
-[21:25:30] === PHASE 4 - shortcuts ===
-[21:25:30] PASS 56  Start Menu group "Hey Logan AI" exists  [C:\Users\s2121270\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Hey Logan AI]
-[21:25:30] PASS 57  Start Menu group has all 6 shortcuts  [all present]
-[21:25:31] PASS 58  Start Menu main shortcut target is wscript.exe  [C:\Windows\System32\wscript.exe]
-[21:25:31] PASS 59  Start Menu main shortcut args = "<install>\Launch.vbs"  ["C:\Users\s2121270\AppData\Local\Programs\HeyLoganAI\Launch.vbs"]
-[21:25:31] PASS 60  Start Menu main shortcut icon is heylogan.ico  [C:\Users\s2121270\AppData\Local\Programs\HeyLoganAI\heylogan.ico,0]
-[21:25:31] PASS 61  Desktop shortcut exists  [C:\Users\s2121270\Desktop\Hey Logan AI.lnk]
-[21:25:31] PASS 62  Desktop shortcut target is wscript.exe  [C:\Windows\System32\wscript.exe]
-[21:25:31] PASS 63  Desktop shortcut args = "<install>\Launch.vbs"  ["C:\Users\s2121270\AppData\Local\Programs\HeyLoganAI\Launch.vbs"]
-[21:25:31] PASS 64  Desktop shortcut icon is heylogan.ico  [C:\Users\s2121270\AppData\Local\Programs\HeyLoganAI\heylogan.ico,0]
-[21:25:31] PASS 65  Shortcut Start Console.lnk -> Start Console.cmd  [C:\Users\s2121270\AppData\Local\Programs\HeyLoganAI\Start Console.cmd]
-[21:25:31] PASS 66  Shortcut Pairing.lnk -> Pairing.cmd  [C:\Users\s2121270\AppData\Local\Programs\HeyLoganAI\Pairing.cmd]
-[21:25:31] PASS 67  Shortcut Stop Server.lnk -> Stop.cmd  [C:\Users\s2121270\AppData\Local\Programs\HeyLoganAI\Stop.cmd]
-[21:25:31] PASS 68  Shortcut Allow through Firewall.lnk -> Allow through Firewall.cmd  [C:\Users\s2121270\AppData\Local\Programs\HeyLoganAI\Allow through Firewall.cmd]
-[21:25:31] PASS 69  Shortcut Uninstall.lnk -> Uninstall.exe  [C:\Users\s2121270\AppData\Local\Programs\HeyLoganAI\Uninstall.exe]
-[21:25:31] 
-[21:25:31] === PHASE 5 - start-at-login (HKCU Run) ===
-[21:25:31] PASS 70  HKCU Run value HeyLoganAI exists (default on)  ["C:\WINDOWS\system32\wscript.exe" "C:\Users\s2121270\AppData\Local\Programs\HeyLoganAI\Launch.vbs"]
-[21:25:31] PASS 71  Run value = wscript.exe "<install>\Launch.vbs"  ["C:\WINDOWS\system32\wscript.exe" "C:\Users\s2121270\AppData\Local\Programs\HeyLoganAI\Launch.vbs"]
-[21:25:31] 
-[21:25:31] === PHASE 6 - launch via shortcut target / health endpoint ===
-[21:25:35] PASS 72  Health endpoint answers within 90 s
-[21:25:35] PASS 73  Health JSON ok = true  [{"ok":true,"app":"Hey Logan AI","version":"1.0.0","time":"2026-11-03T11:25:35.133Z","requiresToken":true}]
-[21:25:35] PASS 74  Health JSON app = "Hey Logan AI"  [Hey Logan AI]
-[21:25:35] PASS 75  Health JSON version = 1.0.0  [1.0.0]
-[21:25:35] PASS 76  Health JSON requiresToken = true
-[21:25:35] PASS 77  First run created app\data\config.json  [C:\Users\s2121270\AppData\Local\Programs\HeyLoganAI\app\data]
-[21:25:35] PASS 78  Pairing token generated (XXXX-XXXX-XXXX)  [RXEY-WCG6-YCZV]
-[21:25:35] PASS 79  HTTPS certificate created in app\data\certs
-[21:25:35] PASS 80  GET /api/pairing returns the token
-[21:25:35] PASS 81  Pairing URL is a LAN HTTPS URL  [https://192.168.0.104:8443?token=RXEY-WCG6-YCZV]
-[21:25:35] PASS 82  Pairing QR SVG returned by API  [1589 chars]
-[21:25:35] 
-[21:25:35] === PHASE 7 - Pairing.cmd ===
-[21:25:36] PASS 83  Pairing.cmd exits 0  [exit=0]
-[21:25:36] PASS 84  Pairing.cmd prints the access token
-[21:25:36] PASS 85  Pairing.cmd shows a 192.168.x.x LAN address  [192.168.0.104]
-[21:25:36] PASS 86  Pairing.cmd shows the https:// phone URL
-[21:25:36] PASS 87  Pairing.cmd shows the local PC URL
-[21:25:36] PASS 88  Pairing.cmd renders a QR code
-[21:25:36] PASS 89  Pairing.cmd says the Android app has no camera scanner
-[21:25:36] PASS 90  Pairing.cmd recommends phone camera / Chrome for the QR
-[21:25:36] 
-[21:25:36] === PHASE 8 - Stop.cmd ===
-[21:25:37] PASS 91  Stop.cmd exits 0  [exit=0]
-[21:25:37] PASS 92  Stop.cmd reports the server was stopped  [Stopping the Hey Logan AI server...
-  Stopped server process 9856
+﻿Hey Logan AI v1.1.0 E2E test - 2026-11-05 18:06:54
+[18:06:55] 
+[18:06:55] === PHASE 0 - release artifacts and user state ===
+[18:06:55] host      : Microsoft Windows 11 Enterprise 10.0.26200
+[18:06:55] repo      : C:\Users\s2121270\Downloads\Hey-Logan-AI-Release
+[18:06:55] test ports: 8790/8445 (user's app keeps 8787/8443)
+[18:06:57] PASS 01  User state backed up before tests
+[18:06:57]   user install : D:\HeyLoganAI (574 files, 93809575 bytes)
+[18:06:57]   user run key : "C:\WINDOWS\system32\wscript.exe" "D:\HeyLoganAI\Launch.vbs"
+[18:06:57]   user pid 8787: 20660
+[18:06:57] PASS 02  dist Setup.exe (1.1.0) exists  [C:\Users\s2121270\Downloads\Hey-Logan-AI-Release\dist\HeyLoganAI-Setup-1.1.0-win-x64.exe]
+[18:06:57] PASS 03  dist Portable.zip (1.1.0) exists  [C:\Users\s2121270\Downloads\Hey-Logan-AI-Release\dist\HeyLoganAI-Portable-1.1.0-win-x64.zip]
+[18:06:58]   setup    : 23607146 bytes  sha256 1a9131cb90dea921772542a0dee329855460c8079f789cab05acf904640eb586
+[18:06:58]   portable : 35114765 bytes  sha256 25caa3921530039d5aac1695fe7a6e01cc82db49343f3a18f856cbb49ed9bb8b
+[18:06:58] PASS 04  Setup.exe size > 20 MB  [23607146 bytes]
+[18:06:58] PASS 05  Portable ZIP size > 25 MB  [35114765 bytes]
+[18:07:00] PASS 06  Setup.exe copied to C:\Temp with identical SHA256  [C:\Temp\hl-e2e\setup\HeyLoganAI-Setup.exe]
+[18:07:00] PASS 07  Setup.exe ProductName is "Hey Logan AI"  [Hey Logan AI]
+[18:07:00] PASS 08  Setup.exe FileDescription mentions Hey Logan AI  [Hey Logan AI Setup]
+[18:07:00] PASS 09  Setup.exe CompanyName is "Hey Logan AI"  [Hey Logan AI]
+[18:07:00] PASS 10  Setup.exe FileVersion is 1.1.0.x  [1.1.0]
+[18:07:00] PASS 11  Setup.exe ProductVersion is 1.1.0.x  [1.1.0]
+[18:07:00] PASS 12  Setup.exe LegalCopyright present  [Copyright (c) 2026 Hey Logan AI]
+[18:07:00] PASS 13  Setup manifest requests asInvoker (no UAC prompt)
+[18:07:00] PASS 14  Setup manifest does not request administrator rights
+[18:07:00] PASS 15  Portable ZIP has > 500 entries  [656 entries]
+[18:07:00] PASS 16  Portable ZIP contains README-FIRST.txt
+[18:07:00] PASS 17  Portable ZIP contains "Start Hey Logan AI.cmd"
+[18:07:00] PASS 18  Portable ZIP contains runtime/node.exe
+[18:07:00] PASS 19  Portable ZIP contains app/server/index.js
+[18:07:00] PASS 20  Portable ZIP contains Launch.vbs and auto-start helpers
+[18:07:00] PASS 21  Portable ZIP ships no app/data
+[18:07:00] PASS 22  Portable ZIP ships no browser-profile
+[18:07:01]   Authenticode status: NotSigned (expected: NotSigned)
+[18:07:01] 
+[18:07:01] === PHASE 1 - baseline ===
+[18:07:01] PASS 23  User's live app still running on 8787 (pid 20660)
+[18:07:01] PASS 24  User's live app answers on 8787 (untouched by tests)  [{"ok":true,"app":"Hey Logan AI","version":"1.0.0","time":"2026-11-05T08:07:01.540Z","requiresToken":true}]
+[18:07:02] PASS 25  Test ports 8790/8445 are free
+[18:07:02] PASS 26  No pre-existing scratch install-a
+[18:07:02] PASS 27  User install dir exists and is not ours  [D:\HeyLoganAI]
+[18:07:02] 
+[18:07:02] === PHASE 2a - interactive wizard starts ===
+[18:07:05] PASS 28  Interactive Setup.exe opens the Modern UI 2 wizard window  [window title='Hey Logan AI Setup']
+[18:07:05] PASS 29  Cancelled wizard left no partial install in scratch
+[18:07:05] 
+[18:07:05] === PHASE 2 - silent install /S /D=<scratch> ===
+[18:07:14] PASS 30  Silent install exits 0  [exit=0 seconds=8.7]
+[18:07:14] PASS 31  Silent install finished in < 180 s  [8.7s]
+[18:07:14] PASS 32  Install dir created (custom /D scratch)  [C:\Temp\hl-e2e\install-a]
+[18:07:14] PASS 33  Default LOCALAPPDATA install dir not created
+[18:07:14] PASS 34  All expected files installed (incl. auto-start helpers)  [all present]
+[18:07:14] PASS 35  App version in installed package.json is 1.1.0
+[18:07:14] PASS 36  No app\data shipped or pre-created by installer
+[18:07:14] PASS 37  Launch.vbs uses a dedicated browser-profile
+[18:07:14] PASS 38  Launch.vbs ships --user-data-dir
+[18:07:14] PASS 39  Launch.vbs ships --no-first-run / --no-default-browser-check
+[18:07:14] PASS 40  Launch.vbs ships --autoplay-policy=no-user-gesture-required
+[18:07:14] PASS 41  Launch.vbs seeds the microphone permission (media_stream_mic)
+[18:07:14] PASS 42  Launch.vbs does NOT ship the unsupported --use-fake-ui-for-media-stream flag
+[18:07:14] PASS 43  Installed sw.js cache is version-busted (heyai-bridge-v1.1.0)
+[18:07:14] PASS 44  Installed sw.js caches /native-voice.js
+[18:07:14] PASS 45  Installed index.html shows the v1.1.0 version label
+[18:07:14] PASS 46  Installed HELP.txt names the 1.1.0 Android APK
+[18:07:14] 
+[18:07:14] === PHASE 3 - Add/Remove Programs + Run value (test install) ===
+[18:07:14] PASS 47  ARP key exists (test install)
+[18:07:14] PASS 48  ARP DisplayName  [Hey Logan AI]
+[18:07:14] PASS 49  ARP DisplayVersion 1.1.0  [1.1.0]
+[18:07:15] PASS 50  ARP Publisher
+[18:07:15] PASS 51  ARP DisplayIcon points at installed .ico
+[18:07:15] PASS 52  ARP InstallLocation  [C:\Temp\hl-e2e\install-a]
+[18:07:15] PASS 53  ARP UninstallString points at Uninstall.exe  ["C:\Temp\hl-e2e\install-a\Uninstall.exe"]
+[18:07:15] PASS 54  ARP QuietUninstallString has /S  ["C:\Temp\hl-e2e\install-a\Uninstall.exe" /S]
+[18:07:15] PASS 55  ARP EstimatedSize >= 80000 KB  [91624]
+[18:07:15] PASS 56  ARP NoModify/NoRepair = 1/1
+[18:07:15] PASS 57  HKCU\Software\HeyLoganAI Version 1.1.0  [1.1.0]
+[18:07:15] PASS 58  HKCU\Software\HeyLoganAI InstallDir
+[18:07:15] PASS 59  Start-at-login default ON: HKCU Run value exists  ["C:\WINDOWS\system32\wscript.exe" "C:\Temp\hl-e2e\install-a\Launch.vbs"]
+[18:07:15] PASS 60  Run value points at the NEW install dir Launch.vbs  ["C:\WINDOWS\system32\wscript.exe" "C:\Temp\hl-e2e\install-a\Launch.vbs"]
+[18:07:15] 
+[18:07:15] === PHASE 4 - shortcuts (incl. Start at Login On/Off) ===
+[18:07:15] PASS 61  Start Menu group "Hey Logan AI" exists
+[18:07:15] PASS 62  Start Menu group has all 8 shortcuts  [all present]
+[18:07:15] PASS 63  Main shortcut target is wscript.exe  [C:\Windows\System32\wscript.exe]
+[18:07:15] PASS 64  Main shortcut args = "<scratch>\Launch.vbs"  ["C:\Temp\hl-e2e\install-a\Launch.vbs"]
+[18:07:15] PASS 65  Main shortcut icon is heylogan.ico
+[18:07:15] PASS 66  Desktop shortcut exists and points at the new install  ["C:\Temp\hl-e2e\install-a\Launch.vbs"]
+[18:07:15] PASS 67  Shortcut Start Console.lnk -> Start Console.cmd  [C:\Temp\hl-e2e\install-a\Start Console.cmd]
+[18:07:15] PASS 68  Shortcut Pairing.lnk -> Pairing.cmd  [C:\Temp\hl-e2e\install-a\Pairing.cmd]
+[18:07:15] PASS 69  Shortcut Stop Server.lnk -> Stop.cmd  [C:\Temp\hl-e2e\install-a\Stop.cmd]
+[18:07:15] PASS 70  Shortcut Allow through Firewall.lnk -> Allow through Firewall.cmd  [C:\Temp\hl-e2e\install-a\Allow through Firewall.cmd]
+[18:07:15] PASS 71  Shortcut Start at Login On.lnk -> Start at Login On.cmd  [C:\Temp\hl-e2e\install-a\Start at Login On.cmd]
+[18:07:15] PASS 72  Shortcut Start at Login Off.lnk -> Start at Login Off.cmd  [C:\Temp\hl-e2e\install-a\Start at Login Off.cmd]
+[18:07:15] PASS 73  Shortcut Uninstall.lnk -> Uninstall.exe  [C:\Temp\hl-e2e\install-a\Uninstall.exe]
+[18:07:15] 
+[18:07:15] === PHASE 5 - launch via Run value / hands-free app window ===
+[18:07:19] PASS 74  Health endpoint answers on test port 8790 within 90 s
+[18:07:19] PASS 75  Health JSON ok = true  [{"ok":true,"app":"Hey Logan AI","version":"1.1.0","time":"2026-11-05T08:07:19.852Z","requiresToken":true}]
+[18:07:19] PASS 76  Health JSON app = "Hey Logan AI"  [Hey Logan AI]
+[18:07:19] PASS 77  Health JSON version = 1.1.0  [1.1.0]
+[18:07:19] PASS 78  Health JSON requiresToken = true
+[18:07:19] PASS 79  First run created app\data\config.json
+[18:07:19] PASS 80  Pairing token generated (XXXX-XXXX-XXXX)  [M7EV-DBC3-6NYB]
+[18:07:19] PASS 81  HTTPS certificate created in app\data\certs
+[18:07:20]   wake   : {"phrases":["hey logan","hi logan","hello logan","okay logan","hey logan ai"],"ack":"Logan here."}
+[18:07:20]   speech : {"lang":"en-US","wakeWindowMs":12000,"silenceMs":1500,"autoStart":true}
+[18:07:20] PASS 82  Server wake word includes "hey logan"  [{"phrases":["hey logan","hi logan","hello logan","okay logan","hey logan ai"],"ack":"Logan here."}]
+[18:07:20] PASS 83  Server wake.ack is set ("Logan here.")  [{"phrases":["hey logan","hi logan","hello logan","okay logan","hey logan ai"],"ack":"Logan here."}]
+[18:07:20] PASS 84  Server speech.autoStart is true  [{"lang":"en-US","wakeWindowMs":12000,"silenceMs":1500,"autoStart":true}]
+[18:07:20] PASS 85  Served page HTML contains "Hey Logan"
+[18:07:20] PASS 86  Served app.js contains autoStartListening
+[18:07:20] PASS 87  Served page HTML contains the "Always listen" voice setting
+[18:07:20] PASS 88  Served /sw.js uses cache heyai-bridge-v1.1.0
+[18:07:20] PASS 89  Served /sw.js lists /native-voice.js in its assets
+[18:07:21] PASS 90  /api/command "ask claude code to summarise the repo" routes to claude-code  [agentId=claude-code missing=True]
+[18:07:22] PASS 91  /api/command "hey logan ai open downloads" routes to Computer  [agentId=computer]
+[18:07:22] PASS 92  Router unit: "ask claude code to summarise the repo" -> claude-code, task "summarise the repo"  [agentId=claude-code task='summarise the repo']
+[18:07:22] PASS 93  Router unit: "hey logan ai open downloads" -> defaultWake, task "open downloads", phrase "hey logan ai"  [task='open downloads' wakePhrase='hey logan ai' defaultWake=True]
+[18:07:23] PASS 94  Launcher created <install>\browser-profile  [C:\Temp\hl-e2e\install-a\browser-profile]
+[18:07:23] PASS 95  Chromium app window running with the dedicated profile  [msedge.exe pid=3284]
+[18:07:23] PASS 96  Browser command line contains --user-data-dir=<install>\browser-profile  ["C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe" --app=http://127.0.0.1:8790/?token=M7EV-DBC3-6NYB --window-size=1180,840 --user-data-dir="C:\Temp\hl-e2e\install-a\browser-profile" --no-first-run --no-default-browser-check --autoplay-policy=no-user-gesture-required]
+[18:07:23] PASS 97  Browser command line contains --autoplay-policy=no-user-gesture-required
+[18:07:23] PASS 98  Browser command line contains --no-first-run / --no-default-browser-check
+[18:07:23] PASS 99  Browser command line does NOT contain --use-fake-ui-for-media-stream
+[18:07:23] PASS 100  Browser command line opens the token URL on the test port  ["C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe" --app=http://127.0.0.1:8790/?token=M7EV-DBC3-6NYB --window-size=1180,840 --user-data-dir="C:\Temp\hl-e2e\install-a\browser-profile" --no-first-run --no-default-browser-check --autoplay-policy=no-user-gesture-required]
+[18:07:23] PASS 101  Launcher seeded browser-profile\Default\Preferences  [C:\Temp\hl-e2e\install-a\browser-profile\Default\Preferences]
+[18:07:23] PASS 102  Preferences contain a media_stream_mic grant for this origin
+[18:07:23]   preferences: {"profile":{"content_settings":{"exceptions":{"media_stream_mic":{"http://127.0.0.1:8790,*":{"setting":1,"last_modified":"13370000000000000"},"https://127.0.0.1:8445,*":{"setting":1,"last_modified":"13370000000000000"},"...
+[18:07:26] PASS 103  App window screenshot captured (no warning-bar check)  [title='Hey Logan AI' file=124350 bytes]
+[18:07:26] PASS 104  App window title is "Hey Logan AI"  [Hey Logan AI]
+[18:07:27]   stopped all test browser/profile processes
+[18:07:28] 
+[18:07:28] === PHASE 6 - Pairing.cmd / Stop.cmd ===
+[18:07:28] PASS 105  Pairing.cmd exits 0  [exit=0]
+[18:07:28] PASS 106  Pairing.cmd prints the access token
+[18:07:28] PASS 107  Pairing.cmd shows a 192.168.x.x LAN address  [192.168.0.102]
+[18:07:28] PASS 108  Pairing.cmd renders a QR code
+[18:07:28] PASS 109  Pairing.cmd has the "no camera scanner" footer
+[18:07:29] PASS 110  Stop.cmd exits 0  [exit=0]
+[18:07:29] PASS 111  Stop.cmd reports the server was stopped  [Stopping the Hey Logan AI server...
+  Stopped server process 8988
   Server stopped.
 
 Press any key to continue . . .]
-[21:25:41] PASS 93  Server is down after Stop.cmd
-[21:25:41] PASS 94  No node process left after Stop.cmd
-[21:25:41] 
-[21:25:41] === PHASE 9 - upgrade in place keeps app\data ===
-[21:25:44] PASS 95  Server running again before upgrade
-[21:25:44] PASS 96  Server is running during upgrade
-[21:26:02] PASS 97  Upgrade install exits 0  [exit=0 seconds=18.6]
-[21:26:05] PASS 98  Upgrade stopped the running server
-[21:26:05] PASS 99  Upgrade replaced program files (tamper marker gone)
-[21:26:05] PASS 100  Upgrade kept the access token  [before=RXEY-WCG6-YCZV after=RXEY-WCG6-YCZV]
-[21:26:05] PASS 101  Upgrade kept app\data marker file
-[21:26:05] PASS 102  Upgrade kept the HTTPS certificate
-[21:26:05] PASS 103  Upgrade kept ARP entry
-[21:26:06] PASS 104  Upgrade kept Run value
-[21:26:06] PASS 105  Upgrade kept Start Menu shortcuts
-[21:26:09] PASS 106  App healthy after upgrade  [Hey Logan AI]
-[21:26:09] PASS 107  Token unchanged after post-upgrade run
-[21:26:14] PASS 108  Server stopped before uninstall
-[21:26:14] 
-[21:26:14] === PHASE 9a - data-loss guard (locked app\data) ===
-[21:26:18] PASS 109  Upgrade aborts (non-zero exit) when app\data cannot be stashed  [exit=1 seconds=4]
-[21:26:18] PASS 110  Aborted upgrade kept the access token
-[21:26:18] PASS 111  Aborted upgrade kept the HTTPS certificate
-[21:26:18] PASS 112  Aborted upgrade did not delete program files
-[21:26:18] PASS 113  Aborted upgrade left no .hl-data-keep stash
-[21:26:33] PASS 114  Upgrade succeeds normally once the lock is released  [exit=0]
-[21:26:33] PASS 115  Token still unchanged after the retry upgrade
-[21:26:33] 
-[21:26:33] === PHASE 10 - uninstall keeping app\data (Uninstall.exe /S) ===
-[21:26:35] PASS 116  Uninstall (keep data) exits 0  [exit=0 seconds=1]
-[21:26:39] PASS 117  Keep-data uninstall completed (NSIS async temp re-launch)
-[21:26:39] PASS 118  Uninstall removed ARP entry
-[21:26:39] PASS 119  Uninstall removed Run value
-[21:26:39] PASS 120  Uninstall removed HKCU\Software\HeyLoganAI
-[21:26:39] PASS 121  Uninstall removed Start Menu group
-[21:26:39] PASS 122  Uninstall removed Desktop shortcut
-[21:26:39] PASS 123  Uninstall kept the install folder (app\data only)
-[21:26:39] PASS 124  Uninstall removed Uninstall.exe
-[21:26:39] PASS 125  Only app\data is left in the install folder  [8 leftover item(s), 0 outside app\data]
-[21:26:39] PASS 126  Kept token survives the keep-data uninstall  [RXEY-WCG6-YCZV]
-[21:26:39] 
-[21:26:39] === PHASE 11 - reinstall, then purge uninstall (/S /PURGEDATA) ===
-[21:26:51] PASS 127  Reinstall over kept app\data exits 0  [exit=0]
-[21:26:51] PASS 128  Reinstall preserved the token
-[21:26:51] PASS 129  Reinstall restored program files
-[21:26:51] PASS 130  Reinstall re-created ARP entry
-[21:26:52] PASS 131  Silent purge uninstall exits 0  [exit=0 seconds=0.7]
-[21:26:56] PASS 132  Purge uninstall completed
-[21:26:56] PASS 133  Purge uninstall removed the whole install folder  [C:\Users\s2121270\AppData\Local\Programs\HeyLoganAI]
-[21:26:56] PASS 134  Purge uninstall removed ARP entry
-[21:26:56] PASS 135  Purge uninstall removed Run value
-[21:26:56] PASS 136  Purge uninstall removed shortcuts
-[21:26:57] PASS 137  No node process left after uninstall
-[21:26:57] 
-[21:26:57] === PHASE 12 - custom install dir (/D=) ===
-[21:27:05] PASS 138  Custom-dir silent install exits 0  [exit=0]
-[21:27:05] PASS 139  Custom-dir install wrote files to /D path
-[21:27:05] PASS 140  Custom-dir install did not touch default dir
-[21:27:05] PASS 141  Custom-dir ARP InstallLocation  [C:\Temp\hl-e2e\custom-install]
-[21:27:05] PASS 142  Custom-dir Run value points at custom path  ["C:\WINDOWS\system32\wscript.exe" "C:\Temp\hl-e2e\custom-install\Launch.vbs"]
-[21:27:05] PASS 143  Custom-dir main shortcut points at custom path  ["C:\Temp\hl-e2e\custom-install\Launch.vbs"]
-[21:27:05] PASS 144  Custom-dir install kept app\data absent
-[21:27:06] PASS 145  Custom-dir uninstaller finds its own install dir and exits 0  [exit=0]
-[21:27:10] PASS 146  Custom-dir purge uninstall completed
-[21:27:10] PASS 147  Custom-dir uninstall removed the custom folder  [C:\Temp\hl-e2e\custom-install]
-[21:27:10] PASS 148  Custom-dir uninstall removed ARP entry
-[21:27:10] 
-[21:27:10] === PHASE 12a - /S /NOAUTOSTART /D= (start-at-login skipped) ===
-[21:27:17] PASS 149  /S /NOAUTOSTART /D= install exits 0  [exit=0]
-[21:27:17] PASS 150  /NOAUTOSTART install wrote files to the /D path
-[21:27:17] PASS 151  /NOAUTOSTART leaves no HKCU Run value
-[21:27:17] PASS 152  /NOAUTOSTART ARP InstallLocation is the /D path  [C:\Temp\hl-e2e\custom-install-noauto]
-[21:27:17] PASS 153  /NOAUTOSTART still creates Start Menu shortcuts
-[21:27:19] PASS 154  /NOAUTOSTART test uninstall exits 0  [exit=0]
-[21:27:23] PASS 155  /NOAUTOSTART test install removed cleanly
-[21:27:23] 
-[21:27:23] === PHASE 13 - portable ZIP (no installer, no registry) ===
-[21:27:24] PASS 156  Portable ZIP extracts  [exit=0 seconds=1.2]
-[21:27:24] PASS 157  Portable README-FIRST.txt present
-[21:27:24] PASS 158  Portable "Start Hey Logan AI.cmd" present
-[21:27:24] PASS 159  Portable start cmd runs runtime\node.exe on app\server\index.js
-[21:27:24] PASS 160  Portable runtime\node.exe present
-[21:27:24] PASS 161  Portable app files present (native-voice.js)
-[21:27:24] PASS 162  Portable extraction ships no app\data
-[21:27:25] PASS 163  Portable bundled runtime is Node v22.23.3  [v22.23.3]
-[21:27:27] PASS 164  Portable server health ok  [{"ok":true,"app":"Hey Logan AI","version":"1.0.0","time":"2026-11-03T11:27:27.318Z","requiresToken":true}]
-[21:27:27] PASS 165  Portable server reports "Hey Logan AI" 1.0.0
-[21:27:27] PASS 166  Portable created its own app\data
-[21:27:27] PASS 167  Portable run created no ARP entry
-[21:27:27] PASS 168  Portable run created no Run value
-[21:27:27] PASS 169  Portable run created no Start Menu group
-[21:27:27] PASS 170  Portable run created no Desktop shortcut
-[21:27:31] PASS 171  Portable tools\stop.ps1 stops the server
-[21:27:31] PASS 172  Portable run left no node process
-[21:27:31] 
-[21:27:31] === PHASE 14 - final clean-up ===
-[21:27:32] PASS 173  Clean: no install dir
-[21:27:32] PASS 174  Clean: no custom install dir
-[21:27:32] PASS 175  Clean: no ARP entry
-[21:27:32] PASS 176  Clean: no HKCU app key
-[21:27:32] PASS 177  Clean: no Run value
-[21:27:32] PASS 178  Clean: no Start Menu group
-[21:27:32] PASS 179  Clean: no Desktop shortcut
-[21:27:32] PASS 180  Clean: no node processes
-[21:27:33] PASS 181  Clean: ports 8787/8443 free
-[21:27:33] 
-[21:27:33] === SUMMARY ===
-[21:27:33] 
-[21:27:33] CHECKS: 181   PASS: 181   FAIL: 0
+[18:07:33] PASS 112  Test server is down after Stop.cmd
+[18:07:33] PASS 113  No test node process left after Stop.cmd
+[18:07:33] PASS 114  User's live app untouched by Stop.cmd (pid 20660)
+[18:07:33] 
+[18:07:33] === PHASE 7 - Start at Login On.cmd / Off.cmd ===
+[18:07:33] PASS 115  Start at Login Off.cmd exits 0  [exit=0]
+[18:07:33] PASS 116  Start at Login Off removes the Run value
+[18:07:33] PASS 117  Start at Login On.cmd exits 0  [exit=0]
+[18:07:33] PASS 118  Start at Login On writes wscript.exe "<install>\Launch.vbs"  ["C:\WINDOWS\system32\wscript.exe" "C:\Temp\hl-e2e\install-a\Launch.vbs"]
+[18:07:33] 
+[18:07:33] === PHASE 8 - upgrade keeps app\data ===
+[18:07:36] PASS 119  Server running again before upgrade
+[18:08:00] PASS 120  Upgrade install exits 0  [exit=0 seconds=23.9]
+[18:08:03] PASS 121  Upgrade stopped the running server
+[18:08:03] PASS 122  Upgrade replaced program files (tamper marker gone)
+[18:08:03] PASS 123  Upgrade kept the access token  [before=M7EV-DBC3-6NYB after=M7EV-DBC3-6NYB]
+[18:08:03] PASS 124  Upgrade kept app\data marker file
+[18:08:03] PASS 125  Upgrade kept the HTTPS certificate
+[18:08:03] PASS 126  Upgrade kept ARP entry
+[18:08:03] PASS 127  Upgrade kept Run value
+[18:08:05] 
+[18:08:05] === PHASE 8a - data-loss guard (locked app\data) ===
+[18:08:09] PASS 128  Upgrade aborts (non-zero exit) when app\data cannot be stashed  [exit=1]
+[18:08:09] PASS 129  Aborted upgrade kept the access token
+[18:08:09] PASS 130  Aborted upgrade kept the HTTPS certificate
+[18:08:09] PASS 131  Aborted upgrade did not delete program files
+[18:08:09] PASS 132  Aborted upgrade left no .hl-data-keep stash
+[18:08:23] PASS 133  Upgrade succeeds normally once the lock is released  [exit=0]
+[18:08:23] PASS 134  Token still unchanged after the retry upgrade
+[18:08:23] 
+[18:08:23] === PHASE 9 - uninstall keep-data (Uninstall.exe /S) ===
+[18:08:25] PASS 135  Uninstall (keep data) exits 0  [exit=0 seconds=1]
+[18:08:31] PASS 136  Keep-data uninstall completed
+[18:08:31] PASS 137  Uninstall removed ARP entry
+[18:08:31] PASS 138  Uninstall removed Run value
+[18:08:31] PASS 139  Uninstall removed Start Menu group
+[18:08:31] PASS 140  Uninstall removed Desktop shortcut
+[18:08:31] PASS 141  Uninstall removed Uninstall.exe and browser-profile
+[18:08:31] PASS 142  Only app\data left in the install folder  [8 item(s), 0 outside app\data]
+[18:08:31] PASS 143  Kept token survives the keep-data uninstall  [M7EV-DBC3-6NYB]
+[18:08:31] PASS 144  Kept certificate survives the keep-data uninstall
+[18:08:31] 
+[18:08:31] === PHASE 10 - reinstall over kept data + purge ===
+[18:08:40] PASS 145  Reinstall over kept app\data exits 0
+[18:08:40] PASS 146  Reinstall preserved the token
+[18:08:41] PASS 147  Silent purge uninstall exits 0
+[18:08:47] PASS 148  Purge uninstall removed the whole install folder
+[18:08:47] 
+[18:08:47] === PHASE 12 - /D= wins over the registered install location ===
+[18:08:56] PASS 149  Reinstall A exits 0 (ARP now points at A)
+[18:09:07] PASS 150  Install with explicit /D=<other dir> exits 0
+[18:09:07] PASS 151  ARP InstallLocation is the /D target  [C:\Temp\hl-e2e\install-b]
+[18:09:07] PASS 152  Run value points at the /D target Launch.vbs
+[18:09:07] PASS 153  ARP-target A was not deleted by the /D run
+[18:09:09] PASS 154  Uninstall B exits 0
+[18:09:13] PASS 155  Uninstall B removed its folder
+[18:09:26] PASS 156  Re-register A through Setup exits 0
+[18:09:26] PASS 157  A is registered again as the install location  [C:\Temp\hl-e2e\install-a]
+[18:09:28] PASS 158  Uninstall A exits 0
+[18:09:34] PASS 159  Uninstall A removed its folder
+[18:09:34] 
+[18:09:34] === PHASE 12a - /S /NOAUTOSTART /D= ===
+[18:09:44] PASS 160  /S /NOAUTOSTART /D= install exits 0
+[18:09:44] PASS 161  /NOAUTOSTART install wrote files to the /D path
+[18:09:44] PASS 162  /NOAUTOSTART leaves no HKCU Run value
+[18:09:44] PASS 163  /NOAUTOSTART still creates Start Menu shortcuts
+[18:09:45] PASS 164  /NOAUTOSTART test uninstall exits 0
+[18:09:51] PASS 165  /NOAUTOSTART test install removed cleanly
+[18:09:51] 
+[18:09:51] === PHASE 13 - upgrade-in-place via ARP InstallLocation (no /D=) ===
+[18:10:10] PASS 166  Installer with NO /D= uses ARP InstallLocation (installs into old tree)  [exit=0]
+[18:10:10] PASS 167  Upgrade-in-place did NOT create the default LOCALAPPDATA copy
+[18:10:10] PASS 168  ARP InstallLocation stayed the old tree  [C:\Temp\hl-old]
+[18:10:10] PASS 169  Upgrade-in-place preserved the fake token  [OLDTEST-AAAA-BBBB]
+[18:10:10] PASS 170  Upgrade-in-place replaced Launch.vbs with the v1.1.0 (browser-profile) one
+[18:10:11] PASS 171  Run value points at the upgraded old tree  ["C:\WINDOWS\system32\wscript.exe" "C:\Temp\hl-old\Launch.vbs"]
+[18:10:11] PASS 172  ARP DisplayVersion is now 1.1.0
+[18:10:13] PASS 173  Uninstall of the upgraded old tree exits 0
+[18:10:20] PASS 174  Upgraded old tree removed
+[18:10:20] 
+[18:10:20] === PHASE 14 - portable ZIP ===
+[18:10:23] PASS 175  Portable ZIP extracts
+[18:10:23] PASS 176  Portable README-FIRST.txt present
+[18:10:23] PASS 177  Portable launch/auto-start helpers present
+[18:10:23] PASS 178  Portable Launch.vbs has the dedicated-profile + autoplay recipe
+[18:10:23] PASS 179  Portable Launch.vbs has no fake-ui flag
+[18:10:23] PASS 180  Portable extraction ships no app\data / browser-profile
+[18:10:27] PASS 181  Portable server health ok  [{"ok":true,"app":"Hey Logan AI","version":"1.1.0","time":"2026-11-05T08:10:27.369Z","requiresToken":true}]
+[18:10:27] PASS 182  Portable server reports "Hey Logan AI" 1.1.0
+[18:10:27] PASS 183  Portable created its own app\data
+[18:10:31] PASS 184  Portable Stop.cmd exits 0 and stops the server
+[18:10:31] PASS 185  Portable run created no registry/shortcut changes
+[18:10:34] PASS 186  Portable Launch.vbs starts the server
+[18:10:34] PASS 187  Portable Launch.vbs created its browser-profile
+[18:10:34] PASS 188  Portable Launch.vbs seeded the mic permission Preferences
+[18:10:35] PASS 189  Portable browser runs with the new flags (no fake-ui)
+[18:10:40] PASS 190  Portable server stopped after browser test
+[18:10:41] 
+[18:10:41] === PHASE 15 - restore user state and final checks ===
+[18:10:41]   restoring the real user installation state...
+[18:10:42]   user state restored.
+[18:10:43] PASS 191  User ARP entry restored to the D:\ install  [D:\HeyLoganAI]
+[18:10:43] PASS 192  User Run value restored byte-for-byte  ["C:\WINDOWS\system32\wscript.exe" "D:\HeyLoganAI\Launch.vbs"]
+[18:10:43] PASS 193  User Start Menu group restored
+[18:10:43] PASS 194  User Start Menu group has its 6 original shortcuts  [6 shortcuts]
+[18:10:43] PASS 195  User Desktop shortcut restored
+[18:10:43] PASS 196  D:\HeyLoganAI untouched (file count unchanged)  [574 vs 574]
+[18:10:43] PASS 197  User's live app still running on 8787 (pid 20660)
+[18:10:43] PASS 198  User's live app still answers on 8787  [untouched]
+[18:10:44] PASS 199  Port 8787 still owned by the user process
+[18:10:44] PASS 200  Edge PWA autostart entry untouched
+[18:10:44] PASS 201  No test install dir left: install-a  [C:\Temp\hl-e2e\install-a]
+[18:10:44] PASS 202  No test install dir left: install-b  [C:\Temp\hl-e2e\install-b]
+[18:10:44] PASS 203  No test install dir left: install-c-noauto  [C:\Temp\hl-e2e\install-c-noauto]
+[18:10:44] PASS 204  No test install dir left: hl-old  [C:\Temp\hl-old]
+[18:10:44] PASS 205  No test node processes left
+[18:10:45] PASS 206  Test ports 8790/8445 are free again
+[18:10:45] PASS 207  No test browser processes left
+[18:10:45] PASS 208  Default LOCALAPPDATA install dir still absent
+[18:10:45] 
+[18:10:45] === SUMMARY ===
+[18:10:45] 
+[18:10:45] CHECKS: 208   PASS: 208   FAIL: 0

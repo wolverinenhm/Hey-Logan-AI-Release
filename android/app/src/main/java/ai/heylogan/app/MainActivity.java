@@ -108,6 +108,14 @@ public class MainActivity extends Activity {
     private boolean pairingMode = false;
     private boolean sslDialogShowing = false;
 
+    /* Hands-free "Hey Logan" (v1.1.0): the microphone is requested as soon as
+       the app starts so the page's autoStartListening() can start the native
+       recognizer without the user pressing anything. If the grant arrives after
+       the page has already loaded, the page is reloaded exactly once so its
+       auto-start runs with microphone access (the flag can never loop). */
+    private boolean microphonePermissionAsked = false;
+    private boolean microphoneReloadDone = false;
+
     /* ============================================================
        Lifecycle
        ============================================================ */
@@ -131,6 +139,10 @@ public class MainActivity extends Activity {
         pairBridge = new PairBridge();
         webView.addJavascriptInterface(voiceBridge, JS_VOICE_NAME);
         webView.addJavascriptInterface(pairBridge, JS_PAIR_NAME);
+
+        // Ask for the microphone up front (before/while the page loads) so the
+        // page's hands-free auto-start can actually open the native recognizer.
+        maybeRequestMicrophonePermission();
 
         if (hasPairing()) {
             connectToPairedPc();
@@ -605,6 +617,8 @@ public class MainActivity extends Activity {
 
     private void maybeRequestMicrophonePermission() {
         if (hasMicrophonePermission()) return;
+        if (microphonePermissionAsked) return;
+        microphonePermissionAsked = true;
         requestPermissions(new String[]{Manifest.permission.RECORD_AUDIO}, REQUEST_MIC);
     }
 
@@ -612,10 +626,26 @@ public class MainActivity extends Activity {
     public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         if (requestCode != REQUEST_MIC) return;
+
         if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-            toast("Microphone ready for voice control.");
+            toast("Microphone ready - hands-free \"Hey Logan\" is on.");
+            // The page may already have loaded while the dialog was open, in which
+            // case its autoStartListening() could not get the microphone. Reload
+            // it once so auto-start runs with access. microphoneReloadDone makes
+            // a reload loop impossible.
+            if (!pairingMode && !microphoneReloadDone && webView != null
+                    && isHttpUrl(webView.getUrl())) {
+                microphoneReloadDone = true;
+                hideError();
+                try {
+                    webView.reload();
+                } catch (Throwable t) {
+                    Log.w(TAG, "Could not reload the page after the microphone grant", t);
+                }
+            }
         } else {
-            toast("Microphone permission was denied. Voice control needs it - enable it in Android Settings.");
+            toast("Microphone permission was denied. Hands-free needs it - enable it in "
+                    + "Android Settings, then tap Start listening once.");
         }
     }
 
@@ -664,14 +694,26 @@ public class MainActivity extends Activity {
         }
     }
 
+    private String appVersionName() {
+        try {
+            String version = getPackageManager()
+                    .getPackageInfo(getPackageName(), 0).versionName;
+            if (!TextUtils.isEmpty(version)) return version;
+        } catch (Throwable ignored) {
+            /* fall through */
+        }
+        return "1.1.0";
+    }
+
     private void showAboutDialog() {
         new AlertDialog.Builder(this)
-                .setTitle("Hey Logan AI 1.0.0")
+                .setTitle("Hey Logan AI " + appVersionName())
                 .setMessage("Companion client for the Hey Logan AI (Hey AI Bridge) server running on your PC.\n\n"
+                        + "- Hands-free: just say \"Hey Logan\" - no button press. The app asks for the "
+                        + "microphone once at startup and starts listening as soon as the page opens.\n"
                         + "- Pair once with the address and access token printed by Pairing.cmd.\n"
                         + "- The PC's self-signed certificate is trusted only for the paired PC, after your confirmation.\n"
-                        + "- Voice input and spoken replies use the phone's own speech engines; the PC only receives transcripts.\n"
-                        + "- Tap the microphone orb in the app to start wake-word listening.\n\n"
+                        + "- Voice input and spoken replies use the phone's own speech engines; the PC only receives transcripts.\n\n"
                         + "Source, build script and signing information are in the project archive.")
                 .setPositiveButton("OK", null)
                 .show();
@@ -886,7 +928,7 @@ public class MainActivity extends Activity {
 
         @JavascriptInterface
         public String version() {
-            return "1.0.0";
+            return appVersionName();
         }
     }
 }

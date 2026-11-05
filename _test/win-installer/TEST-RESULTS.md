@@ -1,320 +1,218 @@
-# Hey Logan AI - Windows installer / portable ZIP: TEST RESULTS
+# Hey Logan AI v1.1.0 - Windows installer / portable ZIP: TEST RESULTS
 
 Real end-to-end run on the release machine. Nothing in this file is estimated:
 every number comes from the run log/JSON next to it.
 
-- Date: 2026-11-03, 21:25:07 - 21:27:33 local (Australia/Brisbane)
+- Date: 2026-11-05, 18:06:55 - 18:10:45 local (Australia/Brisbane)
 - Host: `DESKTOP-VKJOJCR`, Windows 11 Enterprise 10.0.26200, x64
 - User: `STUDENT\s2121270`, PowerShell 5.1.26100.9711
-- Payload packaged: 569 files / 89.34 MB (app + Node.js v22.23.3 runtime +
-  launchers), `app\data` excluded
+- Payload packaged: 571 files / 89.36 MB (app v1.1.0 + Node.js v22.23.3
+  runtime + launchers + auto-start helpers), `app\data` excluded
 - Build toolchain: NSIS 3.04 (makensis, Modern UI 2), `tar.exe` for the ZIP,
   no code-signing certificate (unsigned release)
 
-This run covers the **hardened** installer (task-8): data-loss guard on both
-keep-data paths, no dialogs in silent mode, `/NOAUTOSTART`, `Uninstall.lnk`,
-and portable build-script compiler discovery.
+This run covers **v1.1.0** (final QA-fix build): the hands-free "Hey Logan"
+launcher (dedicated browser profile + seeded microphone grant + autoplay
+flag), start-at-login helpers, upgrade-in-place via the registered install
+location, the service-worker cache-bust and spoken "ask Claude Code ..."
+routing fixes, and all v1.0.0 hardening.
+
+## Special machine situation (handled by the test)
+
+The machine also has the **user's real v1.0.0 installation at `D:\HeyLoganAI`**
+with the app running on ports 8787/8443 (pid 20660), plus an Edge PWA with its
+own OS-login autostart. The test therefore:
+
+- backs up the real HKCU ARP entry, HKCU app key, Run value, Start Menu group
+  and Desktop shortcut, and restores them **exactly** in a `finally` block;
+- never writes to, stops or deletes `D:\HeyLoganAI` and never kills pid 20660;
+- runs all test installations in `C:\Temp` scratch dirs and all test servers /
+  launcher windows on ports **8790/8445** (`HEY_AI_HTTP_PORT` /
+  `HEY_AI_HTTPS_PORT`), because 8787/8443 belong to the user's live app.
+
+The restored state is asserted at the end (ARP → `D:\HeyLoganAI`, Run value
+byte-for-byte, 574 files in `D:\HeyLoganAI` unchanged, pid 20660 still
+listening on 8787, Edge PWA entry untouched).
 
 ## Result
 
 ```
-CHECKS: 181   PASS: 181   FAIL: 0
+CHECKS: 208   PASS: 208   FAIL: 0
 ```
 
-The complete 181-assertion log is `e2e-run.log`; the machine-readable summary is
-`e2e-summary.json` (both in this folder). Harness: `run-e2e.ps1`.
+Complete log: `e2e-run.log`; machine-readable summary: `e2e-summary.json`;
+harness: `run-e2e.ps1`.
 
 ## Artifacts under test (final deliverables)
 
 | Artifact | Size (bytes) | SHA-256 |
 | --- | ---: | --- |
-| `dist\HeyLoganAI-Setup-1.0.0-win-x64.exe` | 23,607,380 (22.51 MB) | `8209b35898ff990c460e492e1f4dae7f7f189e8751e22021ff3a5f9845ced9fc` |
-| `dist\HeyLoganAI-Portable-1.0.0-win-x64.zip` | 35,108,753 (33.48 MB) | `18fa9938946f2b14d58c5f8425bf3a3a7e97172c4c6cb1cafdc0c5db30cb5cf6` |
+| `dist\HeyLoganAI-Setup-1.1.0-win-x64.exe` | 23,607,146 (22.52 MB) | `1a9131cb90dea921772542a0dee329855460c8079f789cab05acf904640eb586` |
+| `dist\HeyLoganAI-Portable-1.1.0-win-x64.zip` | 35,114,765 (33.49 MB) | `25caa3921530039d5aac1695fe7a6e01cc82db49343f3a18f856cbb49ed9bb8b` |
 
-Both were built from the frozen `windows\payload\HeyLoganAI\` tree (569 files,
-`app\data` absent). The portable ZIP contains the same payload plus
-`README-FIRST.txt` and `Start Hey Logan AI.cmd` (654 archive entries).
-Checksums are recorded in `_test\win-installer\SHA256SUMS-windows.txt`
-(`dist\` intentionally has no `SHA256SUMS.txt` - the Lead owns that file).
+Built from the frozen payload (571 files). Portable ZIP: 656 entries
+(`HeyLoganAI/` + `README-FIRST.txt` + `Start Hey Logan AI.cmd`). Checksums are
+also in `_test\win-installer\SHA256SUMS-windows.txt`; `dist\` intentionally has
+no Windows-only `SHA256SUMS.txt` (the Lead owns that file).
 
-Method: the built Setup.exe is copied to `C:\Temp\hl-e2e\setup\` and the copy's
-SHA-256 is asserted equal to the `dist\` file before anything is executed (the
-DSH agent file sandbox wraps executables that live inside the workspace tree;
-running the copy from `C:\Temp` is the supported path). The portable ZIP is
-extracted to `C:\Temp\hl-e2e\portable\` and run from there.
+## Hands-free launcher (the user's request)
 
-## Hardening items verified in this run
+Verified in the installed tree and in the portable ZIP; `Launch.vbs` ships:
 
-### 1. Data-loss guard on the keep-data paths (critical)
+```
+--app="http://127.0.0.1:8787/?token=..."   (test instance: :8790)
+--window-size=1180,840
+--user-data-dir="<install>\browser-profile"
+--no-first-run
+--no-default-browser-check
+--autoplay-policy=no-user-gesture-required
+```
 
-- An upgrade was run while a share-deny handle was held on
-  `<install>\app\data\config.json` (real-world equivalent: a locked file or an
-  antivirus scan). The installer **aborted with exit code 1 in 4 s**, without a
-  dialog (silent mode), instead of continuing into the program-file cleanup:
-  - PASS `Upgrade aborts (non-zero exit) when app\data cannot be stashed` (exit=1)
-  - PASS `Aborted upgrade kept the access token`
-  - PASS `Aborted upgrade kept the HTTPS certificate`
-  - PASS `Aborted upgrade did not delete program files`
-  - PASS `Aborted upgrade left no .hl-data-keep stash`
-- After releasing the handle, the same upgrade succeeded normally (exit 0) and
-  the token was still unchanged - the aborted attempt left the installation
-  fully usable.
-- The uninstall keep-data path uses the same guard (same `ClearErrors; Rename;
-  ${If} ${Errors}; Abort` pattern, code-reviewed; every normal keep-data
-  uninstall below passes).
-- Both keep-data paths also recover a stash left by a previously interrupted
-  run instead of deleting it.
+and **does not** ship `--use-fake-ui-for-media-stream` (no "unsupported
+command-line flag" warning bar).
 
-### 2. No dialogs in silent mode
+On first launch it creates `<install>\browser-profile\Default\Preferences` with
+a microphone permission exception scoped to
+`http://127.0.0.1:8787`, `https://127.0.0.1:8443`, `https://localhost:8443`
+(test instance: the 8790/8445 equivalents). That grant is what makes
+`SpeechRecognition` start without a permission prompt; the autoplay flag makes
+the "Logan here." reply audible without a click.
 
-- The two `.onInit` MessageBoxes (unsupported architecture / Windows older than
-  10) are wrapped in `${IfNot} ${Silent} ... ${EndIf}`; silent mode keeps
-  `SetErrorLevel 1` + `Quit` only - code-reviewed in `installer.nsi`.
-  (Cannot be executed on this Windows 10+ x64 host, so this item is asserted by
-  code review; it can no longer block `/S` on an unsupported host.)
-- The locked-data abort above proves a silent failure path returns exit code 1
-  without waiting for a dialog.
+Live evidence:
 
-### 3. `/NOAUTOSTART`
+- Launched exactly like Windows logon does, using the Run value's command line.
+- Browser process command line (observed):
+  `"C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe" --app=http://127.0.0.1:8790/?token=... --window-size=1180,840 --user-data-dir="C:\Temp\hl-e2e\install-a\browser-profile" --no-first-run --no-default-browser-check --autoplay-policy=no-user-gesture-required`
+- Seeded Preferences file (observed):
+  `{"profile":{"content_settings":{"exceptions":{"media_stream_mic":{"http://127.0.0.1:8790,*":{"setting":1,...},...`
+- `GET /api/session-info` (token header) returns
+  `wake={"phrases":["hey logan","hi logan","hello logan","okay logan","hey logan ai"],"ack":"Logan here."}`
+  and `speech={"lang":"en-US","wakeWindowMs":12000,"silenceMs":1500,"autoStart":true}`.
+- Served page: HTML contains `Hey Logan` and the "Always listen" voice setting;
+  `/app.js` contains `autoStartListening`.
+- **Screenshot of the live app window: `evidence\app-window-1.1.0.png`** - the
+  window shows "Listening for wake words…" and **no yellow warning bar**. It
+  was captured from the real Edge window (PrintWindow, 1180x840).
 
-- `Setup.exe /S /NOAUTOSTART /D=C:\Temp\hl-e2e\custom-install-noauto` exits 0,
-  installs to the `/D=` folder, creates all Start Menu shortcuts, and leaves
-  **no** `HKCU\...\Run\HeyLoganAI` value - PASS (checks 149-155).
-- Plain `/S` still writes the Run value by default (checks 70/71) - the switch
-  is strictly opt-out.
-- `/S /NOAUTOSTART /D=` uninstall (`/S /PURGEDATA`) removes the install cleanly.
+## QA-fix verification (service-worker cache-bust + spoken routing)
 
-### 4. `Uninstall.lnk`
+Both fixes are in the installed app and in the portable ZIP:
 
-- Start Menu group contains `Uninstall.lnk` -> `<install>\Uninstall.exe`
-  (check 69); shown as "Uninstall" in the Start Menu. No
-  `Uninstall Hey Logan AI.lnk` is created anymore.
-
-### 5. Portable rebuild (compiler discovery)
-
-- `lib\build-common.ps1` accepts `-Makensis <path>` and searches: bundled
-  `_toolchain\nsis\Bin\makensis.exe` -> `_toolchain\nsis\makensis.exe` ->
-  `%ProgramFiles%\NSIS\makensis.exe` -> `%ProgramFiles(x86)%\NSIS\makensis.exe`
-  -> `makensis`/`makensis.exe` on PATH, and throws a clear error listing
-  everything it tried.
-- Verified by unit test: auto-detection returns the bundled compiler; explicit
-  `-Makensis` returns the same; an invalid explicit path throws
-  `The -Makensis path does not exist: ...`; a simulated empty release root
-  throws the full "was not found. Tried:" list.
-- `build-setup.ps1` and `build-all.ps1` expose `-Makensis`; the final artifacts
-  were built through `build-all.ps1` (bundled compiler path logged).
-
-## What was verified, with observed values
-
-### Artifact integrity / metadata
-
-- Setup.exe copy SHA-256 == `dist` SHA-256 (`8209b358...`) - PASS.
-- Version info embedded in Setup.exe: ProductName `Hey Logan AI`,
-  FileDescription `Hey Logan AI Setup`, CompanyName `Hey Logan AI`,
-  FileVersion/ProductVersion `1.0.0`, LegalCopyright
-  `Copyright (c) 2026 Hey Logan AI` - all PASS.
-- Setup.exe PE manifest requests `asInvoker` and does **not** request
-  `requireAdministrator` (per-user install, no UAC) - PASS.
-- Portable ZIP layout: `README-FIRST.txt`, `Start Hey Logan AI.cmd`,
-  `runtime/node.exe`, `app/server/index.js` present; **no** `app/data/`
-  (user data never shipped) - all PASS.
-- Exactly 4 files in `dist\`: the two Windows artifacts above plus the Lead's
-  `HeyLoganAI-android-1.0.0.apk` (226,868 B) and
-  `HeyLoganAI-Android-Project-1.0.0.zip` (232,691 B), neither touched by this
-  task. No `_compilecheck.exe`, no tiny test exes, no `.idsig`, no
-  `dist\SHA256SUMS.txt`.
-
-### Interactive wizard (Modern UI 2)
-
-- Launching Setup.exe opens a real wizard window titled `Hey Logan AI Setup`
-  (asserted from the live window title) - PASS.
-- Closing it before installing leaves no install folder / no ARP entry - PASS.
-- Page screenshots captured from the final binary (PrintWindow, no installation
-  performed) in `evidence\`:
-  - `wizard-1-welcome.png` - Welcome page
-  - `wizard-2-components.png` - Components page: "Hey Logan AI (required)"
-    (checked, read-only) + "Start Hey Logan AI when I sign in" (checked by
-    default), Space required 89.6 MB
-  - `wizard-3-directory.png` - Install location page, default
-    `C:\Users\s2121270\AppData\Local\Programs\HeyLoganAI`, Browse button,
-    per-user note
-
-### Silent install (`/S`, default location)
-
-- `Setup.exe /S` exit code 0 in 12.1 s - PASS.
-- Installed to `%LOCALAPPDATA%\Programs\HeyLoganAI` - PASS.
-- All expected files present: `Launch.vbs`, `Start Console.cmd`, `Stop.cmd`,
-  `Pairing.cmd`, `Allow through Firewall.cmd`, `HELP.txt`, `heylogan.ico`,
-  `Uninstall.exe`, `tools\{pair.js,stop.ps1,firewall.ps1}`,
-  `runtime\node.exe` (86,973,768 bytes), `app\...\native-voice.js` - PASS.
-- No `app\data` shipped or created by the installer - PASS.
-- Installed text is the frozen payload: `HELP.txt` contains the new
-  "phone camera" wording; `tools\pair.js` contains the new
-  "The app has no camera scanner." footer - PASS.
-- Silent install does not start the app (no node.exe process) - PASS.
-
-### Add/Remove Programs (HKCU) and registry
-
-| Value | Observed |
-| --- | --- |
-| DisplayName | `Hey Logan AI` |
-| DisplayVersion | `1.0.0` |
-| Publisher | `Hey Logan AI` |
-| DisplayIcon | `<install>\heylogan.ico` |
-| InstallLocation | `C:\Users\s2121270\AppData\Local\Programs\HeyLoganAI` |
-| UninstallString | `"<install>\Uninstall.exe"` |
-| QuietUninstallString | `"<install>\Uninstall.exe" /S` |
-| EstimatedSize | 91,605 KB |
-| NoModify / NoRepair | 1 / 1 |
-| VersionMajor / VersionMinor | 1 / 0 |
-| SystemComponent | absent (visible in Apps & features) |
-
-- `HKCU\Software\HeyLoganAI` -> `InstallDir`, `Version=1.0.0` - PASS.
-- The installer performs HKCU-only writes (static inspection of `installer.nsi`:
-  no HKLM registry commands; `RequestExecutionLevel user`).
-- Start-at-login default on: `HKCU\...\Run\HeyLoganAI` =
-  `"C:\WINDOWS\system32\wscript.exe" "...\Launch.vbs"` - PASS.
-  `/NOAUTOSTART` removes this (see above).
-
-### Shortcuts
-
-- Start Menu group `Hey Logan AI` with 6 shortcuts - PASS.
-- Main shortcut target `C:\Windows\System32\wscript.exe`, arguments
-  `"...\Launch.vbs"`, icon `...\heylogan.ico,0` - PASS.
-- Desktop shortcut: same target/arguments/icon - PASS.
-- `Start Console.lnk` -> `Start Console.cmd`, `Pairing.lnk` -> `Pairing.cmd`,
-  `Stop Server.lnk` -> `Stop.cmd`, `Allow through Firewall.lnk` ->
-  `Allow through Firewall.cmd`, `Uninstall.lnk` -> `Uninstall.exe` - PASS.
-
-### Launch exactly like the shortcut / health endpoint
-
-- Executed the main shortcut's target + arguments (`wscript.exe
-  "...\Launch.vbs"`), server came up hidden - PASS.
-- `GET http://127.0.0.1:8787/api/health` ->
-  `{"ok":true,"app":"Hey Logan AI","version":"1.0.0","time":"...","requiresToken":true}` - PASS.
-- First run created `app\data\config.json`, a `XXXX-XXXX-XXXX` access token
-  (observed `RXEY-WCG6-YCZV`) and `app\data\certs\{cert.pem,key.pem}` - PASS.
-- `GET /api/pairing` (with token header) returns the token, a LAN HTTPS pairing
-  URL `https://192.168.0.104:8443?token=...` and a QR SVG - PASS.
-
-### Pairing.cmd
-
-- Exit code 0; prints the access token, `192.168.0.104` LAN address,
-  `https://192.168.0.104:8443` phone URL, `http://127.0.0.1:8787` PC URL and a
-  scannable QR code (block-art rendered) - all PASS.
-- Frozen-payload footer text present:
-  - `The app has no camera scanner.`
-  - `Phone camera / Chrome: scan the QR code below, accept the certificate`
-  - both PASS. Full captured output: `pairing-output.txt`.
-
-### Stop.cmd
-
-- Exit code 0; printed `Stopped server process ..., Server stopped.` - PASS.
-- Health endpoint stopped answering and no node.exe process remained - PASS.
-  Captured output: `stop-output.txt`.
-
-### In-place upgrade (server running, data preserved)
-
-- Re-ran `Setup.exe /S` while the server was running: exit 0 in 18.6 s - PASS.
-- Upgrade stopped the running server - PASS.
-- Upgrade replaced program files (a marker appended to the installed
-  `app\server\index.js` was gone after the upgrade) - PASS.
-- Upgrade kept the access token (`RXEY-WCG6-YCZV` before == after) and the
-  HTTPS certificate - PASS.
-- Upgrade kept the `app\data` marker file - PASS.
-- Upgrade kept ARP entry, Run value and Start Menu shortcuts - PASS.
-- App was healthy again after the upgrade - PASS.
-
-### Uninstall - keep data (`Uninstall.exe /S`)
-
-- Exit code 0 (cleanup completes ~5 s later in the NSIS uninstaller's temp
-  re-launch; the harness waits for the end state) - PASS.
-- ARP entry, Run value, `HKCU\Software\HeyLoganAI`, Start Menu group and
-  Desktop shortcut all removed - PASS.
-- `Uninstall.exe` removed; install folder kept and contains only `app\data`
-  (8 leftover items, 0 outside `app\data`) - PASS.
-- Kept token still readable in `app\data\config.json` - PASS.
-
-### Reinstall over kept data + uninstall purge (`/S /PURGEDATA`)
-
-- Reinstall over the kept `app\data`: exit 0, token preserved, program files
-  restored, ARP re-created - PASS.
-- `Uninstall.exe /S /PURGEDATA`: exit code 0; install folder, ARP, Run value and
-  shortcuts gone; no node.exe left - PASS.
-
-### Custom install directory (`/D=`)
-
-- `Setup.exe /S /D=C:\Temp\hl-e2e\custom-install`: exit 0, files written there,
-  default folder untouched - PASS.
-- ARP `InstallLocation`, Run value and shortcuts point at the custom folder -
+- Installed `app\public\sw.js` contains `heyai-bridge-v1.1.0` (old v1.0.0 cache
+  name is gone) and lists `/native-voice.js` in its assets - PASS.
+- Installed `index.html` shows the v1.1.0 version label; `HELP.txt` names
+  `HeyLoganAI-android-1.1.0.apk` - PASS.
+- Served `GET /sw.js` returns the new cache name and `/native-voice.js` - PASS.
+- `POST /api/command` with `{"text":"ask claude code to summarise the repo",
+  "sync":true}` routes to `agentId: "claude-code"` (the client only sends the
+  text after the wake word; this used to fall through to the Computer agent) -
   PASS.
-- Uninstaller launched from the custom folder found its own install dir
-  (registry-based), exited 0, removed the folder and the ARP entry - PASS.
+- `POST /api/command` with `{"text":"hey logan ai open downloads","sync":true}`
+  routes to `agentId: "computer"` - PASS.
+- Router result checked directly through the installed app (no side effects):
+  `ask claude code to summarise the repo` -> `claude-code`, task
+  `summarise the repo`; `hey logan ai open downloads` -> `defaultWake: true`,
+  task `open downloads`, `wakePhrase: "hey logan ai"` (longest phrase stripped
+  as one) - PASS.
 
-### Portable ZIP
+## Start at login
 
-- Extract: exit 0 in 1.2 s - PASS.
-- `README-FIRST.txt`, `Start Hey Logan AI.cmd` (runs `runtime\node.exe` on
-  `app\server\index.js`), `runtime\node.exe`, app files including
-  `native-voice.js`; no `app\data` - PASS.
-- Bundled runtime `runtime\node.exe --version` -> `v22.23.3` - PASS.
-- Server from the extracted tree: health ok, app `Hey Logan AI` 1.0.0 - PASS.
-- Portable created its own `app\data`, and created **no** ARP entry, **no** Run
-  value, **no** Start Menu group and **no** Desktop shortcut - all PASS.
-- Portable `tools\stop.ps1` stopped the server; no node.exe left - PASS.
-- ZIP entry hashes for `tools/pair.js` and `HELP.txt` equal the frozen payload
-  files (updated text is really inside the ZIP) - verified separately.
+- Default ON in silent mode: the installer writes
+  `HKCU\...\Run\HeyLoganAI` = `"wscript.exe" "<install>\Launch.vbs"` pointing at
+  the new install dir - PASS.
+- Start Menu has `Start at Login On.lnk` / `Start at Login Off.lnk`:
+  - `Start at Login Off.cmd` exits 0 and removes the Run value - PASS.
+  - `Start at Login On.cmd` exits 0 and re-creates it with the current install's
+    `Launch.vbs` - PASS.
+- Uninstall removes the Run value - PASS.
 
-### Final machine state
+## Upgrade in place via the registered location (user's D:\ scenario)
 
-After the run: no install dir, no custom install dir, no ARP entry, no
-`HKCU\Software\HeyLoganAI`, no Run value, no Start Menu group, no Desktop
-shortcut, no node.exe processes and ports 8787/8443 free - all PASS.
+Simulated safely (real ARP entry backed up first, `C:\Temp\hl-old` used as the
+"old custom-folder install"):
 
-## Silent switches supported by the final binary
+- A 1.0.0-style tree was installed in `C:\Temp\hl-old` with a fake
+  `app\data\config.json` token and certificate, and
+  `HKCU\...\Uninstall\HeyLoganAI\InstallLocation` was set to it.
+- Running the new Setup with **no `/D=`**: exit 0, installed into
+  `C:\Temp\hl-old` (NOT into `%LOCALAPPDATA%\Programs\HeyLoganAI`), fake token
+  preserved, `Launch.vbs` replaced with the v1.1.0 browser-profile version, Run
+  value updated, ARP `InstallLocation` stayed the old tree, `DisplayVersion`
+  became 1.1.0 - all PASS.
+- Explicit `/D=` still wins over the registered location - PASS.
 
-| Command | Verified |
-| --- | --- |
-| `HeyLoganAI-Setup-1.0.0-win-x64.exe /S` | exit 0, default dir, start-at-login on, app not started |
-| `HeyLoganAI-Setup-1.0.0-win-x64.exe /S /NOAUTOSTART` | no HKCU Run value written |
-| `HeyLoganAI-Setup-1.0.0-win-x64.exe /S /NOAUTOSTART /D=<dir>` | exit 0, custom dir honored, no Run value |
-| `HeyLoganAI-Setup-1.0.0-win-x64.exe /S /D=<dir>` | exit 0, custom dir honored |
-| `Uninstall.exe /S` or `/S /KEEPDATA` | exit 0, keeps `app\data` |
-| `Uninstall.exe /S /PURGEDATA` | exit 0, deletes `app\data` and the folder |
-| `HeyLoganAI-Setup-1.0.0-win-x64.exe` (no args) | Modern UI 2 wizard window opens (Welcome -> Components -> Directory) |
+=> On the user's machine, running `HeyLoganAI-Setup-1.1.0-win-x64.exe` will
+replace `D:\HeyLoganAI` in place and keep its `app\data` (token/certificates),
+so no re-pairing is needed.
 
-Exit code `1` is used for an intentional abort: the data-safety guard (could not
-move `app\data` aside) or an unsupported OS/architecture in silent mode. Silent
-mode never shows a dialog.
+## Rest of the verified matrix (all PASS)
 
-## Limits / caveats
+- Artifact integrity: Setup.exe copy to `C:\Temp` SHA-256-equal to `dist\`;
+  version metadata 1.1.0; `asInvoker` manifest (no UAC, no admin request);
+  portable ZIP layout, helpers present, no `app/data`, no `browser-profile`.
+- Interactive Modern UI 2 wizard opens (`Hey Logan AI Setup` window) and can be
+  cancelled without side effects.
+- Silent install `/S /D=<scratch>`: exit 0 (8.5 s), all files incl.
+  `Start at Login On/Off.cmd`, app package version 1.1.0, no `app\data`.
+- ARP values: `Hey Logan AI` / `1.1.0` / publisher / DisplayIcon / D:\ style
+  InstallLocation / Uninstall & QuietUninstall strings / EstimatedSize 91622 KB
+  / NoModify+NoRepair / VersionMajor+Minor; HKCU app key InstallDir+Version.
+- Start Menu group with 8 shortcuts (main, Start Console, Pairing, Stop Server,
+  Allow through Firewall, Start at Login On, Start at Login Off, Uninstall) and
+  Desktop shortcut; main shortcut = `wscript.exe` + `"<install>\Launch.vbs"` +
+  `heylogan.ico`.
+- Health `{"ok":true,"app":"Hey Logan AI","version":"1.1.0",...}` on the test
+  port; first run created token + HTTPS certificate.
+- `Pairing.cmd`: exit 0, token, 192.168.x.x LAN URL, QR code, "no camera
+  scanner" footer (`pairing-output.txt`).
+- `Stop.cmd`: exit 0, stops the test server, leaves the user's app untouched
+  (`stop-output.txt`).
+- Upgrade in place (same folder): exit 0, server stopped, program files
+  replaced, token + marker + certificate + ARP + Run value kept.
+- Data-loss guard: locked `app\data\config.json` makes the upgrade abort with
+  exit code 1, token + certificate + program files intact, no `.hl-data-keep`
+  residue; a retry after unlocking succeeds and keeps the token.
+- Uninstall `/S` (keep data): exit 0, ARP/Run/Start Menu/Desktop removed,
+  `Uninstall.exe` + `browser-profile` removed, only `app\data` remains, token
+  and certificate survive.
+- Reinstall over kept data + uninstall `/S /PURGEDATA`: exit 0, folder gone.
+- `/S /NOAUTOSTART /D=`: files installed, no Run value, shortcuts created,
+  uninstalls cleanly.
+- Portable ZIP: extracts; Launch.vbs starts the server; browser-profile +
+  seeded Preferences + new flags observed; `Stop.cmd` works; no registry or
+  shortcut changes.
+- Final machine: all test dirs gone, ports 8790/8445 free, no test node/browser
+  processes, user's state restored exactly (see above).
 
-- Unsigned binaries: SmartScreen may show "Windows protected your PC" for
-  Setup.exe (and a warning for the downloaded ZIP) - "More info -> Run anyway".
-- Per-user install only (no UAC, no Program Files, no all-users install).
-- Windows 10/11 x64 only (bundled x64 Node.js 22).
-- The installer does not modify Windows Firewall; phone access uses the
-  "Allow through Firewall" shortcut (UAC) or the Windows prompt.
-- Silent uninstall's file deletion finishes asynchronously after the
-  `Uninstall.exe` process returns; scripts should poll for the end state.
-- Default ports 8787/8443; the installer does not choose alternate ports.
-- Start-at-login defaults on; `/NOAUTOSTART` (silent) or clearing the component
-  (interactive) removes it without touching `app\data`.
+## Caveat for the user (please read)
+
+- **They have two OS-login autostart mechanisms.** v1.1.0 installs the
+  `HKCU\...\Run\HeyLoganAI` entry pointing at the new `Launch.vbs`, and the
+  previously installed **Edge PWA** also launches at OS login
+  (`--app-run-on-os-login-mode=windowed`). That can open two app windows.
+  Recommendation: remove the Edge PWA (Settings → Apps → Hey Logan AI → Edge
+  entry, or Edge → Apps → Hey Logan AI → Uninstall) so only the v1.1.0 launcher
+  starts at logon.
+- The dedicated `browser-profile` folder is created next to the app and holds
+  only the local microphone-permission grant; it is deleted on uninstall.
+  The user's normal browser profile is untouched.
+- Upgrade: run the 1.1.0 Setup **without** choosing a new folder; it will
+  replace `D:\HeyLoganAI` in place (the app is stopped first) and keep the
+  pairing token/certificates. Re-pairing is not needed.
+- Unsigned binaries: SmartScreen may warn ("More info → Run anyway").
+- Windows 10/11 x64 only; per-user install (no UAC); firewall not modified
+  (use "Allow through Firewall" once); ports 8787/8443 are fixed defaults.
 
 ## How to reproduce
 
 ```powershell
-# rebuild (from the release root; payload must exist under windows\payload\HeyLoganAI)
-windows\installer\build.cmd
-# or with an external NSIS:
-#   windows\installer\build.cmd -Makensis "C:\Program Files (x86)\NSIS\makensis.exe"
+windows\installer\build.cmd          # rebuild both artifacts (default 1.1.0)
 
-# run the E2E from a copy outside the workspace (agent sandbox requirement)
 New-Item -ItemType Directory C:\Temp\hl-test -Force | Out-Null
 Copy-Item _test\win-installer\run-e2e.ps1 C:\Temp\hl-test\ -Force
 powershell -NoProfile -ExecutionPolicy Bypass -File C:\Temp\hl-test\run-e2e.ps1
 ```
 
-The harness writes `e2e-run.log` and `e2e-summary.json` next to itself, recreates
-all install/uninstall cycle evidence above, and removes all installed state at
-the end.
+The harness backs up and restores the real installation state, writes
+`e2e-run.log` / `e2e-summary.json` / screenshots next to itself, and leaves the
+machine clean.

@@ -22,6 +22,9 @@ WHAT IS IN THIS FOLDER
   Allow through Firewall.cmd
                           Let Windows Firewall allow your phone to connect
                           (asks for administrator approval).
+  Start at Login On.cmd   Make Hey Logan AI start automatically when you
+                          sign in to Windows (recommended).
+  Start at Login Off.cmd  Stop it from starting automatically.
   app\                    The application itself.
   runtime\node.exe        Private copy of the Node.js runtime.
   data info: app\data\    Created on first start: your settings, access
@@ -29,7 +32,11 @@ WHAT IS IN THIS FOLDER
 
 FIRST START
 -----------
-1. Double-click "Launch.vbs". A window opens with the app.
+1. Double-click "Launch.vbs". A window opens with the app and starts
+   listening by itself - just say "Hey Logan" (no need to click anything).
+   The window uses its own private browser profile (browser-profile folder)
+   so the microphone permission stays granted; your normal browser is not
+   touched.
 2. If Windows Firewall asks for permission for Node.js, click "Allow access"
    and tick "Private networks". If you missed it, run
    "Allow through Firewall.cmd" once.
@@ -40,7 +47,7 @@ FIRST START
 
 USING YOUR ANDROID PHONE
 ------------------------
-1. Install HeyLoganAI-android-1.0.0.apk on the phone, or open the pairing link
+1. Install HeyLoganAI-android-1.1.0.apk on the phone, or open the pairing link
    in Chrome and use "Add to Home screen".
 2. On the PC run "Pairing.cmd", then either paste the printed pairing link into
    the Hey Logan AI Android app (the app has no camera scanner), or scan the QR
