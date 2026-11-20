@@ -23,7 +23,7 @@ Unicode true
 
 ;--- Build-time defines (provided by build-setup.ps1) ------------------------
 !ifndef PRODUCT_VERSION
-  !define PRODUCT_VERSION "1.1.0"
+  !define PRODUCT_VERSION "1.2.0"
 !endif
 !ifndef PAYLOAD_DIR
   !error "PAYLOAD_DIR is not defined. Run build-setup.ps1 to build the installer."

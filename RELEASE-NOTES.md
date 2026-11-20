@@ -1,3 +1,33 @@
+# Hey Logan AI 1.2.0 — built-in free AI chat (no API key)
+
+> **Status: source updated, binaries not rebuilt yet.** The app code in `app/`
+> and `windows/payload/` is 1.2.0. The installer, portable zip and APK must be
+> rebuilt on Windows with `windows\installer\build-all.ps1` (default version is
+> now 1.2.0) and attached to a new GitHub Release. The Android APK does not
+> need a rebuild: it connects to the PC server, which is where 1.2.0 changes live.
+
+- **AI Chat agent, works out of the box.** Ask *“Hey Logan, what’s the capital
+  of France?”* or say *“Hey Chat …”* / *“Hey GPT …”*. No account and no API key
+  needed: it uses Pollinations.AI's free public endpoint, or free open-source
+  models on your own PC through **Ollama** or **LM Studio** when they are running.
+- **Optional keys, still supported.** Free-tier keys for Groq, Google Gemini,
+  OpenRouter (`:free` models), Cerebras and Mistral, and paid keys for OpenAI,
+  DeepSeek or any OpenAI-compatible URL. Providers are tried in order and fall
+  back automatically when one is busy. Keys stay in `data\config.json` on your
+  PC (or environment variables) and never reach the phone or browser.
+- **Smart routing.** “Hey Logan” + a general question goes to AI Chat; file,
+  app and PC commands still go to the Computer agent (`ui.smartRouting`).
+- **Fixes:** API errors no longer use a dead `200 : 200` branch, screenshot 404s
+  return properly, the “which agent?” prompt lists the agents you actually
+  have, small UI clean-ups. The CLI agents (Claude Code, Codex, DeepSeek,
+  Gemini, Workbuddy) work exactly as before.
+
+Honest limits: Pollinations' keyless tier is best-effort and rate-limited per IP
+(about one request every 30 seconds). For heavier use, install Ollama or add a
+free key.
+
+---
+
 # Hey Logan AI 1.1.0 — hands-free “Hey Logan” + starts with Windows
 
 This release turns Hey Logan AI into a hands-free assistant:
