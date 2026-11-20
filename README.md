@@ -8,6 +8,11 @@ files, open folders and apps, control the PC, and hand longer tasks to AI
 command-line agents (Claude Code, Codex, DeepSeek, Gemini, Workbuddy) if you
 have them installed. You can talk to it on the PC or from your Android phone.
 
+**Coming in 1.2.0 — built-in free AI chat (source ready, installers to be rebuilt):**
+ask *“Hey Logan, what’s …?”* and a free AI model answers, with **no API key**
+(Pollinations.AI, or Ollama / LM Studio on your PC). Optional free or paid keys
+are supported too. See [RELEASE-NOTES.md](RELEASE-NOTES.md).
+
 **New in 1.1.0 — hands-free:**
 - **No “Start listening” button.** The app starts listening when it opens: call
   **“Hey Logan”**, hear *“Logan here.”*, then say what you want.
